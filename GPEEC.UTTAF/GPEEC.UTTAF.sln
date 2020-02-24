@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTTAF.Desktop", "UTTAF.Desktop\UTTAF.Desktop.csproj", "{EA8C6F46-241F-4859-9FC4-325A0E0C980E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UTTAF.Desktop", "UTTAF.Desktop\UTTAF.Desktop.csproj", "{EA8C6F46-241F-4859-9FC4-325A0E0C980E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTTAF.Mobile.Android", "UTTAF.Mobile\UTTAF.Mobile.Android\UTTAF.Mobile.Android.csproj", "{B12769A2-4A48-4DDF-98CF-2D1F85B7276B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTTAF.Mobile.iOS", "UTTAF.Mobile\UTTAF.Mobile.iOS\UTTAF.Mobile.iOS.csproj", "{2236F1EC-A79A-4C2D-AE00-5144AB3E0979}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTTAF.Mobile", "UTTAF.Mobile\UTTAF.Mobile\UTTAF.Mobile.csproj", "{ACEF479D-DEC9-49EB-9E8F-B076B48DFB25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UTTAF.Mobile", "UTTAF.Mobile\UTTAF.Mobile\UTTAF.Mobile.csproj", "{ACEF479D-DEC9-49EB-9E8F-B076B48DFB25}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Compile", "Compile", "{CF40F578-13C8-4191-8C14-A89A5602CD1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTTAF.Dependencies", "UTTAF.Dependencies\UTTAF.Dependencies.csproj", "{F593849A-69A8-48D7-A081-F18619D7CF12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,18 @@ Global
 		{ACEF479D-DEC9-49EB-9E8F-B076B48DFB25}.Release|iPhone.Build.0 = Release|Any CPU
 		{ACEF479D-DEC9-49EB-9E8F-B076B48DFB25}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{ACEF479D-DEC9-49EB-9E8F-B076B48DFB25}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{F593849A-69A8-48D7-A081-F18619D7CF12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F593849A-69A8-48D7-A081-F18619D7CF12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F593849A-69A8-48D7-A081-F18619D7CF12}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{F593849A-69A8-48D7-A081-F18619D7CF12}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{F593849A-69A8-48D7-A081-F18619D7CF12}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{F593849A-69A8-48D7-A081-F18619D7CF12}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{F593849A-69A8-48D7-A081-F18619D7CF12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F593849A-69A8-48D7-A081-F18619D7CF12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F593849A-69A8-48D7-A081-F18619D7CF12}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{F593849A-69A8-48D7-A081-F18619D7CF12}.Release|iPhone.Build.0 = Release|Any CPU
+		{F593849A-69A8-48D7-A081-F18619D7CF12}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{F593849A-69A8-48D7-A081-F18619D7CF12}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
