@@ -1,0 +1,55 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:UTTAF.Desktop.Themes"
+    xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Color.Primary.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!--  Primary  -->
+    <SolidColorBrush
+        x:Key="PrimaryHueLightBrush"
+        po:Freeze="True"
+        Color="{StaticResource Primary100}" />
+    <SolidColorBrush
+        x:Key="PrimaryHueLightForegroundBrush"
+        po:Freeze="True"
+        Color="{StaticResource Primary100Foreground}" />
+
+    <SolidColorBrush
+        x:Key="PrimaryHueMidLightBrush"
+        po:Freeze="True"
+        Color="{StaticResource Primary200}" />
+    <SolidColorBrush
+        x:Key="PrimaryHueMidLightForegroundBrush"
+        po:Freeze="True"
+        Color="{StaticResource Primary200Foreground}" />
+
+    <SolidColorBrush
+        x:Key="PrimaryHueMidBrush"
+        po:Freeze="True"
+        Color="{StaticResource Primary500}" />
+    <SolidColorBrush
+        x:Key="PrimaryHueMidForegroundBrush"
+        po:Freeze="True"
+        Color="{StaticResource Primary500Foreground}" />
+
+    <SolidColorBrush
+        x:Key="PrimaryHueMidDarkBrush"
+        po:Freeze="True"
+        Color="{StaticResource Primary700}" />
+    <SolidColorBrush
+        x:Key="PrimaryHueMidDarkForegroundBrush"
+        po:Freeze="True"
+        Color="{StaticResource Primary700Foreground}" />
+
+    <SolidColorBrush
+        x:Key="PrimaryHueDarkBrush"
+        po:Freeze="True"
+        Color="{StaticResource Primary900}" />
+    <SolidColorBrush
+        x:Key="PrimaryHueDarkForegroundBrush"
+        po:Freeze="True"
+        Color="{StaticResource Primary900Foreground}" />
+</ResourceDictionary>

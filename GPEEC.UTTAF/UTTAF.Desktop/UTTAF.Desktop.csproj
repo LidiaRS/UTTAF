@@ -21,10 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Theme\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Resources\sbf.png" />
     <Resource Include="Resources\ufac.png" />
     <Resource Include="Resources\UTTAF_Icon.png" />
