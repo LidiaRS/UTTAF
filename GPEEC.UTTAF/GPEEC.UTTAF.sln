@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UTTAF.Mobile", "UTTAF.Mobil
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Compile", "Compile", "{CF40F578-13C8-4191-8C14-A89A5602CD1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTTAF.Dependencies", "UTTAF.Dependencies\UTTAF.Dependencies.csproj", "{F593849A-69A8-48D7-A081-F18619D7CF12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UTTAF.Dependencies", "UTTAF.Dependencies\UTTAF.Dependencies.csproj", "{F593849A-69A8-48D7-A081-F18619D7CF12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTTAF.API", "UTTAF.API\UTTAF.API.csproj", "{A6A0A1BB-4AEB-413B-967A-D9B293687FA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UTTAF.API", "UTTAF.API\UTTAF.API.csproj", "{A6A0A1BB-4AEB-413B-967A-D9B293687FA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTTAF.API.Tests", "UTTAF.API.Tests\UTTAF.API.Tests.csproj", "{239F1DF7-BFCB-4016-8A29-6BD2F532B684}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,6 +105,18 @@ Global
 		{A6A0A1BB-4AEB-413B-967A-D9B293687FA1}.Release|iPhone.Build.0 = Release|Any CPU
 		{A6A0A1BB-4AEB-413B-967A-D9B293687FA1}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{A6A0A1BB-4AEB-413B-967A-D9B293687FA1}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{239F1DF7-BFCB-4016-8A29-6BD2F532B684}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{239F1DF7-BFCB-4016-8A29-6BD2F532B684}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{239F1DF7-BFCB-4016-8A29-6BD2F532B684}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{239F1DF7-BFCB-4016-8A29-6BD2F532B684}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{239F1DF7-BFCB-4016-8A29-6BD2F532B684}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{239F1DF7-BFCB-4016-8A29-6BD2F532B684}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{239F1DF7-BFCB-4016-8A29-6BD2F532B684}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{239F1DF7-BFCB-4016-8A29-6BD2F532B684}.Release|Any CPU.Build.0 = Release|Any CPU
+		{239F1DF7-BFCB-4016-8A29-6BD2F532B684}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{239F1DF7-BFCB-4016-8A29-6BD2F532B684}.Release|iPhone.Build.0 = Release|Any CPU
+		{239F1DF7-BFCB-4016-8A29-6BD2F532B684}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{239F1DF7-BFCB-4016-8A29-6BD2F532B684}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
