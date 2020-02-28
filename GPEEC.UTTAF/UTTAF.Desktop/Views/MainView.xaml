@@ -8,12 +8,15 @@
     Title="UTTAF - Utilizaçao de Tecnologia no Transito com Análise Física"
     Background="{DynamicResource PrimaryHueLightBrush}"
     WindowState="Maximized"
+    WindowStyle="None"
     mc:Ignorable="d">
     <DockPanel>
+        <!--  Cabeçario  -->
         <md:Card
             Height="100"
             Background="{DynamicResource PrimaryHueMidBrush}"
-            DockPanel.Dock="Top">
+            DockPanel.Dock="Top"
+            Visibility="Collapsed">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -105,6 +108,7 @@
                 </StackPanel>
             </Grid>
         </md:Card>
+        <!--  Card  & Boneco Libras  -->
         <Grid Margin="30" DockPanel.Dock="Left">
             <GroupBox
                 MaxWidth="250"
@@ -151,10 +155,10 @@
                     Stretch="Fill" />
             </md:Card>
         </Grid>
-
+        <!--  Imagem ampliada & Descriçao detalhada  -->
         <Grid DockPanel.Dock="Right">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <GroupBox
@@ -171,8 +175,6 @@
                 </GroupBox.Header>
                 <Image
                     Grid.Row="1"
-                    MaxWidth="600"
-                    MaxHeight="300"
                     Source="https://imgsapp.em.com.br/app/foto_127989356258/2015/03/05/4859/20150305095836354379i.jpg"
                     Stretch="Fill" />
             </GroupBox>
@@ -222,7 +224,8 @@
                 Click="Button_Click"
                 Content="{md:PackIcon Kind=Settings}"
                 Foreground="White"
-                Style="{StaticResource MaterialDesignIconButton}" />
+                Style="{StaticResource MaterialDesignIconButton}"
+                Visibility="Collapsed" />
         </Grid>
     </DockPanel>
 </Window>
