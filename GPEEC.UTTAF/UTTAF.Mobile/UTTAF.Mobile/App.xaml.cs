@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using UTTAF.Mobile.Views;
+
+using Xamarin.Forms;
 
 namespace UTTAF.Mobile
 {
@@ -8,7 +10,7 @@ namespace UTTAF.Mobile
         {
             InitializeComponent();
 
-            //MainPage = new MainPage();
+            MainPage = new MainView();
         }
 
         protected override void OnStart()
