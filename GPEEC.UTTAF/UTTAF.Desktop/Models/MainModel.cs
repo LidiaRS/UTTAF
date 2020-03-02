@@ -6,7 +6,7 @@ namespace UTTAF.Desktop.Models
     public class MainModel
     {
         public string Title { get; set; }
-        public string Image { get; set; }
+        public byte[] Image { get; set; }
         public string ResumeDescription { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
