@@ -109,7 +109,7 @@
             </Grid>
         </md:Card>
         <!--  Card  & Boneco Libras  -->
-        <Grid Margin="30" DockPanel.Dock="Left">
+        <Grid Margin="30,20" DockPanel.Dock="Left">
             <GroupBox
                 MaxWidth="250"
                 Margin="0,50,0,0"

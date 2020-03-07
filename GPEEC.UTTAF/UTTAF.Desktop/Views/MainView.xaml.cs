@@ -9,8 +9,11 @@ namespace UTTAF.Desktop.Views
     {
         public MainView() => InitializeComponent();
 
+        public MainView(Window window) : this() => window.Close();
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+
         }
     }
 }
