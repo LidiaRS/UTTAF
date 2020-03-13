@@ -10,10 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repository\Interfaces\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\UTTAF.Dependencies\UTTAF.Dependencies.csproj" />
   </ItemGroup>
 </Project>
