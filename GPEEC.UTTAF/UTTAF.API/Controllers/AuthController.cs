@@ -2,6 +2,7 @@
 
 using System.Threading.Tasks;
 
+using UTTAF.API.Repository.Interfaces;
 using UTTAF.Dependencies.Models;
 
 namespace UTTAF.API.Controllers
@@ -10,10 +11,20 @@ namespace UTTAF.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
+        private readonly IAuthRepository _repository;
+
+        public AuthController(IAuthRepository repository) => _repository = repository;
+
         [HttpPost]
         public async Task<IActionResult> AuthTaskAsync([FromBody]AuthModel auth)
         {
-            return Created("", auth);
+            if (ModelState.IsValid)
+            {
+                await _repository.AddAuthTaskAsync(auth);
+                return Created("", auth);
+            }
+
+            return BadRequest();
         }
 
         [HttpGet]
