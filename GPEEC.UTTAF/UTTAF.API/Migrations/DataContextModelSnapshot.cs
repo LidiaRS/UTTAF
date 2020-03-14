@@ -18,23 +18,14 @@ namespace UTTAF.API.Migrations
 
             modelBuilder.Entity("UTTAF.Dependencies.Models.AuthModel", b =>
                 {
-                    b.Property<Guid>("SessionId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("SessionReference")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("SessionDate")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("SessionName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("SessionPassword")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("SessionId");
+                    b.HasKey("SessionReference");
 
                     b.ToTable("Auths");
                 });

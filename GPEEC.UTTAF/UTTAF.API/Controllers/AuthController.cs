@@ -18,22 +18,11 @@ namespace UTTAF.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AuthTaskAsync([FromBody]AuthModel auth)
         {
-            if (ModelState.IsValid)
-            {
-                await _repository.AddAuthTaskAsync(auth);
-                return Created("", auth);
-            }
+            if (await _repository.ExistsAuthTaskAsync(auth))
+                return Conflict();
 
-            return BadRequest();
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> AuthTaskAsync(int id)
-        {
-            if (id == 10)
-                return Ok($"Seu id é {id}");
-
-            return BadRequest("é necessario informar o id = 10");
+            await _repository.AddAuthAsync(auth);
+            return Created("", auth);
         }
     }
 }

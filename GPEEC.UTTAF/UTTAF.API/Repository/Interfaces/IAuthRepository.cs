@@ -7,8 +7,10 @@ namespace UTTAF.API.Repository.Interfaces
 {
     public interface IAuthRepository
     {
-        Task AddAuthTaskAsync(AuthModel model);
+        Task AddAuthAsync(AuthModel model);
 
-        Task RemoveAuthTaskAsync(Guid model);
+        Task<bool> ExistsAuthTaskAsync(AuthModel model);
+
+        Task RemoveAuthAsync(Guid model);
     }
 }

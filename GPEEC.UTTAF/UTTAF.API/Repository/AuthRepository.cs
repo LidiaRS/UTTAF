@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+
+using System;
 using System.Threading.Tasks;
 
 using UTTAF.API.Data;
@@ -13,13 +15,16 @@ namespace UTTAF.API.Repository
         {
         }
 
-        public async Task AddAuthTaskAsync(AuthModel model)
+        public async Task AddAuthAsync(AuthModel model)
         {
             await _context.Auths.AddAsync(model);
             await _context.SaveChangesAsync();
         }
 
-        public Task RemoveAuthTaskAsync(Guid model)
+        public async Task<bool> ExistsAuthTaskAsync(AuthModel model) =>
+            await _context.Auths.AnyAsync(x => x.SessionReference == model.SessionReference);
+
+        public Task RemoveAuthAsync(Guid model)
         {
             throw new NotImplementedException();
         }
