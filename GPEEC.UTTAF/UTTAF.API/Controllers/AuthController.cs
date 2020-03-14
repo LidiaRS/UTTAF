@@ -16,13 +16,32 @@ namespace UTTAF.API.Controllers
         public AuthController(IAuthRepository repository) => _repository = repository;
 
         [HttpPost]
-        public async Task<IActionResult> AuthTaskAsync([FromBody]AuthModel auth)
+        public async Task<IActionResult> AuthSessionTaskAsync([FromBody]AuthModel auth)
         {
-            if (await _repository.ExistsAuthTaskAsync(auth))
+            if (await _repository.ExistsTaskAsync(auth))
                 return Conflict();
 
-            await _repository.AddAuthAsync(auth);
+            await _repository.AddAsync(auth);
             return Created("", auth);
+        }
+
+        //[Authorize]
+        [HttpDelete]
+        public async Task<IActionResult> RemoveSessionTaskAsync([FromBody]AuthModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (await _repository.ExistsTaskAsync(model))
+                {
+                    await _repository.RemovehAsync(model);
+
+                    return Ok();
+                }
+
+                return NotFound();
+            }
+
+            return BadRequest();
         }
     }
 }

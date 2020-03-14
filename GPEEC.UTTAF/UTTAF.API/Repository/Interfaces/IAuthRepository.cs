@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 using UTTAF.Dependencies.Models;
 
@@ -7,10 +6,10 @@ namespace UTTAF.API.Repository.Interfaces
 {
     public interface IAuthRepository
     {
-        Task AddAuthAsync(AuthModel model);
+        Task AddAsync(AuthModel model);
 
-        Task<bool> ExistsAuthTaskAsync(AuthModel model);
+        Task<bool> ExistsTaskAsync(AuthModel model);
 
-        Task RemoveAuthAsync(Guid model);
+        Task RemovehAsync(AuthModel model);
     }
 }
