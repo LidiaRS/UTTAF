@@ -25,6 +25,9 @@ namespace UTTAF.API.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("SessionStatus")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("SessionReference");
 
                     b.ToTable("Auths");

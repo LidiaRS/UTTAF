@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UTTAF.API.Migrations
 {
-    public partial class RefatoringAuthModel : Migration
+    public partial class SessionStatusEnum : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,6 +12,7 @@ namespace UTTAF.API.Migrations
                 columns: table => new
                 {
                     SessionReference = table.Column<string>(nullable: false),
+                    SessionStatus = table.Column<int>(nullable: false),
                     SessionDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>

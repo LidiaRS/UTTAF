@@ -13,6 +13,8 @@
     <Compile Remove="Migrations\20200314050634_RefatoringAuthModel.Designer.cs" />
     <Compile Remove="Migrations\20200314050957_RefatoringAuthModel.cs" />
     <Compile Remove="Migrations\20200314050957_RefatoringAuthModel.Designer.cs" />
+    <Compile Remove="Migrations\20200314051825_RefatoringAuthModel.cs" />
+    <Compile Remove="Migrations\20200314051825_RefatoringAuthModel.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

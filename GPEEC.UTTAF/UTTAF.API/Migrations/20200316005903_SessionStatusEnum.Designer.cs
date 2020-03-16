@@ -9,8 +9,8 @@ using UTTAF.API.Data;
 namespace UTTAF.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200314051825_RefatoringAuthModel")]
-    partial class RefatoringAuthModel
+    [Migration("20200316005903_SessionStatusEnum")]
+    partial class SessionStatusEnum
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,6 +26,9 @@ namespace UTTAF.API.Migrations
                     b.Property<DateTime?>("SessionDate")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("SessionStatus")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("SessionReference");
 

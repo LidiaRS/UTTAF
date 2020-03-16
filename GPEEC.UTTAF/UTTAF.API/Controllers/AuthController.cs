@@ -19,7 +19,7 @@ namespace UTTAF.API.Controllers
         public async Task<IActionResult> AuthSessionTaskAsync([FromBody]AuthModel auth)
         {
             if (await _repository.ExistsTaskAsync(auth))
-                return Conflict();
+                return Conflict("Ja existe uma sessao com esse referencial em andamento.");
 
             await _repository.AddAsync(auth);
             return Created("", auth);
