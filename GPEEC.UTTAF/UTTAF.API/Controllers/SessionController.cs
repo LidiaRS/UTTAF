@@ -42,6 +42,15 @@ namespace UTTAF.API.Controllers
             return Conflict("Ja existe um participante com esse nome, ou o referencial informado nao existe.");
         }
 
+        [HttpGet("attendees")]
+        public async Task<IActionResult> AttendeesInSessionTaskAsync(string sessionReference, string sessionPassword)
+        {
+            if (await _repository.ExistsTaskAsync(sessionReference, sessionPassword))
+                return Ok(await _repository.GetAttendersTaskAsync(sessionReference));
+
+            return NotFound("Sessao informada nao existe.");
+        }
+
         [HttpDelete]
         public async Task<IActionResult> RemoveSessionTaskAsync([FromBody]AuthSessionModel model)
         {

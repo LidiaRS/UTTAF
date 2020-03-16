@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 using UTTAF.API.Data;
@@ -50,5 +52,11 @@ namespace UTTAF.API.Repository
 
             return false;
         }
+
+        public async Task<IList<AttendeeModel>> GetAttendersTaskAsync(string reference) =>
+            await _context.Attendees.Where(x => x.SessionReference == reference).ToListAsync();
+
+        public async Task<bool> ExistsTaskAsync(string reference, string password) =>
+            await _context.Sessions.AnyAsync(x => x.SessionReference == reference && x.SessionPassword == password);
     }
 }
