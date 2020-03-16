@@ -9,10 +9,10 @@ namespace UTTAF.API.Repository.Interfaces
     {
         Task AddAsync(AuthSessionModel model);
 
-        Task JoinAtSessionAsync(SessionModel session);
+        Task<bool> AddAttendeeTaskAsync(AttendeeModel attendee);
 
         Task<bool> ExistsTaskAsync(AuthSessionModel model);
 
-        Task<bool> RemoveAsync(AuthSessionModel model);
+        Task<bool> RemoveTaskAsync(AuthSessionModel model);
     }
 }

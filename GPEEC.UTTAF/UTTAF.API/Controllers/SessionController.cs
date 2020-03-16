@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UTTAF.API.Models;
 using UTTAF.API.Repository.Interfaces;
 using UTTAF.Dependencies.Enums;
+using UTTAF.Dependencies.Models;
 
 namespace UTTAF.API.Controllers
 {
@@ -21,7 +22,7 @@ namespace UTTAF.API.Controllers
         public async Task<IActionResult> AuthSessionTaskAsync([FromBody]AuthSessionModel auth)
         {
             if (await _repository.ExistsTaskAsync(auth))
-                return Conflict("Ja existe uma sessao com esse referencial em andamento.");
+                return Conflict("Ja existe uma sessao com esse referencial ativo/em andamento.");
 
             auth.SessionStatus = SessionStatusEnum.Active;
             auth.SessionDate = DateTime.Now;
@@ -30,10 +31,21 @@ namespace UTTAF.API.Controllers
             return Created("", auth);
         }
 
+        [HttpPost("attendees")]
+        public async Task<IActionResult> JoinAtSessionTaskAsync([FromBody]AttendeeModel attendee)
+        {
+            if (await _repository.AddAttendeeTaskAsync(attendee))
+            {
+                return Created("", attendee);
+            }
+
+            return Conflict("Ja existe um participante com esse nome, ou o referencial informado nao existe.");
+        }
+
         [HttpDelete]
         public async Task<IActionResult> RemoveSessionTaskAsync([FromBody]AuthSessionModel model)
         {
-            if (await _repository.RemoveAsync(model))
+            if (await _repository.RemoveTaskAsync(model))
                 return Ok();
 
             return NotFound();

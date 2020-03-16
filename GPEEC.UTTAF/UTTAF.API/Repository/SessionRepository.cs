@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using UTTAF.API.Data;
 using UTTAF.API.Models;
 using UTTAF.API.Repository.Interfaces;
+using UTTAF.Dependencies.Enums;
 using UTTAF.Dependencies.Models;
 
 namespace UTTAF.API.Repository
@@ -22,13 +23,25 @@ namespace UTTAF.API.Repository
         }
 
         public async Task<bool> ExistsTaskAsync(AuthSessionModel model) =>
-            await _context.Sessions.AnyAsync(x => x.SessionReference == model.SessionReference);
+            await _context.Sessions.AnyAsync(x => x.SessionReference == model.SessionReference && x.SessionStatus != SessionStatusEnum.Closed);
 
-        public Task JoinAtSessionAsync(SessionModel session) => throw new System.NotImplementedException();
-
-        public async Task<bool> RemoveAsync(AuthSessionModel model)
+        public async Task<bool> AddAttendeeTaskAsync(AttendeeModel attendee)
         {
-            if (await _context.Sessions.FirstOrDefaultAsync(x => x.SessionReference == model.SessionReference && x.SessionPassword == model.SessionPassword) is AuthSessionModel s)
+            if (await _context.Sessions.SingleOrDefaultAsync(x => x.SessionReference == attendee.SessionReference) is null)
+                return false;
+
+            if (await _context.Attendees.SingleOrDefaultAsync(x => x.SessionReference == attendee.SessionReference && x.Name == attendee.Name) is AttendeeModel)
+                return false;
+
+            _context.Attendees.Add(attendee);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> RemoveTaskAsync(AuthSessionModel model)
+        {
+            if (await _context.Sessions.SingleOrDefaultAsync(x => x.SessionReference == model.SessionReference && x.SessionPassword == model.SessionPassword) is AuthSessionModel s)
             {
                 _context.Sessions.Remove(s);
                 await _context.SaveChangesAsync();
