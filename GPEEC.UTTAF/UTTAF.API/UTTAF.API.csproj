@@ -35,4 +35,8 @@
   <ItemGroup>
     <ProjectReference Include="..\UTTAF.Dependencies\UTTAF.Dependencies.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
 </Project>

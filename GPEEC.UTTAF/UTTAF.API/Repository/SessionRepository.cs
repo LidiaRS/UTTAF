@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using UTTAF.API.Data;
-using UTTAF.API.Models;
 using UTTAF.API.Repository.Interfaces;
 using UTTAF.Dependencies.Enums;
 using UTTAF.Dependencies.Models;

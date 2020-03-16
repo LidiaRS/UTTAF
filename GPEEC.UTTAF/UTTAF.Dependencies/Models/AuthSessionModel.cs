@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using UTTAF.Dependencies.Models;
-
-namespace UTTAF.API.Models
+namespace UTTAF.Dependencies.Models
 {
     public class AuthSessionModel : SessionModel
     {

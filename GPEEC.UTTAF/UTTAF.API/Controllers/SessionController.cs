@@ -3,7 +3,6 @@
 using System;
 using System.Threading.Tasks;
 
-using UTTAF.API.Models;
 using UTTAF.API.Repository.Interfaces;
 using UTTAF.Dependencies.Enums;
 using UTTAF.Dependencies.Models;

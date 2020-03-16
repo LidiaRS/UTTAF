@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-
-using UTTAF.API.Models;
 using UTTAF.Dependencies.Models;
 
 namespace UTTAF.API.Repository.Interfaces

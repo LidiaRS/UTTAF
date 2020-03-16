@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
-using UTTAF.API.Models;
 using UTTAF.Dependencies.Models;
 
 namespace UTTAF.API.Data
