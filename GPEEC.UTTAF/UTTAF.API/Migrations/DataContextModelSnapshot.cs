@@ -16,13 +16,12 @@ namespace UTTAF.API.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.2");
 
-            modelBuilder.Entity("UTTAF.Dependencies.Models.AuthModel", b =>
+            modelBuilder.Entity("UTTAF.Dependencies.Models.SessionModel", b =>
                 {
                     b.Property<string>("SessionReference")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("SessionDate")
-                        .IsRequired()
+                    b.Property<DateTime>("SessionDate")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("SessionStatus")
@@ -30,7 +29,7 @@ namespace UTTAF.API.Migrations
 
                     b.HasKey("SessionReference");
 
-                    b.ToTable("Auths");
+                    b.ToTable("Sessions");
                 });
 #pragma warning restore 612, 618
         }

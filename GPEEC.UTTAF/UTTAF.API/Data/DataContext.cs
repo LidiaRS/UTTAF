@@ -6,7 +6,7 @@ namespace UTTAF.API.Data
 {
     public class DataContext : DbContext
     {
-        public DbSet<AuthModel> Auths { get; set; }
+        public DbSet<SessionModel> Sessions { get; set; }
 
         public DataContext()
         {

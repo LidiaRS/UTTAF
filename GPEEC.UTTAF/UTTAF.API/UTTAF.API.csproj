@@ -15,6 +15,10 @@
     <Compile Remove="Migrations\20200314050957_RefatoringAuthModel.Designer.cs" />
     <Compile Remove="Migrations\20200314051825_RefatoringAuthModel.cs" />
     <Compile Remove="Migrations\20200314051825_RefatoringAuthModel.Designer.cs" />
+    <Compile Remove="Migrations\20200316005903_SessionStatusEnum.cs" />
+    <Compile Remove="Migrations\20200316005903_SessionStatusEnum.Designer.cs" />
+    <Compile Remove="Migrations\20200316010712_ChangeControllerName.cs" />
+    <Compile Remove="Migrations\20200316010712_ChangeControllerName.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

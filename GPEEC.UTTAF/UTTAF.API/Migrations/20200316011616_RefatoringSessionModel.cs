@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UTTAF.API.Migrations
 {
-    public partial class SessionStatusEnum : Migration
+    public partial class RefatoringSessionModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Auths",
+                name: "Sessions",
                 columns: table => new
                 {
                     SessionReference = table.Column<string>(nullable: false),
@@ -17,14 +17,14 @@ namespace UTTAF.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Auths", x => x.SessionReference);
+                    table.PrimaryKey("PK_Sessions", x => x.SessionReference);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Auths");
+                name: "Sessions");
         }
     }
 }
