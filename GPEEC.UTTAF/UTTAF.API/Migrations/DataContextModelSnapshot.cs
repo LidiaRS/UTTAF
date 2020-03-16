@@ -16,12 +16,16 @@ namespace UTTAF.API.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.2");
 
-            modelBuilder.Entity("UTTAF.Dependencies.Models.SessionModel", b =>
+            modelBuilder.Entity("UTTAF.API.Models.AuthSessionModel", b =>
                 {
                     b.Property<string>("SessionReference")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("SessionDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SessionPassword")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("SessionStatus")

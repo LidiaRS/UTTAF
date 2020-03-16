@@ -3,6 +3,7 @@
 using System.Threading.Tasks;
 
 using UTTAF.API.Data;
+using UTTAF.API.Models;
 using UTTAF.API.Repository.Interfaces;
 using UTTAF.Dependencies.Models;
 
@@ -14,19 +15,27 @@ namespace UTTAF.API.Repository
         {
         }
 
-        public async Task AddAsync(SessionModel model)
+        public async Task AddAsync(AuthSessionModel model)
         {
             await _context.Sessions.AddAsync(model);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> ExistsTaskAsync(SessionModel model) =>
+        public async Task<bool> ExistsTaskAsync(AuthSessionModel model) =>
             await _context.Sessions.AnyAsync(x => x.SessionReference == model.SessionReference);
 
-        public async Task RemovehAsync(SessionModel model)
+        public Task JoinAtSessionAsync(SessionModel session) => throw new System.NotImplementedException();
+
+        public async Task<bool> RemoveAsync(AuthSessionModel model)
         {
-            _context.Sessions.Remove(model);
-            await _context.SaveChangesAsync();
+            if (await _context.Sessions.FirstOrDefaultAsync(x => x.SessionReference == model.SessionReference && x.SessionPassword == model.SessionPassword) is AuthSessionModel s)
+            {
+                _context.Sessions.Remove(s);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+
+            return false;
         }
     }
 }

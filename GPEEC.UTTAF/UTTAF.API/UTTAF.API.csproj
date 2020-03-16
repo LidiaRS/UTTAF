@@ -19,6 +19,8 @@
     <Compile Remove="Migrations\20200316005903_SessionStatusEnum.Designer.cs" />
     <Compile Remove="Migrations\20200316010712_ChangeControllerName.cs" />
     <Compile Remove="Migrations\20200316010712_ChangeControllerName.Designer.cs" />
+    <Compile Remove="Migrations\20200316011616_RefatoringSessionModel.cs" />
+    <Compile Remove="Migrations\20200316011616_RefatoringSessionModel.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

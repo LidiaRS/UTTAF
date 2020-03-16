@@ -1,15 +1,18 @@
 ﻿using System.Threading.Tasks;
 
+using UTTAF.API.Models;
 using UTTAF.Dependencies.Models;
 
 namespace UTTAF.API.Repository.Interfaces
 {
     public interface IAuthRepository
     {
-        Task AddAsync(SessionModel model);
+        Task AddAsync(AuthSessionModel model);
 
-        Task<bool> ExistsTaskAsync(SessionModel model);
+        Task JoinAtSessionAsync(SessionModel session);
 
-        Task RemovehAsync(SessionModel model);
+        Task<bool> ExistsTaskAsync(AuthSessionModel model);
+
+        Task<bool> RemoveAsync(AuthSessionModel model);
     }
 }
