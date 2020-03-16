@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UTTAF.API.Repository.Interfaces;
 using UTTAF.Dependencies.Enums;
 using UTTAF.Dependencies.Models;
+using UTTAF.Dependencies.Services;
 
 namespace UTTAF.API.Controllers
 {
@@ -25,6 +26,7 @@ namespace UTTAF.API.Controllers
 
             auth.SessionStatus = SessionStatusEnum.Active;
             auth.SessionDate = DateTime.Now;
+            auth.SessionPassword = SecurityService.CalculateHash256(auth.SessionPassword);
 
             await _repository.AddAsync(auth);
             return Created("", auth);
@@ -44,7 +46,7 @@ namespace UTTAF.API.Controllers
         [HttpGet("attendees")]
         public async Task<IActionResult> AttendeesInSessionTaskAsync(string sessionReference, string sessionPassword)
         {
-            if (await _repository.ExistsTaskAsync(sessionReference, sessionPassword))
+            if (await _repository.ExistsTaskAsync(sessionReference, SecurityService.CalculateHash256(sessionPassword)))
                 return Ok(await _repository.GetAttendersTaskAsync(sessionReference));
 
             return NotFound("Sessao informada nao existe.");
@@ -53,6 +55,7 @@ namespace UTTAF.API.Controllers
         [HttpDelete]
         public async Task<IActionResult> RemoveSessionTaskAsync([FromBody]AuthSessionModel model)
         {
+            model.SessionPassword = SecurityService.CalculateHash256(model.SessionPassword);
             if (await _repository.RemoveTaskAsync(model))
                 return Ok();
 

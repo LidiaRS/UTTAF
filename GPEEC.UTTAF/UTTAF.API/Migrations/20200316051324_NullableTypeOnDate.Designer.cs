@@ -9,8 +9,8 @@ using UTTAF.API.Data;
 namespace UTTAF.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200316015631_AddPasswordInSession")]
-    partial class AddPasswordInSession
+    [Migration("20200316051324_NullableTypeOnDate")]
+    partial class NullableTypeOnDate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,12 +18,31 @@ namespace UTTAF.API.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.2");
 
-            modelBuilder.Entity("UTTAF.API.Models.AuthSessionModel", b =>
+            modelBuilder.Entity("UTTAF.Dependencies.Models.AttendeeModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SessionReference")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Attendees");
+                });
+
+            modelBuilder.Entity("UTTAF.Dependencies.Models.AuthSessionModel", b =>
                 {
                     b.Property<string>("SessionReference")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("SessionDate")
+                    b.Property<DateTime?>("SessionDate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("SessionPassword")

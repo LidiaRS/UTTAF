@@ -9,6 +9,7 @@ using UTTAF.API.Tests.Exceptions;
 using UTTAF.Dependencies.Enums;
 using UTTAF.Dependencies.Helpers;
 using UTTAF.Dependencies.Models;
+using UTTAF.Dependencies.Services;
 
 using Xunit;
 
@@ -16,8 +17,8 @@ namespace UTTAF.API.Tests
 {
     public class AuthAPITests
     {
-        private const string SessionPassword = "test123";
         private const string SessionReference = "testSession";
+        private const string SessionPassword = "test123";
 
         [Fact]
         public async void AuthSessionAndReturnData()
@@ -35,8 +36,9 @@ namespace UTTAF.API.Tests
                 AuthSessionModel session = JsonSerializer.Deserialize<AuthSessionModel>(response.Content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
                 Assert.Equal(SessionReference, session.SessionReference);
-                Assert.Equal(SessionPassword, session.SessionPassword);
+                Assert.Equal(SecurityService.CalculateHash256(SessionPassword), session.SessionPassword);
                 Assert.Equal(SessionStatusEnum.Active, session.SessionStatus);
+                Assert.NotNull(session.SessionDate);
             }
             else
                 throw new InvalidSessionException(response.Content);

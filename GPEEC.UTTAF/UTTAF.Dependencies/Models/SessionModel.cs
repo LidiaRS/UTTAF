@@ -15,6 +15,6 @@ namespace UTTAF.Dependencies.Models
         public SessionStatusEnum SessionStatus { get; set; }
 
         [NotNull]
-        public DateTime SessionDate { get; set; }
+        public DateTime? SessionDate { get; set; }
     }
 }

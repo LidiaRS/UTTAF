@@ -16,26 +16,6 @@ namespace UTTAF.API.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.2");
 
-            modelBuilder.Entity("UTTAF.API.Models.AuthSessionModel", b =>
-                {
-                    b.Property<string>("SessionReference")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("SessionDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("SessionPassword")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("SessionStatus")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("SessionReference");
-
-                    b.ToTable("Sessions");
-                });
-
             modelBuilder.Entity("UTTAF.Dependencies.Models.AttendeeModel", b =>
                 {
                     b.Property<int>("Id")
@@ -53,6 +33,26 @@ namespace UTTAF.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Attendees");
+                });
+
+            modelBuilder.Entity("UTTAF.Dependencies.Models.AuthSessionModel", b =>
+                {
+                    b.Property<string>("SessionReference")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("SessionDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SessionPassword")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("SessionStatus")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("SessionReference");
+
+                    b.ToTable("Sessions");
                 });
 #pragma warning restore 612, 618
         }
