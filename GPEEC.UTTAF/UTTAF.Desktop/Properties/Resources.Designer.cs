@@ -83,6 +83,16 @@ namespace UTTAF.Desktop.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Byte[].
         /// </summary>
+        internal static byte[] uttaf {
+            get {
+                object obj = ResourceManager.GetObject("uttaf", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Byte[].
+        /// </summary>
         internal static byte[] UTTAF_Icon {
             get {
                 object obj = ResourceManager.GetObject("UTTAF_Icon", resourceCulture);

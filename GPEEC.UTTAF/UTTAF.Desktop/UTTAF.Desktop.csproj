@@ -10,6 +10,7 @@
   <ItemGroup>
     <None Remove="Resources\sbf.png" />
     <None Remove="Resources\ufac.png" />
+    <None Remove="Resources\uttaf.jpg" />
     <None Remove="Resources\UTTAF_Icon.png" />
   </ItemGroup>
 
@@ -23,6 +24,7 @@
   <ItemGroup>
     <Resource Include="Resources\sbf.png" />
     <Resource Include="Resources\ufac.png" />
+    <Resource Include="Resources\uttaf.jpg" />
     <Resource Include="Resources\UTTAF_Icon.png" />
   </ItemGroup>
 

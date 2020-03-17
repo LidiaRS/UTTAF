@@ -124,6 +124,9 @@
   <data name="ufac" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ufac.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="uttaf" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uttaf.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="UTTAF_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\UTTAF_Icon.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

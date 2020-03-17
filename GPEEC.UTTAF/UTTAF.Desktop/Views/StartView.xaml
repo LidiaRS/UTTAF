@@ -8,14 +8,14 @@
     Title="UTTAF - Utilizaçao de Tecnologia no Transito com Aplicaçao Física"
     mc:Ignorable="d">
     <Grid>
-        <Image Source="http://www.dot.ri.gov/projects/trip/img/autonomous_img.jpg" Stretch="UniformToFill" />
+        <Image Source="/resources/uttaf.jpg" Stretch="UniformToFill" />
         <Border Background="#070B21" Opacity=".75" />
         <md:Card
             Width="300"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             md:ShadowAssist.ShadowDepth="Depth3"
-            Opacity=".8"
+            Opacity=".85"
             UniformCornerRadius="15">
 
             <Grid>
