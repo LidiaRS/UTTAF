@@ -11,7 +11,7 @@
     <Grid>
         <Image Source="/resources/uttaf.jpg" Stretch="UniformToFill" />
         <Border Background="#070B21" Opacity=".75" />
-        <md:Transitioner SelectedIndex="0">
+        <md:Transitioner x:Name="transi" SelectedIndex="0">
             <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=SlideInFromTop}">
                 <md:TransitionerSlide.ForwardWipe>
                     <md:CircleWipe />
@@ -20,7 +20,7 @@
             </md:TransitionerSlide>
             <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=SlideInFromBottom}">
                 <md:TransitionerSlide.BackwardWipe>
-                    <md:FadeWipe />
+                    <md:SlideWipe />
                 </md:TransitionerSlide.BackwardWipe>
                 <local:CreateSessionView />
             </md:TransitionerSlide>

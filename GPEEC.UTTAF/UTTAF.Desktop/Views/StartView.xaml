@@ -20,11 +20,6 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Button
-                x:Name="ButtonAux"
-                Command="{x:Static md:Transitioner.MoveNextCommand}"
-                IsEnabled="False"
-                Visibility="Collapsed" />
 
             <Image
                 Grid.Row="0"
@@ -49,6 +44,7 @@
                 TextWrapping="Wrap" />
 
             <Button
+                x:Name="StartCreateSession"
                 Grid.Row="3"
                 Margin="20"
                 md:ButtonAssist.CornerRadius="10"
@@ -68,6 +64,30 @@
                         Grid.Column="1"
                         Margin="10,0,0,0"
                         Text="Iniciar" />
+                </Grid>
+            </Button>
+
+            <Button
+                x:Name="NextCreateSession"
+                Grid.Row="3"
+                Margin="20"
+                BorderThickness="0"
+                Command="{x:Static md:Transitioner.MoveNextCommand}"
+                Style="{StaticResource MaterialDesignOutlinedButton}"
+                Visibility="Collapsed">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <md:PackIcon
+                        Grid.Column="0"
+                        VerticalAlignment="Center"
+                        Kind="PageNext" />
+                    <TextBlock
+                        Grid.Column="1"
+                        Margin="10,0,0,0"
+                        Text="Prosseguir" />
                 </Grid>
             </Button>
         </Grid>

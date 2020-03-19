@@ -1,6 +1,4 @@
-﻿using MaterialDesignThemes.Wpf;
-
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace UTTAF.Desktop.Views
@@ -14,15 +12,14 @@ namespace UTTAF.Desktop.Views
 
         private void CreateSession(object sender, RoutedEventArgs e)
         {
-            MaterialDesignThemes.Wpf.DialogHost.Show(new DialogHost.InputNewSessionNameView(), "CreateSessionDH", CreateSessionClose);
-        }
-
-        private void CreateSessionClose(object sender, DialogClosingEventArgs e)
-        {
-            if ((bool)e.Parameter == true)
+            MaterialDesignThemes.Wpf.DialogHost.Show(new DialogHost.InputNewSessionNameView(this), "CreateSessionDH", (s, e) =>
             {
-                ButtonAux.Command.Execute(null);
-            }
+                if ((bool)e.Parameter == true)
+                {
+                    StartCreateSession.Visibility = Visibility.Collapsed;
+                    NextCreateSession.Visibility = Visibility.Visible;
+                }
+            });
         }
     }
 }
