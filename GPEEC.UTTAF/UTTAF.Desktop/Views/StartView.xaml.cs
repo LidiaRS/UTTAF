@@ -1,14 +1,15 @@
-﻿using System.Windows;
+﻿using System.Windows.Controls;
 
 namespace UTTAF.Desktop.Views
 {
     /// <summary>
-    /// Lógica interna para StartView.xaml
+    /// Interação lógica para StartView.xam
     /// </summary>
-    public partial class StartView : Window
+    public partial class StartView : UserControl
     {
-        public StartView() => InitializeComponent();
-
-        private void Button_Click(object sender, RoutedEventArgs e) => new MainView(this).Show();
+        public StartView()
+        {
+            InitializeComponent();
+        }
     }
 }

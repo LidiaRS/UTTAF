@@ -1,0 +1,29 @@
+﻿<Window
+    x:Class="UTTAF.Desktop.Views.ConfigureView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:UTTAF.Desktop.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    Title="UTTAF - Utilizaçao de Tecnologia no Transito com Aplicaçao Física"
+    mc:Ignorable="d">
+    <Grid>
+        <Image Source="/resources/uttaf.jpg" Stretch="UniformToFill" />
+        <Border Background="#070B21" Opacity=".75" />
+        <md:Transitioner SelectedIndex="0">
+            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=SlideInFromTop}">
+                <md:TransitionerSlide.ForwardWipe>
+                    <md:CircleWipe />
+                </md:TransitionerSlide.ForwardWipe>
+                <local:StartView />
+            </md:TransitionerSlide>
+            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=SlideInFromBottom}">
+                <md:TransitionerSlide.BackwardWipe>
+                    <md:FadeWipe />
+                </md:TransitionerSlide.BackwardWipe>
+                <local:CreateSessionView />
+            </md:TransitionerSlide>
+        </md:Transitioner>
+    </Grid>
+</Window>
