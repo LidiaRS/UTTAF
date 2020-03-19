@@ -25,5 +25,6 @@
                 <local:CreateSessionView />
             </md:TransitionerSlide>
         </md:Transitioner>
+        <md:DialogHost Identifier="CreateSessionDH" />
     </Grid>
 </Window>

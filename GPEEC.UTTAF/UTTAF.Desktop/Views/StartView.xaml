@@ -20,6 +20,11 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
+            <Button
+                x:Name="ButtonAux"
+                Command="{x:Static md:Transitioner.MoveNextCommand}"
+                IsEnabled="False"
+                Visibility="Collapsed" />
 
             <Image
                 Grid.Row="0"
@@ -49,7 +54,7 @@
                 md:ButtonAssist.CornerRadius="10"
                 Background="{DynamicResource PrimaryHueDarkBrush}"
                 BorderThickness="0"
-                Command="{x:Static md:Transitioner.MoveNextCommand}">
+                Click="CreateSession">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
