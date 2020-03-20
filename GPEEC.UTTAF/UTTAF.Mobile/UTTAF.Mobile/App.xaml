@@ -13,6 +13,10 @@
         <Color x:Key="MidYellow">#f9d800</Color>
         <Color x:Key="MidDarkYellow">#fac500</Color>
         <Color x:Key="DarkYellow">#ffad00</Color>
-        <!--  ffe751-f9de2a-f9d800-fac500-ffad00.png  -->
+
+        <OnPlatform x:Key="MaterialIcons" x:TypeArguments="x:String">
+            <On Platform="iOS" Value="Material Design Icons" />
+            <On Platform="Android" Value="materialdesignicons-webfont.ttf#Material Design Icons" />
+        </OnPlatform>
     </Application.Resources>
 </Application>

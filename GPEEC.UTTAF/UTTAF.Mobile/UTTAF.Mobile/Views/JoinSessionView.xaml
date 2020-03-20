@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="UTTAF.Mobile.Views.StartView"
+    x:Class="UTTAF.Mobile.Views.JoinSessionView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:icon="clr-namespace:UTTAF.Mobile.Util"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Visual="Material"
     mc:Ignorable="d">
-    <Grid>
-        <Image Aspect="AspectFill" Source="uttaf.png" />
-        <Grid BackgroundColor="{StaticResource DarkBlue}" Opacity=".85" />
+    <Grid BackgroundColor="{StaticResource DarkBlue}">
         <Grid VerticalOptions="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -17,28 +17,15 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Label
-                Grid.Row="0"
-                FontAttributes="Bold"
-                FontSize="26"
-                HorizontalTextAlignment="Center"
-                Text="UTTAF"
-                TextColor="White" />
-            <Image
-                Grid.Row="1"
-                Margin="5"
-                HorizontalOptions="CenterAndExpand"
-                Source="uttaf_icon"
-                WidthRequest="150" />
-            <Label
-                Grid.Row="2"
-                FontSize="13"
-                HorizontalTextAlignment="Center"
-                Text="Utilizaçao de Tecnologia no Transito com Aplicaçao Física"
-                TextColor="White" />
 
+            <Entry
+                Grid.Row="0"
+                BackgroundColor="Gray"
+                HorizontalOptions="Center"
+                Text="jk4j35k4jk53j"
+                WidthRequest="200" />
             <Label
-                Grid.Row="3"
+                Grid.Row="1"
                 Margin="15"
                 FontSize="18"
                 HorizontalTextAlignment="Center"
@@ -46,14 +33,31 @@
                 TextColor="White" />
 
             <Button
-                Grid.Row="4"
+                Grid.Row="2"
                 BackgroundColor="{StaticResource DarkYellow}"
-                Clicked="JoinSession"
                 CornerRadius="20"
                 HorizontalOptions="CenterAndExpand"
-                Text="Iniciar"
+                Text="Participar"
+                TextColor="White"
+                WidthRequest="200" />
+            <Button
+                Grid.Row="3"
+                BackgroundColor="Transparent"
+                BorderWidth="0"
+                CornerRadius="20"
+                HorizontalOptions="CenterAndExpand"
+                Text="Encanear"
                 TextColor="White"
                 WidthRequest="200" />
         </Grid>
+
+        <Button
+            Padding="20"
+            BackgroundColor="Transparent"
+            Clicked="BackToStart"
+            FontFamily="{StaticResource MaterialIcons}"
+            HorizontalOptions="Start"
+            Text="{x:Static icon:PackIconUtil.ArrowLeft}"
+            VerticalOptions="Start" />
     </Grid>
 </ContentPage>
