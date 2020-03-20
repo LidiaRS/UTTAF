@@ -7,12 +7,63 @@
     xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <StackLayout>
-        <forms:AnimationView
+    <Grid>
+        <Image Aspect="AspectFill" Source="uttaf.png" />
+        <Grid BackgroundColor="{StaticResource DarkBlue}" Opacity=".85" />
+        <Grid VerticalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                FontAttributes="Bold"
+                FontSize="26"
+                HorizontalTextAlignment="Center"
+                Text="UTTAF"
+                TextColor="White" />
+            <Image
+                Grid.Row="1"
+                Margin="5"
+                HorizontalOptions="CenterAndExpand"
+                Source="uttaf_icon"
+                WidthRequest="150" />
+            <Label
+                Grid.Row="2"
+                FontSize="13"
+                HorizontalTextAlignment="Center"
+                Text="Utilizaçao de Tecnologia no Transito com Aplicaçao Física"
+                TextColor="White" />
+
+            <Label
+                Grid.Row="3"
+                Margin="15"
+                FontSize="18"
+                HorizontalTextAlignment="Center"
+                Text="Eos sed duo takimata diam magna accusam diam sed at dolor ut amet est vero dolore voluptua nulla diam sit"
+                TextColor="White" />
+
+            <Button
+                Grid.Row="4"
+                BackgroundColor="{StaticResource DarkYellow}"
+                CornerRadius="20"
+                HorizontalOptions="CenterAndExpand"
+                Text="Iniciar"
+                TextColor="White"
+                WidthRequest="200" />
+        </Grid>
+
+
+
+
+        <!--<forms:AnimationView
             Animation="loadTraffic.json"
             AutoPlay="True"
             HorizontalOptions="CenterAndExpand"
             Loop="True"
-            VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+            VerticalOptions="CenterAndExpand" />-->
+    </Grid>
 </ContentPage>
