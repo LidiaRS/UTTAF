@@ -9,8 +9,8 @@ using UTTAF.API.Data;
 namespace UTTAF.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200316051324_NullableTypeOnDate")]
-    partial class NullableTypeOnDate
+    [Migration("20200321214530_ChangeSessionMigration")]
+    partial class ChangeSessionMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

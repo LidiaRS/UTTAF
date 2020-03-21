@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UTTAF.API.Migrations
 {
-    public partial class NullableTypeOnDate : Migration
+    public partial class ChangeSessionMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

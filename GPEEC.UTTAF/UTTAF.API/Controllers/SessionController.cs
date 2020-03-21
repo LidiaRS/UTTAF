@@ -36,9 +36,7 @@ namespace UTTAF.API.Controllers
         public async Task<IActionResult> JoinAtSessionTaskAsync([FromBody]AttendeeModel attendee)
         {
             if (await _repository.AddAttendeeTaskAsync(attendee))
-            {
                 return Created("", attendee);
-            }
 
             return Conflict("Ja existe um participante com esse nome, ou o referencial informado nao existe.");
         }

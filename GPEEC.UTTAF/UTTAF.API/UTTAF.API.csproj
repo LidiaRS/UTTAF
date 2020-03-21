@@ -27,6 +27,8 @@
     <Compile Remove="Migrations\20200316031828_AttendeesEndPoint.Designer.cs" />
     <Compile Remove="Migrations\20200316051125_NullableTypeOnDate.cs" />
     <Compile Remove="Migrations\20200316051125_NullableTypeOnDate.Designer.cs" />
+    <Compile Remove="Migrations\20200316051324_NullableTypeOnDate.cs" />
+    <Compile Remove="Migrations\20200316051324_NullableTypeOnDate.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
