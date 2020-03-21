@@ -6,152 +6,73 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     Title="UTTAF - Utilizaçao de Tecnologia no Transito com Análise Física"
-    Background="{DynamicResource PrimaryHueLightBrush}"
+    Background="#070B21"
     WindowState="Maximized"
     WindowStyle="None"
     mc:Ignorable="d">
     <DockPanel>
-        <!--  Cabeçario  -->
-        <md:Card
-            Height="100"
-            Background="{DynamicResource PrimaryHueMidBrush}"
-            DockPanel.Dock="Top"
-            Visibility="Collapsed">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <Image
-                    Grid.Column="0"
-                    Width="200"
-                    Source="/Resources/sbf.png" />
-
-                <StackPanel
-                    Grid.Column="1"
-                    Margin="10"
-                    VerticalAlignment="Center"
-                    Orientation="Horizontal">
-                    <StackPanel>
-                        <TextBlock
-                            FontSize="35"
-                            FontWeight="Bold"
-                            Foreground="Red"
-                            Text="MNPEF" />
-                        <TextBlock
-                            Margin="0,-10,0,0"
-                            HorizontalAlignment="Center"
-                            FontSize="17"
-                            FontWeight="DemiBold"
-                            Text="Polo 59 - UFAC" />
-                    </StackPanel>
-                    <TextBlock
-                        Width="85"
-                        Margin="5,10,0,0"
-                        VerticalAlignment="Center"
-                        FontSize="10"
-                        Text="Mestrada Nacional Profissional em Ensino de Física"
-                        TextAlignment="Center"
-                        TextWrapping="Wrap" />
-                </StackPanel>
-
-
-                <Image
-                    Grid.Column="2"
-                    Height="70"
-                    Margin="10,0"
-                    Source="/Resources/ufac.png" />
-
-                <StackPanel
-                    Grid.Column="3"
-                    Margin="10,0,0,0"
-                    VerticalAlignment="Center">
-                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        <md:PackIcon
-                            Width="30"
-                            Height="30"
-                            Margin="0,10,0,0"
-                            VerticalAlignment="Center"
-                            Kind="Library" />
-                        <TextBlock
-                            Margin="5,0"
-                            FontWeight="Bold"
-                            Style="{StaticResource MaterialDesignHeadline4TextBlock}"
-                            Text="G P E E C" />
-                    </StackPanel>
-                    <TextBlock
-                        Margin="0,-5,0,0"
-                        HorizontalAlignment="Center"
-                        FontSize="9"
-                        Text="Grupo de Pesquisa e Extensao em Ensino de Ciencias" />
-                </StackPanel>
-
-                <StackPanel
-                    Grid.Column="4"
-                    Margin="0,0,10,0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center">
-                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        <Image Height="50" Source="/Resources/UTTAF_Icon.png" />
-                        <TextBlock
-                            Margin="10,0,0,0"
-                            VerticalAlignment="Center"
-                            FontSize="35"
-                            FontWeight="ExtraBlack"
-                            Text="UTTAF" />
-                    </StackPanel>
-                    <TextBlock FontSize="12" Text="Utilizaçao de Tecnologia no Transito com Análise Física" />
-                </StackPanel>
-            </Grid>
-        </md:Card>
         <!--  Card  & Boneco Libras  -->
         <Grid Margin="30,20" DockPanel.Dock="Left">
-            <GroupBox
-                MaxWidth="250"
-                Margin="0,50,0,0"
-                VerticalAlignment="Top"
-                Style="{StaticResource MaterialDesignCardGroupBox}">
-                <GroupBox.Header>
+            <Grid Margin="0,50,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <md:Card
+                    Grid.Row="0"
+                    md:ShadowAssist.ShadowEdges="Top, Left, Right"
+                    Background="{DynamicResource PrimaryHueDarkBrush}">
                     <TextBlock
+                        Padding="8"
                         HorizontalAlignment="Center"
-                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource MaterialDesignHeadline5TextBlock}"
                         Text="{Binding TitleCard, FallbackValue=Colisao entre carros}" />
-                </GroupBox.Header>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Image
-                        Grid.Row="0"
-                        Width="100"
-                        Height="100"
-                        HorizontalAlignment="Center"
-                        Source="https://imgsapp.em.com.br/app/foto_127989356258/2015/03/05/4859/20150305095836354379i.jpg" />
-                    <TextBlock
-                        Grid.Row="1"
-                        HorizontalAlignment="Center"
-                        Style="{StaticResource MaterialDesignTextBlock}"
-                        Text="{Binding DescriptionIcident, FallbackValue=Acidente com uma vitima do sexo femenino na BR364.}"
-                        TextAlignment="Center"
-                        TextWrapping="Wrap" />
-                    <TextBlock
-                        Grid.Row="2"
-                        HorizontalAlignment="Center"
-                        Style="{StaticResource MaterialDesignBody2TextBlock}"
-                        Text="{Binding IncidentDate, FallbackValue=14/03/2017}" />
-                </Grid>
-            </GroupBox>
-            <md:Card HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                </md:Card>
+                <md:Card
+                    Grid.Row="1"
+                    Width="320"
+                    Height="350"
+                    Background="#3aFFFFFF">
+                    <Grid Margin="7">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Image
+                            Grid.Row="0"
+                            Width="180"
+                            Height="180"
+                            HorizontalAlignment="Center"
+                            Source="https://imgsapp.em.com.br/app/foto_127989356258/2015/03/05/4859/20150305095836354379i.jpg" />
+                        <TextBlock
+                            Grid.Row="1"
+                            HorizontalAlignment="Center"
+                            Foreground="White"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            Text="{Binding DescriptionIcident, FallbackValue=Acidente com uma vitima do sexo femenino na BR364.}"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap" />
+                        <TextBlock
+                            Grid.Row="2"
+                            Margin="0,10,0,0"
+                            HorizontalAlignment="Center"
+                            FontWeight="DemiBold"
+                            Foreground="White"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            Text="{Binding IncidentDate, FallbackValue=14/03/2017}" />
+                    </Grid>
+                </md:Card>
+            </Grid>
+            <md:Card
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Background="Transparent">
                 <Image
-                    Width="150"
-                    Height="170"
-                    Source="http://1.bp.blogspot.com/-bGVHElz8l2Q/Tj8yETRt2FI/AAAAAAAAAts/tk2bfUIohwg/s1600/boneco+fof%25C3%25A3o.jpg"
+                    Width="200"
+                    Height="200"
+                    Source="https://i.pinimg.com/originals/c3/09/6c/c3096cd1a4d63a70d96f3eb33403c517.jpg"
                     Stretch="Fill" />
             </md:Card>
         </Grid>
@@ -183,14 +104,14 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <md:Card Grid.Row="1" Background="{DynamicResource MaterialDesignCardBackground}">
+                <md:Card Grid.Row="1" Background="#3aFFFFFF">
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <TextBlock
                             Margin="10"
                             FontSize="18"
-                            Foreground="Black"
+                            Foreground="White"
                             TextWrapping="Wrap">
-                            <Run Text="Aliquyam dolore consetetur stet te takimata amet nonumy et amet et ut magna lorem ea et eos labore ipsum autem" />
+                            <Run Text="Aliquyam dolore consetetur *stet* te takimata amet nonumy et amet et ut magna lorem ea et eos labore ipsum autem" />
                             <LineBreak />
                             <LineBreak />
                             <Run Text="Vel eum elitr elitr ipsum et erat elitr ea facilisi sanctus et dolores eos sed vel aliquip sit vero rebum" />
@@ -207,7 +128,7 @@
                     Padding="5"
                     HorizontalAlignment="Left"
                     md:ShadowAssist.ShadowEdges="Top, Left, Right"
-                    Background="{DynamicResource PrimaryHueMidDarkBrush}">
+                    Background="{DynamicResource PrimaryHueDarkBrush}">
                     <TextBlock
                         FontSize="18"
                         FontWeight="Bold"

@@ -19,7 +19,7 @@ namespace UTTAF.Desktop.Views
 
         private void CancelSession(object sender, RoutedEventArgs e)
         {
-            var view = ((((Application.Current.MainWindow as ConfigureView).Content as Grid).Children[2] as Transitioner).Items[0] as TransitionerSlide).Content as StartView;
+            var view = (((((Application.Current.MainWindow as ConfigureView).Content as Grid).Children[2] as Grid).Children[0] as Transitioner).Items[0] as TransitionerSlide).Content as StartView;
             view.StartCreateSession.Visibility = Visibility.Visible;
             view.NextCreateSession.Visibility = Visibility.Collapsed;
         }
