@@ -8,7 +8,7 @@ using Xamarin.Forms.Platform.Android;
 
 namespace UTTAF.Mobile.Droid
 {
-    [Activity(MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
