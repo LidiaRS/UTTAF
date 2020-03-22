@@ -14,9 +14,9 @@ namespace UTTAF.API.Controllers
     [ApiController]
     public class SessionController : ControllerBase
     {
-        private readonly IAuthRepository _repository;
+        private readonly ISessionRepository _repository;
 
-        public SessionController(IAuthRepository repository) => _repository = repository;
+        public SessionController(ISessionRepository repository) => _repository = repository;
 
         [HttpPost]
         public async Task<IActionResult> AuthSessionTaskAsync([FromBody]AuthSessionModel auth)

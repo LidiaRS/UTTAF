@@ -11,7 +11,7 @@ using UTTAF.Dependencies.Models;
 
 namespace UTTAF.API.Repository
 {
-    public class SessionRepository : Repository, IAuthRepository
+    public class SessionRepository : Repository, ISessionRepository
     {
         public SessionRepository(DataContext context) : base(context)
         {

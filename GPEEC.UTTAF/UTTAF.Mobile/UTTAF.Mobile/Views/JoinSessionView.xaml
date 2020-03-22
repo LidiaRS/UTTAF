@@ -8,8 +8,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Visual="Material"
     mc:Ignorable="d">
-    <Grid BackgroundColor="{StaticResource DarkBlue}">
-        <Grid VerticalOptions="Center">
+    <Grid>
+        <Image Aspect="AspectFill" Source="uttaf" />
+        <Grid BackgroundColor="{StaticResource DarkBlue}" VerticalOptions="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -20,13 +21,16 @@
 
             <Entry
                 Grid.Row="0"
-                BackgroundColor="Gray"
+                BackgroundColor="#3affffff"
                 HorizontalOptions="Center"
-                Text="jk4j35k4jk53j"
+                Placeholder="Referencial"
+                PlaceholderColor="White"
+                Text="{Binding SessionReference, FallbackValue=2kj34jk23j4k2}"
+                TextColor="White"
                 WidthRequest="200" />
             <Label
                 Grid.Row="1"
-                Margin="15"
+                Margin="20"
                 FontSize="18"
                 HorizontalTextAlignment="Center"
                 Text="Eos sed duo takimata diam magna accusam diam sed at dolor ut amet est vero dolore voluptua nulla diam sit"
@@ -44,11 +48,8 @@
                 Grid.Row="3"
                 BackgroundColor="Transparent"
                 BorderWidth="0"
-                CornerRadius="20"
-                HorizontalOptions="CenterAndExpand"
                 Text="Encanear"
-                TextColor="White"
-                WidthRequest="200" />
+                TextColor="White" />
         </Grid>
 
         <Button
@@ -56,8 +57,10 @@
             BackgroundColor="Transparent"
             Clicked="BackToStart"
             FontFamily="{StaticResource MaterialIcons}"
+            FontSize="20"
             HorizontalOptions="Start"
             Text="{x:Static icon:PackIconUtil.ArrowLeft}"
+            TextColor="White"
             VerticalOptions="Start" />
     </Grid>
 </ContentPage>

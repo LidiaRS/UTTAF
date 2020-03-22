@@ -11,8 +11,7 @@ namespace UTTAF.API.Migrations
                 name: "Attendees",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<int>(nullable: false).Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: false),
                     SessionReference = table.Column<string>(nullable: false)
                 },
