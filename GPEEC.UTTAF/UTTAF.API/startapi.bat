@@ -10,10 +10,11 @@ echo ======================  RODANDO API  ========================
 cd ..
 cd UTTAF.API
 dotnet run
-pause
 
 echo ======================  RODANDO TESTES  ========================
 cd ..
 cd UTTAF.API.Tests
 dotnet test
+
+pause
 

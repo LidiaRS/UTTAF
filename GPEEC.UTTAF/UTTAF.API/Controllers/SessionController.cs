@@ -57,7 +57,7 @@ namespace UTTAF.API.Controllers
             if (await _repository.RemoveTaskAsync(model))
                 return Ok();
 
-            return NotFound();
+            return NotFound($"Nao foi possivel encontrar uma sessao com o nome: {model.SessionReference}");
         }
     }
 }
