@@ -18,5 +18,14 @@
             <On Platform="iOS" Value="Material Design Icons" />
             <On Platform="Android" Value="materialdesignicons-webfont.ttf#Material Design Icons" />
         </OnPlatform>
+
+        <Style x:Key="ButtonIcon" TargetType="Button">
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="CornerRadius" Value="0" />
+            <Setter Property="FontFamily" Value="{StaticResource MaterialIcons}" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Padding" Value="10" />
+        </Style>
     </Application.Resources>
 </Application>

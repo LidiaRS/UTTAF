@@ -10,7 +10,8 @@
     mc:Ignorable="d">
     <Grid>
         <Image Aspect="AspectFill" Source="uttaf" />
-        <Grid BackgroundColor="{StaticResource DarkBlue}" VerticalOptions="Center">
+        <Grid BackgroundColor="{StaticResource DarkBlue}" Opacity=".85" />
+        <Grid VerticalOptions="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -50,15 +51,13 @@
                 BorderWidth="0"
                 Text="Encanear"
                 TextColor="White" />
+
         </Grid>
 
         <Button
-            Padding="20"
-            BackgroundColor="Transparent"
             Clicked="BackToStart"
-            FontFamily="{StaticResource MaterialIcons}"
-            FontSize="20"
             HorizontalOptions="Start"
+            Style="{StaticResource ButtonIcon}"
             Text="{x:Static icon:PackIconUtil.ArrowLeft}"
             TextColor="White"
             VerticalOptions="Start" />
