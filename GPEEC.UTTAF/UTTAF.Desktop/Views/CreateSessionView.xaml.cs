@@ -10,7 +10,11 @@ namespace UTTAF.Desktop.Views
     /// </summary>
     public partial class CreateSessionView : UserControl
     {
-        public CreateSessionView() => InitializeComponent();
+        public CreateSessionView()
+        {
+            InitializeComponent();
+            DataContext = (Application.Current.MainWindow as ConfigureView).DataContext;
+        }
 
         private void FinishSession(object sender, RoutedEventArgs e)
         {

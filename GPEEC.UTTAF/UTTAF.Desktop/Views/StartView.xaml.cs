@@ -8,7 +8,11 @@ namespace UTTAF.Desktop.Views
     /// </summary>
     public partial class StartView : UserControl
     {
-        public StartView() => InitializeComponent();
+        public StartView()
+        {
+            InitializeComponent();
+            DataContext = (Application.Current.MainWindow as ConfigureView).DataContext;
+        }
 
         private void CreateSession(object sender, RoutedEventArgs e)
         {
