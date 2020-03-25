@@ -1,5 +1,14 @@
-﻿using System.Windows;
+﻿using RestSharp;
+
+using System.Net;
+using System.Text.Json;
+using System.Windows;
 using System.Windows.Controls;
+
+using UTTAF.Dependencies.Helpers;
+using UTTAF.Dependencies.Models;
+using UTTAF.Desktop.Services.Requests;
+using UTTAF.Desktop.Views.DialogHost;
 
 namespace UTTAF.Desktop.Views
 {
@@ -16,12 +25,25 @@ namespace UTTAF.Desktop.Views
 
         private void CreateSession(object sender, RoutedEventArgs e)
         {
-            MaterialDesignThemes.Wpf.DialogHost.Show(new DialogHost.InputNewSessionNameView(this), "CreateSessionDH", (s, e) =>
+            MaterialDesignThemes.Wpf.DialogHost.Show(new InputNewSessionNameView(this), "CreateSessionDH", async (s, e) =>
             {
                 if ((bool)e.Parameter == true)
                 {
-                    StartCreateSession.Visibility = Visibility.Collapsed;
-                    NextCreateSession.Visibility = Visibility.Visible;
+                    var view = e.Session.Content as InputNewSessionNameView;
+                    string reference = view.Reference.Text;
+                    string password = view.Password.Password;
+
+                    IRestResponse response = await InitializeSessionService.InitSessionTaskAsync(new AuthSessionModel { SessionReference = reference, SessionPassword = password });
+
+                    if (response.StatusCode == HttpStatusCode.Created)
+                    {
+                        DataHelper.AuthSession = JsonSerializer.Deserialize<AuthSessionModel>(response.Content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                        StartCreateSession.Visibility = Visibility.Collapsed;
+                        NextCreateSession.Visibility = Visibility.Visible;
+                    }
+                    else if(response.StatusCode == HttpStatusCode.Conflict)
+                        MessageBox.Show(response.Content.Replace('\"', '\0'));
                 }
             });
         }

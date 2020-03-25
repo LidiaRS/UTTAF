@@ -29,7 +29,7 @@ namespace UTTAF.API.Controllers
             auth.SessionPassword = SecurityService.CalculateHash256(auth.SessionPassword);
 
             await _repository.AddAsync(auth);
-            return Created("", auth);
+            return Created(string.Empty, auth);
         }
 
         [HttpPost("attendees")]
