@@ -42,8 +42,8 @@ namespace UTTAF.Desktop.Views
                         StartCreateSession.Visibility = Visibility.Collapsed;
                         NextCreateSession.Visibility = Visibility.Visible;
                     }
-                    else if(response.StatusCode == HttpStatusCode.Conflict)
-                        MessageBox.Show(response.Content.Replace('\"', '\0'));
+                    else if (response.StatusCode == HttpStatusCode.Conflict)
+                        MessageBox.Show(response.Content.Replace("\"", string.Empty));
                 }
             });
         }
