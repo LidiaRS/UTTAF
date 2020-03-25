@@ -1,7 +1,5 @@
 ﻿using Dependencies.Services;
 
-using NUnit.Framework;
-
 using RestSharp;
 
 using System.Net;
@@ -14,6 +12,9 @@ using UTTAF.Dependencies.Helpers;
 using UTTAF.Dependencies.Models;
 using UTTAF.Dependencies.Services;
 
+using Xunit;
+using Xunit.Extensions.Ordering;
+
 namespace UTTAF.API.Tests
 {
     public class AuthAPITests
@@ -21,7 +22,7 @@ namespace UTTAF.API.Tests
         private const string SessionReference = "testSession";
         private const string SessionPassword = "test123";
 
-        [Test, Order(0)]
+        [Fact, Order(0)]
         public async Task AuthSessionAndReturnData()
         {
             IRestResponse response = await new RequestService()
@@ -36,16 +37,16 @@ namespace UTTAF.API.Tests
             {
                 AuthSessionModel session = JsonSerializer.Deserialize<AuthSessionModel>(response.Content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-                Assert.AreEqual(SessionReference, session.SessionReference);
-                Assert.AreEqual(SecurityService.CalculateHash256(SessionPassword), session.SessionPassword);
-                Assert.AreEqual(SessionStatusEnum.Active, session.SessionStatus);
+                Assert.Equal(SessionReference, session.SessionReference);
+                Assert.Equal(SecurityService.CalculateHash256(SessionPassword), session.SessionPassword);
+                Assert.Equal(SessionStatusEnum.Active, session.SessionStatus);
                 Assert.NotNull(session.SessionDate);
             }
             else
                 throw new InvalidSessionException(response.Content);
         }
 
-        [Test, Order(1)]
+        [Fact, Order(1)]
         public async Task RemoveSession()
         {
             IRestResponse response = await new RequestService()
