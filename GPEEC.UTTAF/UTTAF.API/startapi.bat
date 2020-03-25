@@ -11,10 +11,5 @@ cd ..
 cd UTTAF.API
 dotnet run
 
-echo ======================  RODANDO TESTES  ========================
-cd ..
-cd UTTAF.API.Tests
-dotnet test
-
 pause
 
