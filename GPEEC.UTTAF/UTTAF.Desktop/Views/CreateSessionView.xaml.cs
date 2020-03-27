@@ -20,11 +20,13 @@ namespace UTTAF.Desktop.Views
             new MainView(Application.Current.MainWindow).Show();
         }
 
-        private void CancelSession(object sender, RoutedEventArgs e)
+        internal void CancelSession()
         {
             var view = (((((Application.Current.MainWindow as ConfigureView).Content as Grid).Children[2] as Grid).Children[0] as Transitioner).Items[0] as TransitionerSlide).Content as StartView;
             view.StartCreateSession.Visibility = Visibility.Visible;
             view.NextCreateSession.Visibility = Visibility.Collapsed;
+
+            Transitioner.MoveFirstCommand.Execute(null, null);
         }
     }
 }

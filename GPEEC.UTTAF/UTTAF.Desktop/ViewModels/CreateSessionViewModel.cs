@@ -1,8 +1,16 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 using QRCoder;
 
+using RestSharp;
+
+using System.Net;
+using System.Windows;
+
 using UTTAF.Dependencies.Helpers;
+using UTTAF.Desktop.Services.Requests;
+using UTTAF.Desktop.Views;
 
 namespace UTTAF.Desktop.ViewModels
 {
@@ -23,10 +31,27 @@ namespace UTTAF.Desktop.ViewModels
             set => Set(ref _sessionReference, value);
         }
 
+        public RelayCommand<CreateSessionView> CancelSessionCreationCommand { get; private set; }
+
+        public CreateSessionViewModel()
+        {
+            CancelSessionCreationCommand = new RelayCommand<CreateSessionView>(CancelSessionCreation);
+        }
+
         public void Init()
         {
             SessionReference = DataHelper.AuthSession.SessionReference;
             QrCode = GenerateQrCode();
+        }
+
+        private async void CancelSessionCreation(CreateSessionView sessionView)
+        {
+            IRestResponse response = await SessionService.DeleteSessionTaskAsync(DataHelper.AuthSession);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+                sessionView.CancelSession();
+            else if (response.StatusCode == HttpStatusCode.NotFound)
+                MessageBox.Show(response.Content.Replace("\"", string.Empty));
         }
 
         private object GenerateQrCode()
