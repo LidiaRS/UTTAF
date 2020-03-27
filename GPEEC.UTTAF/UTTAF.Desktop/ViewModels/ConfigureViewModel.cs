@@ -21,13 +21,12 @@ namespace UTTAF.Desktop.ViewModels
             set => Set(ref _reference, value);
         }
 
-        public RelayCommand CreateSessionCommand { get; private set; }
+        public RelayCommand Command { get; private set; }
 
         public ConfigureViewModel() => Init();
 
         private void Init()
         {
-            Reference = DataHelper.AuthSession.SessionReference;
         }
 
         private void GenerateQrCode()

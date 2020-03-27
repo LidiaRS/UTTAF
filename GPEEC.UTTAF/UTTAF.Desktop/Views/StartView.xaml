@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    x:Name="this"
     mc:Ignorable="d">
     <md:Card
         Width="300"
@@ -58,7 +59,8 @@
                 md:ButtonAssist.CornerRadius="10"
                 Background="{DynamicResource PrimaryHueDarkBrush}"
                 BorderThickness="0"
-                Click="CreateSession">
+                Command="{Binding CreateSessionCommand}"
+                CommandParameter="{x:Reference this}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
