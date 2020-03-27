@@ -147,7 +147,6 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Background="{StaticResource PrimaryHueDarkBrush}"
-                Click="Button_Click"
                 Content="{md:PackIcon Kind=Settings}"
                 Foreground="White"
                 Style="{StaticResource MaterialDesignIconButton}"

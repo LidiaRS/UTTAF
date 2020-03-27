@@ -82,6 +82,7 @@
                 Grid.Row="4"
                 Margin="20"
                 BorderThickness="0"
+                Click="CreateSession"
                 Command="{x:Static md:Transitioner.MoveNextCommand}"
                 Style="{StaticResource MaterialDesignOutlinedButton}"
                 Visibility="Collapsed">

@@ -3,17 +3,16 @@
 using System.Windows;
 using System.Windows.Controls;
 
+using UTTAF.Desktop.ViewModels;
+
 namespace UTTAF.Desktop.Views
 {
-    /// <summary>
-    /// Interação lógica para CreateSessionView.xam
-    /// </summary>
     public partial class CreateSessionView : UserControl
     {
         public CreateSessionView()
         {
             InitializeComponent();
-            DataContext = (Application.Current.MainWindow as ConfigureView).DataContext;
+            DataContext = new CreateSessionViewModel();
         }
 
         private void FinishSession(object sender, RoutedEventArgs e)
