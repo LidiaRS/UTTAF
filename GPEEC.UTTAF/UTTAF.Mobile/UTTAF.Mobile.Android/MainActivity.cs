@@ -6,6 +6,9 @@ using Android.Runtime;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
+using ZXing.Mobile;
+using ZXing.Net.Mobile.Android;
+
 namespace UTTAF.Mobile.Droid
 {
     [Activity(ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
@@ -21,6 +24,8 @@ namespace UTTAF.Mobile.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Forms.Init(this, savedInstanceState);
             FormsMaterial.Init(this, savedInstanceState);
+            ZXing.Net.Mobile.Forms.Android.Platform.Init();
+            MobileBarcodeScanner.Initialize(Application);
 
             LoadApplication(new App());
         }
@@ -28,6 +33,7 @@ namespace UTTAF.Mobile.Droid
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            PermissionsHandler.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
