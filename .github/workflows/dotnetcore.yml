@@ -13,7 +13,9 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
-    - name: API
+    - name: Build API
       run: dotnet build ./GPEEC.UTTAF/UTTAF.API/UTTAF.API.csproj
-    - name: API Tests
+    - name: Build API.Tests
       run: dotnet build ./GPEEC.UTTAF/UTTAF.API.Tests/UTTAF.API.Tests.csproj
+    - name: Test API.Tests
+      run: dotnet test ./GPEEC.UTTAF/UTTAF.API.Tests/UTTAF.API.Tests.csproj
