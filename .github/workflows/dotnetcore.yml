@@ -1,0 +1,21 @@
+name: .NET Core
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+    - name: Build API
+      run: dotnet build ./GPEEC.UTTAF/UTTAF.API/UTTAF.API.csproj
+    - name: Build API.Tests
+      run: dotnet build ./GPEEC.UTTAF/UTTAF.API.Tests/UTTAF.API.Tests.csproj
+    #- name: Test API.Tests
+    #  run: dotnet test ./GPEEC.UTTAF/UTTAF.API.Tests/UTTAF.API.Tests.csproj
