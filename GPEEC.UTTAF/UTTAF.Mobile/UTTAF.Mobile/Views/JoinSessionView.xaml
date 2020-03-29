@@ -24,13 +24,26 @@
                 Grid.Row="0"
                 BackgroundColor="#3affffff"
                 HorizontalOptions="Center"
+                MaxLength="20"
                 Placeholder="Referencial"
                 PlaceholderColor="White"
-                Text="{Binding SessionReference, FallbackValue=2kj34jk23j4k2}"
+                Text="{Binding SessionReference}"
                 TextColor="White"
                 WidthRequest="200" />
-            <Label
+
+            <Entry
                 Grid.Row="1"
+                BackgroundColor="#3affffff"
+                HorizontalOptions="Center"
+                MaxLength="20"
+                Placeholder="Nome"
+                PlaceholderColor="White"
+                Text="{Binding Attendee}"
+                TextColor="White"
+                WidthRequest="200" />
+
+            <Label
+                Grid.Row="2"
                 Margin="20"
                 FontSize="18"
                 HorizontalTextAlignment="Center"
@@ -38,17 +51,19 @@
                 TextColor="White" />
 
             <Button
-                Grid.Row="2"
+                Grid.Row="3"
                 BackgroundColor="{StaticResource DarkYellow}"
+                Command="{Binding JoinAtSessionCommand}"
                 CornerRadius="20"
                 HorizontalOptions="CenterAndExpand"
                 Text="Participar"
                 TextColor="White"
                 WidthRequest="200" />
             <Button
-                Grid.Row="3"
+                Grid.Row="4"
                 BackgroundColor="Transparent"
                 BorderWidth="0"
+                Command="{Binding JoinAtSessionWithQrCodeCommand}"
                 Text="Encanear"
                 TextColor="White" />
 

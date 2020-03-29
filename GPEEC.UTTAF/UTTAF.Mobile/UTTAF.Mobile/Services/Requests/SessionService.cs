@@ -11,12 +11,12 @@ namespace UTTAF.Mobile.Services.Requests
 {
     internal class SessionService
     {
-        internal async static Task<IRestResponse> JoinAtSession(AttendeeModel attendee)
+        public async static Task<IRestResponse> JoinAtSession(AttendeeModel attendee)
         {
             return await new RequestService()
             {
                 URL = DataHelper.URI,
-                URN = "Session/Attendees",
+                URN = "session/attendees",
                 Body = attendee,
                 Method = Method.POST
             }.ExecuteTaskAsync();

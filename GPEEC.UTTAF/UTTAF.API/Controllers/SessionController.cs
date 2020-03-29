@@ -44,10 +44,15 @@ namespace UTTAF.API.Controllers
         [HttpGet("attendees")]
         public async Task<IActionResult> AttendeesInSessionTaskAsync(string sessionReference, string sessionPassword)
         {
-            if (await _repository.ExistsTaskAsync(sessionReference, SecurityService.CalculateHash256(sessionPassword)))
-                return Ok(await _repository.GetAttendersTaskAsync(sessionReference));
+            if (!string.IsNullOrEmpty(sessionReference) && !string.IsNullOrEmpty(sessionPassword))
+            {
+                if (await _repository.ExistsTaskAsync(sessionReference, SecurityService.CalculateHash256(sessionPassword)))
+                    return Ok(await _repository.GetAttendersTaskAsync(sessionReference));
 
-            return NotFound("Sessao informada nao existe.");
+                return NotFound("Sessao informada nao existe.");
+            }
+
+            return BadRequest();
         }
 
         [HttpDelete]

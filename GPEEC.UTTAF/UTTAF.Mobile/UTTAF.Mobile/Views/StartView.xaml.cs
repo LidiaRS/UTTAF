@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using Logikoz.XamarinUtilities.Utilities;
+
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace UTTAF.Mobile.Views
@@ -10,7 +12,7 @@ namespace UTTAF.Mobile.Views
 
         private async void JoinSession(object sender, System.EventArgs e)
         {
-            await Navigation.PushModalAsync(new JoinSessionView(), true);
+            await PopPushViewUtil.PushModalAsync(new JoinSessionView());
         }
     }
 }
