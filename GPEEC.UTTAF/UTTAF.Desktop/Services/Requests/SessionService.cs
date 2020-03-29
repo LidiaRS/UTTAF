@@ -22,6 +22,21 @@ namespace UTTAF.Desktop.Services.Requests
             }.ExecuteTaskAsync();
         }
 
+        internal async static Task<IRestResponse> GetAttendeesTaskAsync(AuthSessionModel model)
+        {
+            var request = new RequestService()
+            {
+                URL = DataHelper.URI,
+                URN = "Session/Attendees",
+                Method = Method.GET,
+                ContainsParameter = true
+            };
+            request.Parameters.Add(nameof(model.SessionReference), model.SessionReference);
+            request.Parameters.Add(nameof(model.SessionPassword), model.SessionPassword);
+
+            return await request.ExecuteTaskAsync();
+        }
+
         internal async static Task<IRestResponse> DeleteSessionTaskAsync(AuthSessionModel model)
         {
             return await new RequestService()

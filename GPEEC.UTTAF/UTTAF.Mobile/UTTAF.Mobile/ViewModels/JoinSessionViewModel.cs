@@ -21,9 +21,6 @@ namespace UTTAF.Mobile.ViewModels
         private string _sessionReference;
         private string _attendee;
 
-        public RelayCommand JoinAtSessionWithQrCodeCommand { get; private set; }
-        public RelayCommand JoinAtSessionCommand { get; private set; }
-
         public string SessionReference
         {
             get => _sessionReference;
@@ -35,6 +32,9 @@ namespace UTTAF.Mobile.ViewModels
             get => _attendee;
             set => Set(ref _attendee, value);
         }
+
+        public RelayCommand JoinAtSessionWithQrCodeCommand { get; private set; }
+        public RelayCommand JoinAtSessionCommand { get; private set; }
 
         public JoinSessionViewModel() => Init();
 

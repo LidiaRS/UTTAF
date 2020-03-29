@@ -5,10 +5,17 @@ using QRCoder;
 
 using RestSharp;
 
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net;
+using System.Text.Json;
 using System.Windows;
+using System.Windows.Threading;
 
 using UTTAF.Dependencies.Helpers;
+using UTTAF.Dependencies.Models;
 using UTTAF.Desktop.Services.Requests;
 using UTTAF.Desktop.Views;
 
@@ -16,6 +23,7 @@ namespace UTTAF.Desktop.ViewModels
 {
     internal class CreateSessionViewModel : ViewModelBase
     {
+        private DispatcherTimer timer;
         private string _sessionReference;
         private object _qrCodeImg;
 
@@ -31,6 +39,8 @@ namespace UTTAF.Desktop.ViewModels
             set => Set(ref _sessionReference, value);
         }
 
+        public ObservableCollection<AttendeeModel> Attendees { get; set; } = new ObservableCollection<AttendeeModel>();
+
         public RelayCommand<CreateSessionView> CancelSessionCreationCommand { get; private set; }
 
         public CreateSessionViewModel()
@@ -40,8 +50,32 @@ namespace UTTAF.Desktop.ViewModels
 
         public void Init()
         {
+            Attendees.Clear();
             SessionReference = DataHelper.AuthSession.SessionReference;
             QrCode = GenerateQrCode();
+
+            timer = new DispatcherTimer()
+            {
+                Interval = new TimeSpan(0, 0, 0, 0, 500)
+            };
+            timer.Tick += async (sender, e) =>
+            {
+                IRestResponse response = await SessionService.GetAttendeesTaskAsync(DataHelper.AuthSession);
+
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    JsonSerializer.Deserialize<List<AttendeeModel>>(response.Content, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    }).ForEach(att =>
+                    {
+                        if (!Attendees.Any(x => x.Name == att.Name))
+                            Attendees.Add(att);
+                    });
+                }
+            };
+
+            timer.Start();
         }
 
         private async void CancelSessionCreation(CreateSessionView sessionView)
@@ -52,6 +86,8 @@ namespace UTTAF.Desktop.ViewModels
                 sessionView.CancelSession();
             else if (response.StatusCode == HttpStatusCode.NotFound)
                 MessageBox.Show(response.Content.Replace("\"", string.Empty));
+
+            timer.Stop();
         }
 
         private object GenerateQrCode()
