@@ -15,7 +15,7 @@ namespace UTTAF.Desktop.Services.Requests
         {
             return await new RequestService()
             {
-                URL = DataHelper.Uri,
+                URL = DataHelper.URI,
                 URN = "Session",
                 Method = Method.POST,
                 Body = authSession
@@ -26,7 +26,7 @@ namespace UTTAF.Desktop.Services.Requests
         {
             return await new RequestService()
             {
-                URL = DataHelper.Uri,
+                URL = DataHelper.URI,
                 URN = "Session",
                 Method = Method.DELETE,
                 Body = model
