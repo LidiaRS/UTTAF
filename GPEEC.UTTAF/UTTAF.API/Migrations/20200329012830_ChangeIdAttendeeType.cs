@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UTTAF.API.Migrations
 {
-    public partial class ChangeSessionMigration : Migration
+    public partial class ChangeIdAttendeeType : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +11,7 @@ namespace UTTAF.API.Migrations
                 name: "Attendees",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false).Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     SessionReference = table.Column<string>(nullable: false)
                 },

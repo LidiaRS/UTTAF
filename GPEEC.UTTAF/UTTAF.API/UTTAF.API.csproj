@@ -29,6 +29,8 @@
     <Compile Remove="Migrations\20200316051125_NullableTypeOnDate.Designer.cs" />
     <Compile Remove="Migrations\20200316051324_NullableTypeOnDate.cs" />
     <Compile Remove="Migrations\20200316051324_NullableTypeOnDate.Designer.cs" />
+    <Compile Remove="Migrations\20200321214530_ChangeSessionMigration.cs" />
+    <Compile Remove="Migrations\20200321214530_ChangeSessionMigration.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

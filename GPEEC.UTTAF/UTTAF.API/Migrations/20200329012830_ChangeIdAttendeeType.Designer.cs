@@ -9,20 +9,20 @@ using UTTAF.API.Data;
 namespace UTTAF.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200321214530_ChangeSessionMigration")]
-    partial class ChangeSessionMigration
+    [Migration("20200329012830_ChangeIdAttendeeType")]
+    partial class ChangeIdAttendeeType
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.2");
+                .HasAnnotation("ProductVersion", "3.1.3");
 
             modelBuilder.Entity("UTTAF.Dependencies.Models.AttendeeModel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
