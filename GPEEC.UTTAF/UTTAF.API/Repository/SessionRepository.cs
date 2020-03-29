@@ -40,6 +40,18 @@ namespace UTTAF.API.Repository
             return true;
         }
 
+        public async Task<bool> ClearAttendeersTaskAsync(AuthSessionModel model)
+        {
+            if (await GetAttendersTaskAsync(model.SessionReference) is IList<AttendeeModel> att)
+            {
+                _context.Attendees.RemoveRange(att);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+
+            return false;
+        }
+
         public async Task<bool> RemoveTaskAsync(AuthSessionModel model)
         {
             if (await _context.Sessions.SingleOrDefaultAsync(x => x.SessionReference == model.SessionReference && x.SessionPassword == model.SessionPassword) is AuthSessionModel s)

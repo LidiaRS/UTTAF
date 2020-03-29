@@ -60,7 +60,8 @@ namespace UTTAF.API.Controllers
         {
             model.SessionPassword = SecurityService.CalculateHash256(model.SessionPassword);
             if (await _repository.RemoveTaskAsync(model))
-                return Ok();
+                if (await _repository.ClearAttendeersTaskAsync(model))
+                    return Ok();
 
             return NotFound($"Nao foi possivel encontrar uma sessao com o nome: {model.SessionReference}");
         }

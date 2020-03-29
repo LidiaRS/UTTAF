@@ -17,6 +17,8 @@ namespace UTTAF.API.Repository.Interfaces
 
         Task<bool> ExistsTaskAsync(string reference, string password);
 
+        Task<bool> ClearAttendeersTaskAsync(AuthSessionModel model);
+
         Task<bool> RemoveTaskAsync(AuthSessionModel model);
     }
 }
