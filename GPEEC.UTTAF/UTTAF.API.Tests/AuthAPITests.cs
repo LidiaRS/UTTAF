@@ -17,7 +17,7 @@ using Xunit.Extensions.Ordering;
 
 namespace UTTAF.API.Tests
 {
-    public class AuthAPITests
+    public class AuthAPITests : AttendeeAPITests
     {
         private const string SessionReference = "testSession";
         private const string SessionPassword = "test123";
@@ -46,7 +46,11 @@ namespace UTTAF.API.Tests
                 throw new InvalidSessionException(response.Content);
         }
 
-        [Fact, Order(1)]
+        [Theory, Order(1)]
+        [InlineData("{ \"Name\": \"Test Name\", \"SessionReference\": \"" + SessionReference + "\"}")]
+        protected override async Task JoinAtSession(string attendee) => await base.JoinAtSession(attendee);
+
+        [Fact, Order(2)]
         public async Task RemoveSession()
         {
             IRestResponse response = await new RequestService()
