@@ -56,42 +56,57 @@
                 FontWeight="DemiBold"
                 Text="{Binding SessionReference}" />
         </Border>
-        <ItemsControl Grid.Row="3" ItemsSource="{Binding Attendees}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel
-                        MaxWidth="650"
-                        Margin="20"
-                        HorizontalAlignment="Center" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="{x:Type att:AttendeeModel}">
-                    <Border BorderBrush="Gray" BorderThickness="1">
-                        <Grid Margin="5">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Border
-                                Grid.Column="0"
-                                Width="10"
-                                Height="10"
-                                Margin="0,3,0,0"
-                                Background="GreenYellow"
-                                CornerRadius="20" />
-                            <TextBlock
-                                Grid.Column="1"
-                                Margin="10,0,0,0"
-                                FontSize="14"
-                                FontWeight="DemiBold"
-                                Foreground="White"
-                                Text="{Binding Name}" />
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <Grid Grid.Row="3" Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock
+                Grid.Row="0"
+                Margin="0,0,0,5"
+                HorizontalAlignment="Center"
+                FontSize="16"
+                FontWeight="DemiBold"
+                Foreground="White"
+                Text="Participantes" />
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding Attendees}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel MaxWidth="650" HorizontalAlignment="Center" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type att:AttendeeModel}">
+                        <Border
+                            Width="130"
+                            BorderBrush="White"
+                            BorderThickness=".5">
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Border
+                                    Grid.Column="0"
+                                    Width="10"
+                                    Height="10"
+                                    Margin="0,3,0,0"
+                                    Background="GreenYellow"
+                                    CornerRadius="20" />
+                                <TextBlock
+                                    Grid.Column="1"
+                                    Margin="10,0,0,0"
+                                    FontFamily="Consolas"
+                                    FontSize="14"
+                                    FontWeight="DemiBold"
+                                    Foreground="White"
+                                    Text="{Binding Name}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
         <Button
             Grid.Row="4"
             Margin="10"
@@ -115,6 +130,7 @@
         </Button>
         <Button
             Grid.Row="5"
+            Margin="10,0"
             Command="{Binding CancelSessionCreationCommand}"
             CommandParameter="{x:Reference this}"
             Content="Cancelar"

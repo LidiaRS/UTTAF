@@ -6,33 +6,39 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    BackgroundColor="{DynamicResource DarkBlue}"
+    Visual="Material"
     mc:Ignorable="d">
-    <Grid VerticalOptions="Center">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <StackLayout>
         <forms:AnimationView
             Grid.Row="0"
             Animation="loadTraffic.json"
             AutoPlay="True"
-            HeightRequest="100"
-            HorizontalOptions="CenterAndExpand"
+            HeightRequest="300"
+            HorizontalOptions="Center"
             Loop="True"
-            VerticalOptions="CenterAndExpand" />
+            VerticalOptions="StartAndExpand"
+            WidthRequest="300" />
+        <Label
+            FontAttributes="Bold"
+            FontSize="18"
+            HorizontalTextAlignment="Center"
+            Text="Voce está participando!"
+            TextColor="Black"
+            VerticalOptions="Center" />
         <Label
             Grid.Row="1"
-            Margin="20"
-            FontSize="15"
-            HorizontalOptions="Center"
-            Text="Aguandando a sessao comerçar"
-            TextColor="White" />
+            HorizontalTextAlignment="Center"
+            Text="Olá Ruan 👽👽, A sessao irá começar em breve."
+            TextColor="Black"
+            VerticalOptions="Center" />
+
         <Button
             Grid.Row="2"
-            BackgroundColor="{DynamicResource MidDarkYellow}"
-            HorizontalOptions="Center"
-            Text="Sair" />
-    </Grid>
+            Margin="30"
+            BackgroundColor="{DynamicResource MidYellow}"
+            Command="{Binding ExitSessionCommand}"
+            Text="Sair"
+            TextColor="Black"
+            VerticalOptions="EndAndExpand" />
+    </StackLayout>
 </ContentPage>

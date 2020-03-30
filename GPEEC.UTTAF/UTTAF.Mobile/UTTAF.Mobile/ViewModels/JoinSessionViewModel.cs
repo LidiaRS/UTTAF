@@ -81,7 +81,7 @@ namespace UTTAF.Mobile.ViewModels
 
                 if (response.StatusCode == HttpStatusCode.Created)
                 {
-                    await Application.Current.MainPage.DisplayAlert("", "entrou", "ok");
+                    await PopPushViewUtil.PushModalAsync(new JoinedSessionView(), true);
                 }
                 else if (response.StatusCode == HttpStatusCode.Conflict)
                 {

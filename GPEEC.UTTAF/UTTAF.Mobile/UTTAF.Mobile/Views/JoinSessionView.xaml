@@ -11,7 +11,7 @@
     <Grid>
         <Image Aspect="AspectFill" Source="uttaf" />
         <Grid BackgroundColor="{StaticResource DarkBlue}" Opacity=".85" />
-        <Grid VerticalOptions="Center">
+        <Grid VerticalOptions="CenterAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -33,9 +33,9 @@
 
             <Entry
                 Grid.Row="1"
-                BackgroundColor="#3affffff"
+                BackgroundColor="#1affffff"
                 HorizontalOptions="Center"
-                MaxLength="20"
+                MaxLength="10"
                 Placeholder="Nome"
                 PlaceholderColor="White"
                 Text="{Binding Attendee}"
