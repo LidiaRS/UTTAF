@@ -47,7 +47,7 @@ namespace UTTAF.Mobile.ViewModels
 
         private async void JoinAtSession()
         {
-            IRestResponse response = await SessionService.JoinAtSession(new AttendeeModel { SessionReference = SessionReference, Name = Attendee });
+            IRestResponse response = await AttendeeService.JoinAtSessionTaskAsync(new AttendeeModel { SessionReference = SessionReference, Name = Attendee });
 
             if (response.StatusCode == HttpStatusCode.Created)
             {
@@ -74,7 +74,7 @@ namespace UTTAF.Mobile.ViewModels
 
             if (result != null)
             {
-                IRestResponse response = await SessionService.JoinAtSession(new AttendeeModel { SessionReference = SessionReference = result.Text, Name = Attendee });
+                IRestResponse response = await AttendeeService.JoinAtSessionTaskAsync(new AttendeeModel { SessionReference = SessionReference = result.Text, Name = Attendee });
 
                 if (response.StatusCode == HttpStatusCode.Created)
                 {

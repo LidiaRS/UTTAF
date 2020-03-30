@@ -60,7 +60,7 @@ namespace UTTAF.Desktop.ViewModels
             };
             timer.Tick += async (sender, e) =>
             {
-                IRestResponse response = await SessionService.GetAttendeesTaskAsync(DataHelper.AuthSession);
+                IRestResponse response = await AttendeeService.GetAttendeesTaskAsync(DataHelper.AuthSession);
 
                 if (response.StatusCode == HttpStatusCode.OK)
                 {

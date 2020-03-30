@@ -9,14 +9,14 @@ using UTTAF.Dependencies.Models;
 
 namespace UTTAF.Mobile.Services.Requests
 {
-    internal class SessionService
+    internal class AttendeeService
     {
-        public async static Task<IRestResponse> JoinAtSession(AttendeeModel attendee)
+        internal async static Task<IRestResponse> JoinAtSessionTaskAsync(AttendeeModel attendee)
         {
             return await new RequestService()
             {
                 URL = DataHelper.URI,
-                URN = "session/attendees",
+                URN = "Attendee/Join",
                 Body = attendee,
                 Method = Method.POST
             }.ExecuteTaskAsync();

@@ -24,6 +24,7 @@ namespace UTTAF.API
             services.AddDbContext<DataContext>(c => c.UseSqlite(Configuration["ConnectionString"]));
 
             services.AddScoped<ISessionRepository, SessionRepository>();
+            services.AddScoped<IAttendeeRepository, AttendeeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

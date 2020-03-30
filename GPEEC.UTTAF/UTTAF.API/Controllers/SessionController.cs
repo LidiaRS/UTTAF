@@ -14,53 +14,35 @@ namespace UTTAF.API.Controllers
     [ApiController]
     public class SessionController : ControllerBase
     {
-        private readonly ISessionRepository _repository;
+        private readonly ISessionRepository _sessionRepository;
+        private readonly IAttendeeRepository _attendeeRepository;
 
-        public SessionController(ISessionRepository repository) => _repository = repository;
+        public SessionController(ISessionRepository sessionRepository, IAttendeeRepository attendeeRepository)
+        {
+            _sessionRepository = sessionRepository;
+            _attendeeRepository = attendeeRepository;
+        }
 
         [HttpPost]
-        public async Task<IActionResult> AuthSessionTaskAsync([FromBody]AuthSessionModel auth)
+        public async Task<IActionResult> CreateSessionTaskAsync([FromBody]AuthSessionModel auth)
         {
-            if (await _repository.ExistsTaskAsync(auth))
+            if (await _sessionRepository.ExistsTaskAsync(auth))
                 return Conflict("Ja existe uma sessao com esse referencial ativo/em andamento.");
 
             auth.SessionStatus = SessionStatusEnum.Active;
             auth.SessionDate = DateTime.Now;
             auth.SessionPassword = SecurityService.CalculateHash256(auth.SessionPassword);
 
-            await _repository.AddAsync(auth);
+            await _sessionRepository.AddAsync(auth);
             return Created(string.Empty, auth);
-        }
-
-        [HttpPost("attendees")]
-        public async Task<IActionResult> JoinAtSessionTaskAsync([FromBody]AttendeeModel attendee)
-        {
-            if (await _repository.AddAttendeeTaskAsync(attendee))
-                return Created("", attendee);
-
-            return Conflict("Ja existe um participante com esse nome, ou o referencial informado nao existe.");
-        }
-
-        [HttpGet("attendees")]
-        public async Task<IActionResult> AttendeesInSessionTaskAsync(string sessionReference, string sessionPassword)
-        {
-            if (!string.IsNullOrEmpty(sessionReference) && !string.IsNullOrEmpty(sessionPassword))
-            {
-                if (await _repository.ExistsTaskAsync(sessionReference, SecurityService.CalculateHash256(sessionPassword)))
-                    return Ok(await _repository.GetAttendersTaskAsync(sessionReference));
-
-                return NotFound("Sessao informada nao existe.");
-            }
-
-            return BadRequest();
         }
 
         [HttpDelete]
         public async Task<IActionResult> RemoveSessionTaskAsync([FromBody]AuthSessionModel model)
         {
             model.SessionPassword = SecurityService.CalculateHash256(model.SessionPassword);
-            if (await _repository.RemoveTaskAsync(model))
-                if (await _repository.ClearAttendeersTaskAsync(model))
+            if (await _sessionRepository.RemoveTaskAsync(model))
+                if (await _attendeeRepository.ClearAttendeersTaskAsync(model))
                     return Ok();
 
             return NotFound($"Nao foi possivel encontrar uma sessao com o nome: {model.SessionReference}");
