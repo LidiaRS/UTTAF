@@ -1,6 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
+using Logikoz.XamarinUtilities.Utilities;
+
 using RestSharp;
 
 using System.Collections.Generic;
@@ -8,6 +10,7 @@ using System.Net;
 
 using UTTAF.Dependencies.Models;
 using UTTAF.Mobile.Services.Requests;
+using UTTAF.Mobile.Views;
 
 using Xamarin.Forms;
 
@@ -51,7 +54,7 @@ namespace UTTAF.Mobile.ViewModels
 
             if (response.StatusCode == HttpStatusCode.Created)
             {
-                await Application.Current.MainPage.DisplayAlert("", "entrou", "ok");
+                await PopPushViewUtil.PushModalAsync(new JoinedSessionView(), true);
             }
             else if (response.StatusCode == HttpStatusCode.Conflict)
             {

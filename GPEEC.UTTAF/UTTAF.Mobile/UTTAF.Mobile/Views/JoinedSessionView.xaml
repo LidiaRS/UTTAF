@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="UTTAF.Mobile.Views.JoinedSessionView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    BackgroundColor="{DynamicResource DarkBlue}"
+    mc:Ignorable="d">
+    <Grid VerticalOptions="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <forms:AnimationView
+            Grid.Row="0"
+            Animation="loadTraffic.json"
+            AutoPlay="True"
+            HeightRequest="100"
+            HorizontalOptions="CenterAndExpand"
+            Loop="True"
+            VerticalOptions="CenterAndExpand" />
+        <Label
+            Grid.Row="1"
+            Margin="20"
+            FontSize="15"
+            HorizontalOptions="Center"
+            Text="Aguandando a sessao comerçar"
+            TextColor="White" />
+        <Button
+            Grid.Row="2"
+            BackgroundColor="{DynamicResource MidDarkYellow}"
+            HorizontalOptions="Center"
+            Text="Sair" />
+    </Grid>
+</ContentPage>

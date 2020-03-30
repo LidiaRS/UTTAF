@@ -24,17 +24,17 @@ namespace UTTAF.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateSessionTaskAsync([FromBody]AuthSessionModel auth)
+        public async Task<IActionResult> CreateSessionTaskAsync([FromBody]AuthSessionModel model)
         {
-            if (await _sessionRepository.ExistsTaskAsync(auth))
+            if (await _sessionRepository.ExistsTaskAsync(model))
                 return Conflict("Ja existe uma sessao com esse referencial ativo/em andamento.");
 
-            auth.SessionStatus = SessionStatusEnum.Active;
-            auth.SessionDate = DateTime.Now;
-            auth.SessionPassword = SecurityService.CalculateHash256(auth.SessionPassword);
+            model.SessionStatus = SessionStatusEnum.Active;
+            model.SessionDate = DateTime.Now;
+            model.SessionPassword = SecurityService.CalculateHash256(model.SessionPassword);
 
-            await _sessionRepository.AddAsync(auth);
-            return Created(string.Empty, auth);
+            await _sessionRepository.AddAsync(model);
+            return Created(string.Empty, model);
         }
 
         [HttpDelete]
@@ -48,7 +48,7 @@ namespace UTTAF.API.Controllers
             return NotFound($"Nao foi possivel encontrar uma sessao com o nome: {model.SessionReference}");
         }
 
-        [HttpGet]
+        [HttpGet("Started")]
         public async Task<IActionResult> SessionStartedTaskAsync(string reference)
         {
             if (!string.IsNullOrEmpty(reference))
@@ -63,6 +63,12 @@ namespace UTTAF.API.Controllers
             }
 
             return BadRequest("Informe o referencial da sessao.");
+        }
+
+        [HttpPut("Status")]
+        public async Task<IActionResult> ChangeSessionStatus([FromBody]AuthSessionModel model)
+        {
+            return BadRequest();
         }
     }
 }
