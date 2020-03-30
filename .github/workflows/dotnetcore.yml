@@ -19,6 +19,4 @@ jobs:
       run: dotnet build ./GPEEC.UTTAF/UTTAF.API.Tests/UTTAF.API.Tests.csproj
     #- name: Test API.Tests
     #  run: dotnet test ./GPEEC.UTTAF/UTTAF.API.Tests/UTTAF.API.Tests.csproj
-    - name: Build Desktop App
-      run: dotnet build ./GPEEC.UTTAF/UTTAF.Desktop/UTTAF.Desktop.csproj
     
