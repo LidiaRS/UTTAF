@@ -21,9 +21,6 @@ namespace UTTAF.API.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> ExistsTaskAsync(AuthSessionModel model) =>
-            await _context.Sessions.AnyAsync(x => x.SessionReference == model.SessionReference && x.SessionStatus != SessionStatusEnum.Closed);
-
         public async Task<bool> RemoveTaskAsync(AuthSessionModel model)
         {
             if (await _context.Sessions.SingleOrDefaultAsync(x => x.SessionReference == model.SessionReference && x.SessionPassword == model.SessionPassword) is AuthSessionModel s)
@@ -36,7 +33,16 @@ namespace UTTAF.API.Repository
             return false;
         }
 
+        public async Task<bool> ExistsTaskAsync(string reference) =>
+            await _context.Sessions.AnyAsync(x => x.SessionReference == reference);
+
         public async Task<bool> ExistsTaskAsync(string reference, string password) =>
             await _context.Sessions.AnyAsync(x => x.SessionReference == reference && x.SessionPassword == password);
+
+        public async Task<bool> ExistsTaskAsync(AuthSessionModel model) =>
+            await _context.Sessions.AnyAsync(x => x.SessionReference == model.SessionReference && x.SessionStatus != SessionStatusEnum.Closed);
+
+        public async Task<bool> SessionStartedTaskAsync(string reference) =>
+            await _context.Sessions.AnyAsync(x => x.SessionReference == reference && x.SessionStatus == SessionStatusEnum.InProgress);
     }
 }

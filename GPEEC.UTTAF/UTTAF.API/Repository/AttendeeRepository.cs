@@ -44,10 +44,5 @@ namespace UTTAF.API.Repository
 
         public async Task<IEnumerable<AttendeeModel>> GetAttendersTaskAsync(string reference) =>
             await _context.Attendees.Where(x => x.SessionReference == reference).ToListAsync();
-
-        /*
-         * 
-
-         */
     }
 }

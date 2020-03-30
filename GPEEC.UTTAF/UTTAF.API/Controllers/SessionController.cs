@@ -47,5 +47,22 @@ namespace UTTAF.API.Controllers
 
             return NotFound($"Nao foi possivel encontrar uma sessao com o nome: {model.SessionReference}");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> SessionStartedTaskAsync(string reference)
+        {
+            if (!string.IsNullOrEmpty(reference))
+            {
+                if (!await _sessionRepository.ExistsTaskAsync(reference))
+                    return NotFound("A Sessao informada nao existe");
+
+                if (await _sessionRepository.SessionStartedTaskAsync(reference))
+                    return Ok(reference);
+
+                return NotFound("A sessao informada nao está em andamento");
+            }
+
+            return BadRequest("Informe o referencial da sessao.");
+        }
     }
 }
