@@ -17,7 +17,7 @@ using Xunit.Extensions.Ordering;
 
 namespace UTTAF.API.Tests
 {
-    public class AuthAPITests : AttendeeAPITests
+    public class SessionAPITests : AttendeeAPITests
     {
         private const string SessionReference = "testSession";
         private const string SessionPassword = "test123";

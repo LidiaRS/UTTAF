@@ -24,10 +24,15 @@ namespace UTTAF.API.Controllers
         [HttpPost("Join")]
         public async Task<IActionResult> JoinAtSessionTaskAsync([FromBody]AttendeeModel attendee)
         {
-            if (await _attendeeRepository.AddAttendeeTaskAsync(attendee))
-                return Created(string.Empty, attendee);
+            if (ModelState.IsValid)
+            {
+                if (await _attendeeRepository.AddAttendeeTaskAsync(attendee))
+                    return Created(string.Empty, attendee);
 
-            return Conflict("Ja existe um participante com esse nome, ou o referencial informado nao existe.");
+                return Conflict("Ja existe um participante com esse nome, ou o referencial informado nao existe.");
+            }
+
+            return BadRequest("É necessario informar o referencial da sessao e o nome do participante!");
         }
 
         [HttpGet]
