@@ -26,13 +26,27 @@ namespace UTTAF.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (await _attendeeRepository.AddAttendeeTaskAsync(attendee))
-                    return Created(string.Empty, attendee);
+                if (await _attendeeRepository.AddAttendeeTaskAsync(attendee) is AttendeeModel att)
+                    return Created(string.Empty, att);
 
                 return Conflict("Ja existe um participante com esse nome, ou o referencial informado nao existe.");
             }
 
             return BadRequest("É necessario informar o referencial da sessao e o nome do participante!");
+        }
+
+        [HttpDelete("Leave")]
+        public async Task<IActionResult> LeaveAtSessionTaskAsync([FromBody]AttendeeModel attendee)
+        {
+            if (ModelState.IsValid)
+            {
+                if (await _attendeeRepository.LeaveAttendeeTaskAsync(attendee))
+                    return Ok(attendee);
+
+                return Conflict("Nao existe um participante com esse Id, ou o referencial informado nao existe.");
+            }
+
+            return BadRequest("É necessario informar as informaçoes do participante!");
         }
 
         [HttpGet]

@@ -21,5 +21,16 @@ namespace UTTAF.Mobile.Services.Requests
                 Method = Method.POST
             }.ExecuteTaskAsync();
         }
+
+        internal async static Task<IRestResponse> LeaveAtSessionTaskAsync(AttendeeModel attendee)
+        {
+            return await new RequestService()
+            {
+                URL = DataHelper.URI,
+                URN = "Attendee/Leave",
+                Body = attendee,
+                Method = Method.DELETE
+            }.ExecuteTaskAsync();
+        }
     }
 }

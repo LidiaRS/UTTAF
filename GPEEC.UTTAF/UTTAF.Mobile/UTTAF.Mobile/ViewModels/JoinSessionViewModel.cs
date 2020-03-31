@@ -1,18 +1,10 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
-using Logikoz.XamarinUtilities.Utilities;
-
-using RestSharp;
-
 using System.Collections.Generic;
-using System.Net;
 
 using UTTAF.Dependencies.Models;
-using UTTAF.Mobile.Services.Requests;
-using UTTAF.Mobile.Views;
-
-using Xamarin.Forms;
+using UTTAF.Mobile.Services;
 
 using ZXing;
 using ZXing.Mobile;
@@ -48,19 +40,8 @@ namespace UTTAF.Mobile.ViewModels
             JoinAtSessionCommand = new RelayCommand(JoinAtSession);
         }
 
-        private async void JoinAtSession()
-        {
-            IRestResponse response = await AttendeeService.JoinAtSessionTaskAsync(new AttendeeModel { SessionReference = SessionReference, Name = Attendee });
-
-            if (response.StatusCode == HttpStatusCode.Created)
-            {
-                await PopPushViewUtil.PushModalAsync(new JoinedSessionView(), true);
-            }
-            else if (response.StatusCode == HttpStatusCode.Conflict)
-            {
-                await Application.Current.MainPage.DisplayAlert("Ops!", response.Content.Replace("\"", string.Empty), "OK");
-            }
-        }
+        private async void JoinAtSession() =>
+            await JoinAtSessionService.JoinAsync(new AttendeeModel { SessionReference = SessionReference, Name = Attendee });
 
         private async void JoinAtSessionWithQrCode()
         {
@@ -76,18 +57,7 @@ namespace UTTAF.Mobile.ViewModels
             });
 
             if (result != null)
-            {
-                IRestResponse response = await AttendeeService.JoinAtSessionTaskAsync(new AttendeeModel { SessionReference = SessionReference = result.Text, Name = Attendee });
-
-                if (response.StatusCode == HttpStatusCode.Created)
-                {
-                    await PopPushViewUtil.PushModalAsync(new JoinedSessionView(), true);
-                }
-                else if (response.StatusCode == HttpStatusCode.Conflict)
-                {
-                    await Application.Current.MainPage.DisplayAlert("Ops!", response.Content.Replace("\"", string.Empty), "OK");
-                }
-            }
+                await JoinAtSessionService.JoinAsync(new AttendeeModel { SessionReference = SessionReference = result.Text, Name = Attendee });
         }
     }
 }

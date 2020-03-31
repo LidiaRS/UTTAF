@@ -13,5 +13,7 @@ namespace UTTAF.Mobile.Views
             InitializeComponent();
             BindingContext = new JoinedSessionViewModel();
         }
+
+        protected override bool OnBackButtonPressed() => true;
     }
 }

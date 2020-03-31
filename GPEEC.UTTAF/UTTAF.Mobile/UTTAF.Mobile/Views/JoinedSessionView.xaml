@@ -3,11 +3,15 @@
     x:Class="UTTAF.Mobile.Views.JoinedSessionView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:UTTAF.Mobile.Converters.Binding"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Visual="Material"
     mc:Ignorable="d">
+    <ContentPage.Resources>
+        <converters:JoinedMessageBindingConverter x:Key="JoinedMessage" />
+    </ContentPage.Resources>
     <StackLayout>
         <forms:AnimationView
             Grid.Row="0"
@@ -28,7 +32,7 @@
         <Label
             Grid.Row="1"
             HorizontalTextAlignment="Center"
-            Text="Olá Ruan 👽👽, A sessao irá começar em breve."
+            Text="{Binding Attendee.Name, Converter={StaticResource JoinedMessage}}"
             TextColor="Black"
             VerticalOptions="Center" />
 

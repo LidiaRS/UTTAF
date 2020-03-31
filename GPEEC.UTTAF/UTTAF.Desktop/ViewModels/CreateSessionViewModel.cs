@@ -64,10 +64,18 @@ namespace UTTAF.Desktop.ViewModels
 
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    JsonSerializer.Deserialize<List<AttendeeModel>>(response.Content, new JsonSerializerOptions
+                    List<AttendeeModel> attendees = JsonSerializer.Deserialize<List<AttendeeModel>>(response.Content, new JsonSerializerOptions
                     {
                         PropertyNameCaseInsensitive = true
-                    }).ForEach(att =>
+                    });
+
+                    Attendees.ToList().ForEach(att =>
+                    {
+                        if (!attendees.Any(x => x.Name == att.Name))
+                            Attendees.Remove(att);
+                    });
+
+                    attendees.ForEach(att =>
                     {
                         if (!Attendees.Any(x => x.Name == att.Name))
                             Attendees.Add(att);

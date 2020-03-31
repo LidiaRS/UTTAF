@@ -7,10 +7,12 @@ namespace UTTAF.API.Repository.Interfaces
 {
     public interface IAttendeeRepository
     {
-        Task<bool> AddAttendeeTaskAsync(AttendeeModel attendee);
+        Task<AttendeeModel> AddAttendeeTaskAsync(AttendeeModel attendee);
 
         Task<IEnumerable<AttendeeModel>> GetAttendersTaskAsync(string reference);
 
         Task<bool> ClearAttendeersTaskAsync(AuthSessionModel model);
+
+        Task<bool> LeaveAttendeeTaskAsync(AttendeeModel attendee);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 using System.Collections.Generic;
 using System.Linq;
@@ -16,18 +17,18 @@ namespace UTTAF.API.Repository
         {
         }
 
-        public async Task<bool> AddAttendeeTaskAsync(AttendeeModel attendee)
+        public async Task<AttendeeModel> AddAttendeeTaskAsync(AttendeeModel attendee)
         {
             if (await _context.Sessions.SingleOrDefaultAsync(x => x.SessionReference == attendee.SessionReference) is null)
-                return false;
+                return null;
 
             if (await _context.Attendees.SingleOrDefaultAsync(x => x.SessionReference == attendee.SessionReference && x.Name == attendee.Name) is AttendeeModel)
-                return false;
+                return null;
 
-            _context.Attendees.Add(attendee);
+            EntityEntry<AttendeeModel> att = await _context.Attendees.AddAsync(attendee);
             await _context.SaveChangesAsync();
 
-            return true;
+            return att.Entity;
         }
 
         public async Task<bool> ClearAttendeersTaskAsync(AuthSessionModel model)
@@ -44,5 +45,17 @@ namespace UTTAF.API.Repository
 
         public async Task<IEnumerable<AttendeeModel>> GetAttendersTaskAsync(string reference) =>
             await _context.Attendees.Where(x => x.SessionReference == reference).ToListAsync();
+
+        public async Task<bool> LeaveAttendeeTaskAsync(AttendeeModel attendee)
+        {
+            if (await _context.Attendees.SingleOrDefaultAsync(x => x.Id == attendee.Id && x.SessionReference == attendee.SessionReference) is AttendeeModel att)
+            {
+                _context.Attendees.Remove(att);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+
+            return false;
+        }
     }
 }
