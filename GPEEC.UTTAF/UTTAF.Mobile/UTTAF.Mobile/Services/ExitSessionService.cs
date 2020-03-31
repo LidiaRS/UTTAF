@@ -22,13 +22,27 @@ namespace UTTAF.Mobile.Services
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 await Application.Current.MainPage.DisplayAlert("Concluido!", "Voce deixou a sessao 😥", "OK");
+                ClosePages();
+            }
+            else if (ReturnExpression(response))
+                await SendAlertMessageAsync(response);
+            else if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                await SendAlertMessageAsync(response);
+                ClosePages();
+            }
+
+            static bool ReturnExpression(IRestResponse response) =>
+                response.StatusCode == HttpStatusCode.Conflict || response.StatusCode == HttpStatusCode.BadRequest;
+
+            static async Task SendAlertMessageAsync(IRestResponse response) =>
+                await Application.Current.MainPage.DisplayAlert("Ops!", response.Content.Replace("\"", string.Empty), "OK");
+
+            static void ClosePages()
+            {
                 PopPushViewUtil.PopModal<JoinedSessionView>(true);
                 PopPushViewUtil.PopModal<JoinSessionView>(false);
             }
-            else if (ReturnExpression(response))
-                await Application.Current.MainPage.DisplayAlert("Ops!", response.Content.Replace("\"", string.Empty), "OK");
-
-            static bool ReturnExpression(IRestResponse response) => response.StatusCode == HttpStatusCode.Conflict || response.StatusCode == HttpStatusCode.BadRequest;
         }
     }
 }

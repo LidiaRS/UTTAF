@@ -49,15 +49,15 @@ namespace UTTAF.API.Controllers
         }
 
         [HttpGet("Started")]
-        public async Task<IActionResult> SessionStartedTaskAsync(string reference)
+        public async Task<IActionResult> SessionStartedTaskAsync(string sessionReference)
         {
-            if (!string.IsNullOrEmpty(reference))
+            if (!string.IsNullOrEmpty(sessionReference))
             {
-                if (!await _sessionRepository.ExistsTaskAsync(reference))
+                if (!await _sessionRepository.ExistsTaskAsync(sessionReference))
                     return NotFound("A Sessao informada nao existe");
 
-                if (await _sessionRepository.SessionStartedTaskAsync(reference))
-                    return Ok(reference);
+                if (await _sessionRepository.SessionStartedTaskAsync(sessionReference))
+                    return Ok(sessionReference);
 
                 return NotFound("A sessao informada nao está em andamento");
             }

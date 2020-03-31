@@ -26,10 +26,13 @@ namespace UTTAF.API.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (!await _sessionRepository.ExistsTaskAsync(attendee.SessionReference))
+                    return NotFound("O referencial informado nao existe.");
+
                 if (await _attendeeRepository.AddAttendeeTaskAsync(attendee) is AttendeeModel att)
                     return Created(string.Empty, att);
 
-                return Conflict("Ja existe um participante com esse nome, ou o referencial informado nao existe.");
+                return Conflict("Ja existe um participante com esse nome.");
             }
 
             return BadRequest("É necessario informar o referencial da sessao e o nome do participante!");
@@ -40,6 +43,9 @@ namespace UTTAF.API.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (!await _sessionRepository.ExistsTaskAsync(attendee.SessionReference))
+                    return NotFound("A sessao informada nao existe, talvez tenha sido excluida!");
+
                 if (await _attendeeRepository.LeaveAttendeeTaskAsync(attendee))
                     return Ok(attendee);
 

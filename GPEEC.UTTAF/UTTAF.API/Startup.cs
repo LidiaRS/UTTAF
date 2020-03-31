@@ -21,7 +21,7 @@ namespace UTTAF.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<DataContext>(c => c.UseSqlite(Configuration["ConnectionString"]));
+            services.AddDbContext<DataContext>(opc => opc.UseSqlite(Configuration["ConnectionString"]));
 
             services.AddScoped<ISessionRepository, SessionRepository>();
             services.AddScoped<IAttendeeRepository, AttendeeRepository>();
@@ -30,6 +30,13 @@ namespace UTTAF.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // Auto create DB
+            using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                DataContext context = serviceScope.ServiceProvider.GetRequiredService<DataContext>();
+                context.Database.Migrate();
+            }
+
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 

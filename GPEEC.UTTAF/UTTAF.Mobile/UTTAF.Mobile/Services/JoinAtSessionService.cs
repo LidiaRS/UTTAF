@@ -30,7 +30,7 @@ namespace UTTAF.Mobile.Services
                 await Application.Current.MainPage.DisplayAlert("Ops!", response.Content.Replace("\"", string.Empty), "OK");
 
             static bool ReturnExpression(IRestResponse response) =>
-                response.StatusCode == HttpStatusCode.Conflict || response.StatusCode == HttpStatusCode.BadRequest;
+                response.StatusCode == HttpStatusCode.Conflict || response.StatusCode == HttpStatusCode.BadRequest || response.StatusCode == HttpStatusCode.NotFound;
         }
     }
 }
