@@ -20,10 +20,10 @@ namespace UTTAF.API.Repository
         public async Task<AttendeeModel> AddAttendeeTaskAsync(AttendeeModel attendee)
         {
             if (await _context.Sessions.SingleOrDefaultAsync(x => x.SessionReference == attendee.SessionReference) is null)
-                return null;
+                return default;
 
             if (await _context.Attendees.SingleOrDefaultAsync(x => x.SessionReference == attendee.SessionReference && x.Name == attendee.Name) is AttendeeModel)
-                return null;
+                return default;
 
             EntityEntry<AttendeeModel> att = await _context.Attendees.AddAsync(attendee);
             await _context.SaveChangesAsync();
@@ -40,7 +40,7 @@ namespace UTTAF.API.Repository
                 return true;
             }
 
-            return false;
+            return default;
         }
 
         public async Task<IEnumerable<AttendeeModel>> GetAttendersTaskAsync(string reference) =>
@@ -55,7 +55,7 @@ namespace UTTAF.API.Repository
                 return true;
             }
 
-            return false;
+            return default;
         }
     }
 }

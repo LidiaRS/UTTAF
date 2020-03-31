@@ -35,7 +35,7 @@ namespace UTTAF.API.Repository
                 return true;
             }
 
-            return false;
+            return default;
         }
 
         public async Task<bool> ExistsTaskAsync(string reference) =>
@@ -50,6 +50,16 @@ namespace UTTAF.API.Repository
         public async Task<bool> SessionStartedTaskAsync(string reference) =>
             await _context.Sessions.AnyAsync(x => x.SessionReference == reference && x.SessionStatus == SessionStatusEnum.InProgress);
 
-        public Task<AuthSessionModel> ChangeStatusSessionTaskAsync(AuthSessionModel authSession) => throw new System.NotImplementedException();
+        public async Task<AuthSessionModel> ChangeStatusSessionTaskAsync(AuthSessionModel authSession)
+        {
+            if (await _context.Sessions.SingleOrDefaultAsync(x => x.SessionReference == authSession.SessionReference && x.SessionPassword == authSession.SessionPassword) is AuthSessionModel auth)
+            {
+                _context.Entry(auth).CurrentValues.SetValues(authSession);
+                await _context.SaveChangesAsync();
+                return auth;
+            }
+
+            return default;
+        }
     }
 }

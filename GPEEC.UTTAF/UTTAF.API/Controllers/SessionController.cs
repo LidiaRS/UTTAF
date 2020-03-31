@@ -24,30 +24,30 @@ namespace UTTAF.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateSessionTaskAsync([FromBody]AuthSessionModel model)
+        public async Task<IActionResult> CreateSessionTaskAsync([FromBody]AuthSessionModel authSession)
         {
-            if (await _sessionRepository.ExistsTaskAsync(model))
+            if (await _sessionRepository.ExistsTaskAsync(authSession))
                 return Conflict("Ja existe uma sessao com esse referencial ativo/em andamento.");
 
-            model.SessionStatus = SessionStatusEnum.Active;
-            model.SessionDate = DateTime.Now;
-            model.SessionPassword = SecurityService.CalculateHash256(model.SessionPassword);
+            authSession.SessionStatus = SessionStatusEnum.Active;
+            authSession.SessionDate = DateTime.Now;
+            authSession.SessionPassword = SecurityService.CalculateHash256(authSession.SessionPassword);
 
-            if (await _sessionRepository.AddAsync(model) is AuthSessionModel auth)
+            if (await _sessionRepository.AddAsync(authSession) is AuthSessionModel auth)
                 return Created(string.Empty, auth);
 
             return BadRequest();
         }
 
         [HttpDelete]
-        public async Task<IActionResult> RemoveSessionTaskAsync([FromBody]AuthSessionModel model)
+        public async Task<IActionResult> RemoveSessionTaskAsync([FromBody]AuthSessionModel authSession)
         {
-            model.SessionPassword = SecurityService.CalculateHash256(model.SessionPassword);
-            if (await _sessionRepository.RemoveTaskAsync(model))
-                if (await _attendeeRepository.ClearAttendeersTaskAsync(model))
+            authSession.SessionPassword = SecurityService.CalculateHash256(authSession.SessionPassword);
+            if (await _sessionRepository.RemoveTaskAsync(authSession))
+                if (await _attendeeRepository.ClearAttendeersTaskAsync(authSession))
                     return Ok();
 
-            return NotFound($"Nao foi possivel encontrar uma sessao com o nome: {model.SessionReference}");
+            return NotFound($"Nao foi possivel encontrar uma sessao com o nome: {authSession.SessionReference}");
         }
 
         [HttpGet("Started")]
@@ -68,9 +68,20 @@ namespace UTTAF.API.Controllers
         }
 
         [HttpPut("Status")]
-        public async Task<IActionResult> ChangeSessionStatus([FromBody]AuthSessionModel model)
+        public async Task<IActionResult> ChangeSessionStatusTaskAsync([FromBody]AuthSessionModel authSession)
         {
-            await Task.Delay(500);
+            if (ModelState.IsValid)
+            {
+                if (await _sessionRepository.ExistsTaskAsync(authSession.SessionReference))
+                    return NotFound("A sessao informada nao existe.");
+
+                authSession.SessionPassword = SecurityService.CalculateHash256(authSession.SessionPassword);
+
+                if (await _sessionRepository.ChangeStatusSessionTaskAsync(authSession) is AuthSessionModel auth)
+                    return Ok(auth);
+
+                return BadRequest("Nao foi possivel alterar o status, verifique se a senha está correta.");
+            }
             return BadRequest();
         }
     }
