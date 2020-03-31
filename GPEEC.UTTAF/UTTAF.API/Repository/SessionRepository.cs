@@ -15,10 +15,15 @@ namespace UTTAF.API.Repository
         {
         }
 
-        public async Task AddAsync(AuthSessionModel model)
+        public async Task<AuthSessionModel> AddAsync(AuthSessionModel authSession)
         {
-            await _context.Sessions.AddAsync(model);
-            await _context.SaveChangesAsync();
+            if ((await _context.Sessions.AddAsync(authSession)).Entity is AuthSessionModel auth)
+            {
+                await _context.SaveChangesAsync();
+                return auth;
+            }
+
+            return default;
         }
 
         public async Task<bool> RemoveTaskAsync(AuthSessionModel model)
@@ -44,5 +49,7 @@ namespace UTTAF.API.Repository
 
         public async Task<bool> SessionStartedTaskAsync(string reference) =>
             await _context.Sessions.AnyAsync(x => x.SessionReference == reference && x.SessionStatus == SessionStatusEnum.InProgress);
+
+        public Task<AuthSessionModel> ChangeStatusSessionTaskAsync(AuthSessionModel authSession) => throw new System.NotImplementedException();
     }
 }

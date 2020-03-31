@@ -21,6 +21,16 @@ namespace UTTAF.Desktop.Services.Requests
                 Body = authSession
             }.ExecuteTaskAsync();
         }
+        internal static async Task<IRestResponse> StartSessionTaskAsync(AuthSessionModel authSession)
+        {
+            return await new RequestService()
+            {
+                URL = DataHelper.URI,
+                URN = "Session/Status",
+                Method = Method.PUT,
+                Body = authSession
+            }.ExecuteTaskAsync();
+        }
 
         internal static async Task<IRestResponse> DeleteSessionTaskAsync(AuthSessionModel model)
         {

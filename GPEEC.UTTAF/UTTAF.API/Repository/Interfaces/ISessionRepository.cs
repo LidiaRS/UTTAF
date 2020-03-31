@@ -6,9 +6,9 @@ namespace UTTAF.API.Repository.Interfaces
 {
     public interface ISessionRepository
     {
-        Task AddAsync(AuthSessionModel model);
+        Task<AuthSessionModel> AddAsync(AuthSessionModel authSession);
 
-        Task<bool> ExistsTaskAsync(AuthSessionModel model);
+        Task<bool> ExistsTaskAsync(AuthSessionModel authSession);
 
         Task<bool> ExistsTaskAsync(string reference, string password);
 
@@ -16,6 +16,8 @@ namespace UTTAF.API.Repository.Interfaces
 
         Task<bool> SessionStartedTaskAsync(string reference);
 
-        Task<bool> RemoveTaskAsync(AuthSessionModel model);
+        Task<bool> RemoveTaskAsync(AuthSessionModel authSession);
+
+        Task<AuthSessionModel> ChangeStatusSessionTaskAsync(AuthSessionModel authSession);
     }
 }

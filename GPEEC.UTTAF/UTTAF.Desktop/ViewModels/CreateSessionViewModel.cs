@@ -14,6 +14,7 @@ using System.Text.Json;
 using System.Windows;
 using System.Windows.Threading;
 
+using UTTAF.Dependencies.Enums;
 using UTTAF.Dependencies.Helpers;
 using UTTAF.Dependencies.Models;
 using UTTAF.Desktop.Services.Requests;
@@ -42,10 +43,24 @@ namespace UTTAF.Desktop.ViewModels
         public ObservableCollection<AttendeeModel> Attendees { get; set; } = new ObservableCollection<AttendeeModel>();
 
         public RelayCommand<CreateSessionView> CancelSessionCreationCommand { get; private set; }
+        public RelayCommand StartSessionCommand { get; private set; }
 
         public CreateSessionViewModel()
         {
             CancelSessionCreationCommand = new RelayCommand<CreateSessionView>(CancelSessionCreation);
+            StartSessionCommand = new RelayCommand(StartSession);
+        }
+
+        private async void StartSession()
+        {
+            DataHelper.AuthSession.SessionStatus = SessionStatusEnum.InProgress;
+            IRestResponse response = await SessionService.StartSessionTaskAsync(DataHelper.AuthSession);
+
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    break;
+            }
         }
 
         public void Init()

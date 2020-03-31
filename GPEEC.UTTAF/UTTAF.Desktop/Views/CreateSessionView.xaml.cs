@@ -15,11 +15,6 @@ namespace UTTAF.Desktop.Views
             DataContext = new CreateSessionViewModel();
         }
 
-        private void FinishSession(object sender, RoutedEventArgs e)
-        {
-            new MainView(Application.Current.MainWindow).Show();
-        }
-
         internal void CancelSession()
         {
             if (Application.Current.MainWindow is ConfigureView configure)

@@ -33,8 +33,10 @@ namespace UTTAF.API.Controllers
             model.SessionDate = DateTime.Now;
             model.SessionPassword = SecurityService.CalculateHash256(model.SessionPassword);
 
-            await _sessionRepository.AddAsync(model);
-            return Created(string.Empty, model);
+            if (await _sessionRepository.AddAsync(model) is AuthSessionModel auth)
+                return Created(string.Empty, auth);
+
+            return BadRequest();
         }
 
         [HttpDelete]
@@ -68,6 +70,7 @@ namespace UTTAF.API.Controllers
         [HttpPut("Status")]
         public async Task<IActionResult> ChangeSessionStatus([FromBody]AuthSessionModel model)
         {
+            await Task.Delay(500);
             return BadRequest();
         }
     }
