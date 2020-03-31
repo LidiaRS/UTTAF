@@ -18,11 +18,12 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Entry
                 Grid.Row="0"
-                BackgroundColor="#3affffff"
+                BackgroundColor="#0affffff"
                 HorizontalOptions="Center"
                 MaxLength="20"
                 Placeholder="Referencial"
@@ -30,10 +31,30 @@
                 Text="{Binding SessionReference}"
                 TextColor="White"
                 WidthRequest="200" />
+            <Label
+                Grid.Row="1"
+                Margin="5"
+                FontSize="14"
+                HorizontalTextAlignment="Center"
+                Text="OU"
+                TextColor="White" />
+            <Button
+                Grid.Row="2"
+                Margin="0,0,0,10"
+                BackgroundColor="Transparent"
+                BorderColor="Gray"
+                BorderWidth="1"
+                Command="{Binding JoinAtSessionWithQrCodeCommand}"
+                CornerRadius="10"
+                FontSize="16"
+                HorizontalOptions="CenterAndExpand"
+                Text="Encanear QrCode"
+                TextColor="White"
+                WidthRequest="220" />
 
             <Entry
-                Grid.Row="1"
-                BackgroundColor="#1affffff"
+                Grid.Row="3"
+                BackgroundColor="#0affffff"
                 HorizontalOptions="Center"
                 MaxLength="10"
                 Placeholder="Nome"
@@ -43,7 +64,7 @@
                 WidthRequest="200" />
 
             <Label
-                Grid.Row="2"
+                Grid.Row="4"
                 Margin="20"
                 FontSize="18"
                 HorizontalTextAlignment="Center"
@@ -51,7 +72,7 @@
                 TextColor="White" />
 
             <Button
-                Grid.Row="3"
+                Grid.Row="5"
                 BackgroundColor="{StaticResource DarkYellow}"
                 Command="{Binding JoinAtSessionCommand}"
                 CornerRadius="20"
@@ -59,13 +80,6 @@
                 Text="Participar"
                 TextColor="White"
                 WidthRequest="200" />
-            <Button
-                Grid.Row="4"
-                BackgroundColor="Transparent"
-                BorderWidth="0"
-                Command="{Binding JoinAtSessionWithQrCodeCommand}"
-                Text="Encanear"
-                TextColor="White" />
 
         </Grid>
 

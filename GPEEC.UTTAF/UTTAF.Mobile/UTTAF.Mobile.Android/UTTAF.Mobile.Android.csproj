@@ -109,4 +109,9 @@
     <AndroidResource Include="Resources\drawable\Splash.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties XamarinHotReloadUnhandledDeviceExceptionUTTAFMobileAndroidHideInfoBar="True" XamarinHotReloadDebuggerTimeoutExceptionUTTAFMobileAndroidHideInfoBar="True" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>
