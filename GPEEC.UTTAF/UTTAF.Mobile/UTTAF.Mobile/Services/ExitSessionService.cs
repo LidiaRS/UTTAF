@@ -15,7 +15,7 @@ namespace UTTAF.Mobile.Services
 {
     internal class ExitSessionService
     {
-        public static async Task ExitAsync(AttendeeModel attendee)
+        public static async Task<bool> ExitTaskAsync(AttendeeModel attendee)
         {
             IRestResponse response = await AttendeeService.LeaveAtSessionTaskAsync(attendee);
 
@@ -25,12 +25,17 @@ namespace UTTAF.Mobile.Services
                 ClosePages();
             }
             else if (ReturnExpression(response))
+            {
                 await SendAlertMessageAsync(response);
+                return false;
+            }
             else if (response.StatusCode == HttpStatusCode.NotFound)
             {
                 await SendAlertMessageAsync(response);
                 ClosePages();
             }
+
+            return true;
 
             static bool ReturnExpression(IRestResponse response) =>
                 response.StatusCode == HttpStatusCode.Conflict || response.StatusCode == HttpStatusCode.BadRequest;

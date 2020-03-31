@@ -59,7 +59,7 @@ namespace UTTAF.API.Controllers
                 if (await _sessionRepository.SessionStartedTaskAsync(sessionReference))
                     return Ok(sessionReference);
 
-                return NotFound("A sessao informada nao está em andamento");
+                return BadRequest("A sessao informada nao está em andamento");
             }
 
             return BadRequest("Informe o referencial da sessao.");
