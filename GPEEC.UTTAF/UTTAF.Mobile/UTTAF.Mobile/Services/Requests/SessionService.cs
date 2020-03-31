@@ -16,12 +16,13 @@ namespace UTTAF.Mobile.Services.Requests
             var request = new RequestService()
             {
                 URL = DataHelper.URI,
-                URN = "Started",
+                URN = "Session/Started",
                 ContainsParameter = true,
                 Method = Method.GET
             };
 
             request.Parameters.Add(nameof(SessionModel.SessionReference), reference);
+
             return await request.ExecuteTaskAsync();
         }
     }

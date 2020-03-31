@@ -29,6 +29,9 @@ namespace UTTAF.API.Controllers
                 if (!await _sessionRepository.ExistsTaskAsync(attendee.SessionReference))
                     return NotFound("O referencial informado nao existe.");
 
+                if (await _sessionRepository.SessionStartedTaskAsync(attendee.SessionReference))
+                    return BadRequest("A sessao ja está em andamento");
+
                 if (await _attendeeRepository.AddAttendeeTaskAsync(attendee) is AttendeeModel att)
                     return Created(string.Empty, att);
 

@@ -72,7 +72,7 @@ namespace UTTAF.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (await _sessionRepository.ExistsTaskAsync(authSession.SessionReference))
+                if (!await _sessionRepository.ExistsTaskAsync(authSession.SessionReference))
                     return NotFound("A sessao informada nao existe.");
 
                 authSession.SessionPassword = SecurityService.CalculateHash256(authSession.SessionPassword);

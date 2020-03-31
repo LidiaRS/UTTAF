@@ -59,6 +59,13 @@ namespace UTTAF.Desktop.ViewModels
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
+                    timer.Stop();
+                    new MainView(Application.Current.MainWindow).Show();
+                    break;
+
+                case HttpStatusCode.NotFound:
+                case HttpStatusCode.BadRequest:
+                    MessageBox.Show(response.Content.Replace("\"", string.Empty));
                     break;
             }
         }
