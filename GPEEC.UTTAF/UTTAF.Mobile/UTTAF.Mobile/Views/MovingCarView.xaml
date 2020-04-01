@@ -1,45 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="UTTAF.Mobile.Views.JoinedSessionView"
+    x:Class="UTTAF.Mobile.Views.MovingCarView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:converters="clr-namespace:UTTAF.Mobile.Converters.Binding"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Visual="Material"
     mc:Ignorable="d">
-    <ContentPage.Resources>
-        <converters:JoinedMessageBindingConverter x:Key="JoinedMessage" />
-    </ContentPage.Resources>
     <StackLayout>
         <forms:AnimationView
-            Animation="loadTraffic.json"
+            Animation="MovingCar.json"
             AutoPlay="True"
             HeightRequest="300"
             HorizontalOptions="Center"
             Loop="True"
             VerticalOptions="StartAndExpand"
             WidthRequest="300" />
+
+
         <Label
             FontAttributes="Bold"
             FontSize="18"
             HorizontalTextAlignment="Center"
-            Text="Voce está participando!"
+            Text="O robo está se movendo!"
             TextColor="Black"
             VerticalOptions="Center" />
         <Label
             HorizontalTextAlignment="Center"
-            Text="{Binding Attendee.Name, Converter={StaticResource JoinedMessage}}"
+            Text="Logo encontrará um obstáculo, aguarde!"
             TextColor="Black"
             VerticalOptions="Center" />
 
-        <Button
-            Margin="30"
-            BackgroundColor="{DynamicResource MidYellow}"
-            Command="{Binding ExitSessionCommand}"
-            Text="Sair"
-            TextColor="Black"
-            VerticalOptions="EndAndExpand" />
     </StackLayout>
 </ContentPage>
