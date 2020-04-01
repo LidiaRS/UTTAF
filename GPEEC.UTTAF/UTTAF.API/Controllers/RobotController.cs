@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
+using UTTAF.API.Models;
 using UTTAF.API.Models.Auxiliary;
 using UTTAF.API.Repository.Interfaces;
+using UTTAF.Dependencies.Services;
 
 namespace UTTAF.API.Controllers
 {
@@ -19,6 +22,26 @@ namespace UTTAF.API.Controllers
         {
             _sessionRepository = sessionRepository;
             _robotRepository = robotRepository;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> NewRobotTaskAsync([FromBody]RobotModel robot, [Required]string sessionPassword)
+        {
+            if (ModelState.IsValid)
+            {
+                if (!await _sessionRepository.ExistsTaskAsync(robot.SessionReference, SecurityService.CalculateHash256(sessionPassword)))
+                    return NotFound("A sessao informada nao existe!");
+
+                if (await _robotRepository.ExistsTaskAsync(robot.SessionReference))
+                    return Conflict("Ja existe um robo nesta sessao!");
+
+                robot.DataOperation = DateTime.Now;
+
+                if (await _robotRepository.AddTaskAsync(robot) is RobotModel bot)
+                    return Created(string.Empty, bot);
+            }
+
+            return BadRequest();
         }
 
         [HttpGet]
@@ -66,7 +89,7 @@ namespace UTTAF.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (!await _sessionRepository.ExistsTaskAsync(card.SessionReference, card.SessionPassword))
+                if (!await _sessionRepository.ExistsTaskAsync(card.SessionReference, SecurityService.CalculateHash256(card.SessionPassword)))
                     return NotFound("A sessao informada nao existe, ou a senha está incorreta");
 
                 //fazer o carrinho para de andar.
