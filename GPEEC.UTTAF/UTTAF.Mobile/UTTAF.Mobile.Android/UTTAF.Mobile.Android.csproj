@@ -76,7 +76,7 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\materialdesignicons-webfont.ttf" />
     <AndroidAsset Include="Assets\loadTraffic.json" />
-    <AndroidAsset Include="Assets\MovingCar.json" />
+    <AndroidAsset Include="Assets\MovingRobot.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="UTTAF.Mobile.Views.MovingCarView"
+    x:Class="UTTAF.Mobile.Views.MovingRobotView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
@@ -17,7 +17,6 @@
             VerticalOptions="StartAndExpand"
             WidthRequest="300" />
 
-
         <Label
             FontAttributes="Bold"
             FontSize="18"
@@ -30,6 +29,5 @@
             Text="Logo encontrará um obstáculo, aguarde!"
             TextColor="Black"
             VerticalOptions="Center" />
-
     </StackLayout>
 </ContentPage>

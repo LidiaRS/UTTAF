@@ -9,14 +9,35 @@ using UTTAF.API.Data;
 namespace UTTAF.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200329012830_ChangeIdAttendeeType")]
-    partial class ChangeIdAttendeeType
+    [Migration("20200401071940_InitRobotSupport")]
+    partial class InitRobotSupport
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.3");
+
+            modelBuilder.Entity("UTTAF.API.Models.RobotModel", b =>
+                {
+                    b.Property<Guid>("RobotId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DataOperation")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("RobotStatus")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("SessionReference")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("RobotId");
+
+                    b.ToTable("Robots");
+                });
 
             modelBuilder.Entity("UTTAF.Dependencies.Models.AttendeeModel", b =>
                 {

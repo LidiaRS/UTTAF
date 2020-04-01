@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
+using UTTAF.API.Models;
 using UTTAF.Dependencies.Models;
 
 namespace UTTAF.API.Data
@@ -7,6 +9,8 @@ namespace UTTAF.API.Data
     {
         public DbSet<AuthSessionModel> Sessions { get; set; }
         public DbSet<AttendeeModel> Attendees { get; set; }
+
+        public DbSet<RobotModel> Robots { get; set; }
 
         public DataContext()
         {

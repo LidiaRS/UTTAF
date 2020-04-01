@@ -16,6 +16,27 @@ namespace UTTAF.API.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.3");
 
+            modelBuilder.Entity("UTTAF.API.Models.RobotModel", b =>
+                {
+                    b.Property<Guid>("RobotId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DataOperation")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("RobotStatus")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("SessionReference")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("RobotId");
+
+                    b.ToTable("Robots");
+                });
+
             modelBuilder.Entity("UTTAF.Dependencies.Models.AttendeeModel", b =>
                 {
                     b.Property<Guid>("Id")

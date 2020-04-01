@@ -37,13 +37,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\MovingRobotView.xaml.cs">
+      <DependentUpon>MovingRobotView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="Views\JoinedSessionView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\JoinSessionView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\MovingCarView.xaml">
+    <EmbeddedResource Update="Views\MovingRobotView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\StartView.xaml">

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UTTAF.API.Migrations
 {
-    public partial class ChangeIdAttendeeType : Migration
+    public partial class InitRobotSupport : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,6 +18,20 @@ namespace UTTAF.API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Attendees", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Robots",
+                columns: table => new
+                {
+                    RobotId = table.Column<Guid>(nullable: false),
+                    SessionReference = table.Column<string>(nullable: false),
+                    RobotStatus = table.Column<int>(nullable: false),
+                    DataOperation = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Robots", x => x.RobotId);
                 });
 
             migrationBuilder.CreateTable(
@@ -39,6 +53,9 @@ namespace UTTAF.API.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Attendees");
+
+            migrationBuilder.DropTable(
+                name: "Robots");
 
             migrationBuilder.DropTable(
                 name: "Sessions");

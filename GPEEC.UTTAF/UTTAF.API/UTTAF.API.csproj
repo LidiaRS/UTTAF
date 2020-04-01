@@ -31,6 +31,8 @@
     <Compile Remove="Migrations\20200316051324_NullableTypeOnDate.Designer.cs" />
     <Compile Remove="Migrations\20200321214530_ChangeSessionMigration.cs" />
     <Compile Remove="Migrations\20200321214530_ChangeSessionMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200329012830_ChangeIdAttendeeType.cs" />
+    <Compile Remove="Migrations\20200329012830_ChangeIdAttendeeType.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,9 +51,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\UTTAF.Dependencies\UTTAF.Dependencies.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\" />
   </ItemGroup>
 </Project>
