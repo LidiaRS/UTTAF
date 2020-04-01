@@ -24,6 +24,7 @@ namespace UTTAF.API
 
             services.AddScoped<ISessionRepository, SessionRepository>();
             services.AddScoped<IAttendeeRepository, AttendeeRepository>();
+            services.AddScoped<IRobotRepository, RobotRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

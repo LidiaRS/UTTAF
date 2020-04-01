@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 using UTTAF.API.Repository.Interfaces;
@@ -51,9 +52,9 @@ namespace UTTAF.API.Controllers
         }
 
         [HttpGet("Started")]
-        public async Task<IActionResult> SessionStartedTaskAsync(string sessionReference)
+        public async Task<IActionResult> SessionStartedTaskAsync([Required]string sessionReference)
         {
-            if (!string.IsNullOrEmpty(sessionReference))
+            if (ModelState.IsValid)
             {
                 if (!await _sessionRepository.ExistsTaskAsync(sessionReference))
                     return NotFound("A Sessao informada nao existe");
@@ -64,7 +65,7 @@ namespace UTTAF.API.Controllers
                 return BadRequest("A sessao informada nao está em andamento");
             }
 
-            return BadRequest("Informe o referencial da sessao.");
+            return BadRequest();
         }
 
         [HttpPut("Status")]

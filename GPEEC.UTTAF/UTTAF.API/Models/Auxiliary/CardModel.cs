@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace UTTAF.API.Models.Auxiliary
 {
@@ -12,5 +13,8 @@ namespace UTTAF.API.Models.Auxiliary
 
         [Required]
         public string CardId { get; set; }
+
+        [Required]
+        public DateTime RegistredTime { get; set; }
     }
 }

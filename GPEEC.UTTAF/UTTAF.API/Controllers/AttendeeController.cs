@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 using UTTAF.API.Repository.Interfaces;
@@ -59,9 +60,9 @@ namespace UTTAF.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AttendeesInSessionTaskAsync(string sessionReference, string sessionPassword)
+        public async Task<IActionResult> AttendeesInSessionTaskAsync([Required]string sessionReference, [Required]string sessionPassword)
         {
-            if (!string.IsNullOrEmpty(sessionReference) && !string.IsNullOrEmpty(sessionPassword))
+            if (ModelState.IsValid)
             {
                 if (await _sessionRepository.ExistsTaskAsync(sessionReference, SecurityService.CalculateHash256(sessionPassword)))
                     return Ok(await _attendeeRepository.GetAttendersTaskAsync(sessionReference));
