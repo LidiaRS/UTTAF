@@ -13,7 +13,7 @@ using ZXing.Net.Mobile.Android;
 
 namespace UTTAF.Mobile.Droid
 {
-    [Activity(ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
