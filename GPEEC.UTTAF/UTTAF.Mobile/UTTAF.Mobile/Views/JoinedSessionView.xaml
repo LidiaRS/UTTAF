@@ -33,7 +33,7 @@
             Text="{Binding Attendee.Name, Converter={StaticResource JoinedMessage}}"
             TextColor="Black"
             VerticalOptions="Center" />
-
+        
         <Button
             Margin="30"
             BackgroundColor="{DynamicResource MidYellow}"

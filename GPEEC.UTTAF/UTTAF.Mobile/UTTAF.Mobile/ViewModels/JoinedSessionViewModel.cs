@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-
+using Logikoz.XamarinUtilities.Utilities;
 using RestSharp;
 
 using System;
@@ -11,7 +11,7 @@ using UTTAF.Dependencies.Models;
 using UTTAF.Mobile.Services;
 using UTTAF.Mobile.Services.Requests;
 using UTTAF.Mobile.Util;
-
+using UTTAF.Mobile.Views;
 using Xamarin.Forms;
 
 namespace UTTAF.Mobile.ViewModels
@@ -47,7 +47,7 @@ namespace UTTAF.Mobile.ViewModels
                 {
                     case HttpStatusCode.OK:
                         CancelTimer();
-                        await Application.Current.MainPage.DisplayAlert("Uruu!", "iniciou", "Ok");
+                        Application.Current.MainPage = new MovingRobotView();
                         break;
 
                     case HttpStatusCode.NotFound:

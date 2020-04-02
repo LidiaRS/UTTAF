@@ -3,6 +3,7 @@
     x:Class="UTTAF.Mobile.Views.JoinSessionView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:icon="clr-namespace:UTTAF.Mobile.Util"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -38,7 +39,8 @@
                 HorizontalTextAlignment="Center"
                 Text="OU"
                 TextColor="White" />
-            <Button
+
+            <button:SfButton
                 Grid.Row="2"
                 Margin="0,0,0,10"
                 BackgroundColor="Transparent"
@@ -46,18 +48,34 @@
                 BorderWidth="1"
                 Command="{Binding JoinAtSessionWithQrCodeCommand}"
                 CornerRadius="10"
-                FontSize="16"
                 HorizontalOptions="CenterAndExpand"
-                Text="Encanear QrCode"
-                TextColor="White"
-                WidthRequest="220" />
+                WidthRequest="220">
+                <Label Padding="7" HorizontalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <FormattedString.Spans>
+                                <Span
+                                    FontFamily="{StaticResource MaterialIcons}"
+                                    FontSize="18"
+                                    Text="{x:Static icon:PackIconUtil.QrcodeScan}"
+                                    TextColor="White" />
+                                <Span Text="     " />
+                                <Span
+                                    FontSize="16"
+                                    Text="ESCANEAR QRCODE"
+                                    TextColor="White" />
+                            </FormattedString.Spans>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </button:SfButton>
 
             <Entry
                 Grid.Row="3"
                 BackgroundColor="#0affffff"
                 HorizontalOptions="Center"
                 MaxLength="10"
-                Placeholder="Nome"
+                Placeholder="Participante"
                 PlaceholderColor="White"
                 Text="{Binding Attendee}"
                 TextColor="White"
@@ -71,15 +89,32 @@
                 Text="Eos sed duo takimata diam magna accusam diam sed at dolor ut amet est vero dolore voluptua nulla diam sit"
                 TextColor="White" />
 
-            <Button
+            <button:SfButton
                 Grid.Row="5"
                 BackgroundColor="{StaticResource DarkYellow}"
                 Command="{Binding JoinAtSessionCommand}"
                 CornerRadius="20"
                 HorizontalOptions="CenterAndExpand"
-                Text="Participar"
-                TextColor="White"
-                WidthRequest="200" />
+                WidthRequest="210">
+                <Label Padding="7" HorizontalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <FormattedString.Spans>
+                                <Span
+                                    FontFamily="{StaticResource MaterialIcons}"
+                                    FontSize="20"
+                                    Text="{x:Static icon:PackIconUtil.AccountArrowRight}"
+                                    TextColor="White" />
+                                <Span Text="     " />
+                                <Span
+                                    FontSize="16"
+                                    Text="PARTICIPAR"
+                                    TextColor="White" />
+                            </FormattedString.Spans>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </button:SfButton>
 
         </Grid>
 

@@ -7,6 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     Title="UTTAF - Utilizaçao de Tecnologia no Transito com Aplicaçao Física"
+    Width="450"
+    Height="690"
     Closing="ClosingWindow"
     mc:Ignorable="d">
     <Grid>

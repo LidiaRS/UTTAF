@@ -3,6 +3,8 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 
+using Syncfusion.Licensing;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
@@ -16,6 +18,8 @@ namespace UTTAF.Mobile.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            SyncfusionLicenseProvider.RegisterLicense("MjMxNzAyQDMxMzgyZTMxMmUzMFpUWHhFaXA0SkxwMWd5RzhZcnpzMVhsTjBNWDBRYmUvbWc2NmpzZ0gveGc9");
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 

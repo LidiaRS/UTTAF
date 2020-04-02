@@ -19,6 +19,7 @@
     <PackageReference Include="Dependencies" Version="1.1.0" />
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
     <PackageReference Include="RestSharp" Version="106.10.1" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.1.0.42" />
     <PackageReference Include="System.Text.Json" Version="4.7.1" />
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.530" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />

@@ -1,4 +1,7 @@
-﻿using Foundation;
+using Syncfusion.XForms.iOS.Buttons;
+using Foundation;
+
+using Syncfusion.Licensing;
 
 using UIKit;
 
@@ -11,6 +14,8 @@ namespace UTTAF.Mobile.iOS
     {
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            SyncfusionLicenseProvider.RegisterLicense("MjMxNzAyQDMxMzgyZTMxMmUzMFpUWHhFaXA0SkxwMWd5RzhZcnpzMVhsTjBNWDBRYmUvbWc2NmpzZ0gveGc9");
+
             Xamarin.Forms.Forms.Init();
             ZXing.Net.Mobile.Forms.iOS.Platform.Init();
 

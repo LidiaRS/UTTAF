@@ -7,5 +7,7 @@ namespace UTTAF.Mobile.Views
     public partial class MovingRobotView : ContentPage
     {
         public MovingRobotView() => InitializeComponent();
+
+        protected override bool OnBackButtonPressed() => true;
     }
 }

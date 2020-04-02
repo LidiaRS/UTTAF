@@ -14,6 +14,10 @@ namespace UTTAF.Desktop.Views
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             await SessionService.DeleteSessionTaskAsync(DataHelper.AuthSession);
+            var newWindow = new ConfigureView();
+            Application.Current.MainWindow = newWindow;
+            Close();
+            newWindow.Show();
         }
     }
 }

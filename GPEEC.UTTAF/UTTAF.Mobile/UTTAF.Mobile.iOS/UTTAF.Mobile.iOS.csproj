@@ -122,6 +122,15 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Syncfusion.Licensing">
+      <Version>18.1.0.42</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.Buttons">
+      <Version>18.1.0.42</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.Buttons.IOS">
+      <Version>18.1.0.42</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.530" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
   </ItemGroup>

@@ -6,15 +6,16 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    BackgroundColor="{DynamicResource DarkBlue}"
     mc:Ignorable="d">
-    <StackLayout>
+    <StackLayout VerticalOptions="CenterAndExpand">
         <forms:AnimationView
-            Animation="MovingCar.json"
+            Animation="MovingRobot.json"
             AutoPlay="True"
             HeightRequest="300"
             HorizontalOptions="Center"
             Loop="True"
-            VerticalOptions="StartAndExpand"
+            VerticalOptions="Start"
             WidthRequest="300" />
 
         <Label
@@ -22,12 +23,12 @@
             FontSize="18"
             HorizontalTextAlignment="Center"
             Text="O robo está se movendo!"
-            TextColor="Black"
+            TextColor="White"
             VerticalOptions="Center" />
         <Label
             HorizontalTextAlignment="Center"
             Text="Logo encontrará um obstáculo, aguarde!"
-            TextColor="Black"
+            TextColor="White"
             VerticalOptions="Center" />
     </StackLayout>
 </ContentPage>
