@@ -1,4 +1,5 @@
-﻿using Dependencies.Services;
+﻿using Dependencies;
+using Dependencies.Services;
 
 using RestSharp;
 
@@ -15,9 +16,9 @@ namespace UTTAF.Mobile.Services.Requests
         {
             var request = new RequestService()
             {
-                URL = DataHelper.URI,
+                Protocol = Protocols.HTTP,
+                URL = DataHelper.URLBase,
                 URN = "Session/Started",
-                ContainsParameter = true,
                 Method = Method.GET
             };
 

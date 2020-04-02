@@ -27,7 +27,7 @@ namespace UTTAF.API.Tests
         {
             IRestResponse response = await new RequestService()
             {
-                URL = DataHelper.URI,
+                URL = DataHelper.URLBase,
                 Method = Method.POST,
                 URN = "Session",
                 Body = new { SessionReference, SessionPassword }
@@ -55,7 +55,7 @@ namespace UTTAF.API.Tests
         {
             IRestResponse response = await new RequestService()
             {
-                URL = DataHelper.URI,
+                URL = DataHelper.URLBase,
                 Method = Method.DELETE,
                 URN = "Session",
                 Body = new { SessionReference, SessionPassword }

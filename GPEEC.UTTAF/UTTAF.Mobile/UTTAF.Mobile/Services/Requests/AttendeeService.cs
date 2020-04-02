@@ -1,4 +1,5 @@
-﻿using Dependencies.Services;
+﻿using Dependencies;
+using Dependencies.Services;
 
 using RestSharp;
 
@@ -15,7 +16,8 @@ namespace UTTAF.Mobile.Services.Requests
         {
             return await new RequestService()
             {
-                URL = DataHelper.URI,
+                Protocol = Protocols.HTTP,
+                URL = DataHelper.URLBase,
                 URN = "Attendee/Join",
                 Body = attendee,
                 Method = Method.POST
@@ -26,7 +28,8 @@ namespace UTTAF.Mobile.Services.Requests
         {
             return await new RequestService()
             {
-                URL = DataHelper.URI,
+                Protocol = Protocols.HTTP,
+                URL = DataHelper.URLBase,
                 URN = "Attendee/Leave",
                 Body = attendee,
                 Method = Method.DELETE

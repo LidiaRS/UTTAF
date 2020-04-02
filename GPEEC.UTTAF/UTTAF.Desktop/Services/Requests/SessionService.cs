@@ -1,4 +1,5 @@
-﻿using Dependencies.Services;
+﻿using Dependencies;
+using Dependencies.Services;
 
 using RestSharp;
 
@@ -15,17 +16,20 @@ namespace UTTAF.Desktop.Services.Requests
         {
             return await new RequestService()
             {
-                URL = DataHelper.URI,
+                Protocol = Protocols.HTTP,
+                URL = DataHelper.URLBase,
                 URN = "Session",
                 Method = Method.POST,
                 Body = authSession
             }.ExecuteTaskAsync();
         }
+
         internal static async Task<IRestResponse> StartSessionTaskAsync(AuthSessionModel authSession)
         {
             return await new RequestService()
             {
-                URL = DataHelper.URI,
+                Protocol = Protocols.HTTP,
+                URL = DataHelper.URLBase,
                 URN = "Session/Status",
                 Method = Method.PUT,
                 Body = authSession
@@ -36,7 +40,8 @@ namespace UTTAF.Desktop.Services.Requests
         {
             return await new RequestService()
             {
-                URL = DataHelper.URI,
+                Protocol = Protocols.HTTP,
+                URL = DataHelper.URLBase,
                 URN = "Session",
                 Method = Method.DELETE,
                 Body = model

@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dependencies" Version="1.0.0" />
+    <PackageReference Include="Dependencies" Version="1.1.0" />
     <PackageReference Include="MaterialDesignColors" Version="1.2.2" />
     <PackageReference Include="MaterialDesignThemes" Version="3.0.1" />
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />

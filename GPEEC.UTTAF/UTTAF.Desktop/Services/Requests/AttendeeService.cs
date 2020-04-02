@@ -1,4 +1,5 @@
-﻿using Dependencies.Services;
+﻿using Dependencies;
+using Dependencies.Services;
 
 using RestSharp;
 
@@ -15,10 +16,10 @@ namespace UTTAF.Desktop.Services.Requests
         {
             var request = new RequestService()
             {
-                URL = DataHelper.URI,
+                Protocol = Protocols.HTTP,
+                URL = DataHelper.URLBase,
                 URN = "Attendee",
-                Method = Method.GET,
-                ContainsParameter = true
+                Method = Method.GET
             };
             request.Parameters.Add(nameof(model.SessionReference), model.SessionReference);
             request.Parameters.Add(nameof(model.SessionPassword), model.SessionPassword);
