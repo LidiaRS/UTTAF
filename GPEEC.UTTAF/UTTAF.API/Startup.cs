@@ -20,7 +20,11 @@ namespace UTTAF.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<DataContext>(options => options.UseSqlite(Configuration["ConnectionString"]));
+            services.AddDbContext<DataContext>
+            (
+                options => options.UseSqlite(Configuration["ConnectionString"], 
+                builder => builder.MigrationsAssembly("UTTAF.API"))
+            );
 
             services.AddScoped<ISessionRepository, SessionRepository>();
             services.AddScoped<IAttendeeRepository, AttendeeRepository>();
