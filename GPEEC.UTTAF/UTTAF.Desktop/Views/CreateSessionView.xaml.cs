@@ -9,10 +9,10 @@ namespace UTTAF.Desktop.Views
 {
     public partial class CreateSessionView : UserControl
     {
-        public CreateSessionView()
+        public CreateSessionView(CreateSessionViewModel createSessionViewModel)
         {
             InitializeComponent();
-            DataContext = new CreateSessionViewModel();
+            DataContext = createSessionViewModel;
         }
 
         internal void CancelSession()

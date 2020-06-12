@@ -10,9 +10,9 @@ using UTTAF.Dependencies.Models;
 
 namespace UTTAF.Desktop.Services.Requests
 {
-    internal class SessionService
+    public class SessionService
     {
-        internal static async Task<IRestResponse> InitSessionTaskAsync(AuthSessionModel authSession)
+        public async Task<IRestResponse> InitSessionTaskAsync(AuthSessionModel authSession)
         {
             return await new RequestService()
             {
@@ -24,7 +24,7 @@ namespace UTTAF.Desktop.Services.Requests
             }.ExecuteTaskAsync();
         }
 
-        internal static async Task<IRestResponse> StartSessionTaskAsync(AuthSessionModel authSession)
+        public async Task<IRestResponse> StartSessionTaskAsync(AuthSessionModel authSession)
         {
             return await new RequestService()
             {
@@ -36,7 +36,7 @@ namespace UTTAF.Desktop.Services.Requests
             }.ExecuteTaskAsync();
         }
 
-        internal static async Task<IRestResponse> DeleteSessionTaskAsync(AuthSessionModel model)
+        public async Task<IRestResponse> DeleteSessionTaskAsync(AuthSessionModel model)
         {
             return await new RequestService()
             {

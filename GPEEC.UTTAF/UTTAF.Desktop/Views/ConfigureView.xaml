@@ -9,6 +9,7 @@
     Title="UTTAF - Utilizaçao de Tecnologia no Transito com Aplicaçao Física"
     Width="450"
     Height="690"
+    x:Name="this"
     Closing="ClosingWindow"
     mc:Ignorable="d">
     <Grid>
@@ -28,13 +29,108 @@
                     <md:TransitionerSlide.ForwardWipe>
                         <md:CircleWipe />
                     </md:TransitionerSlide.ForwardWipe>
-                    <local:StartView />
+                    <md:Card
+                        Width="300"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        md:ShadowAssist.ShadowDepth="Depth3"
+                        Opacity=".85"
+                        UniformCornerRadius="15">
+                        <Grid VerticalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                Grid.Row="0"
+                                Margin="0,10,0,0"
+                                FontSize="20"
+                                FontWeight="DemiBold"
+                                Text="UTTAF"
+                                TextAlignment="Center" />
+                            <Image
+                                Grid.Row="1"
+                                Width="100"
+                                Height="100"
+                                Margin="0,-30"
+                                HorizontalAlignment="Center"
+                                Source="/Resources/UTTAF_Icon.png" />
+                            <TextBlock
+                                Grid.Row="2"
+                                FontSize="10"
+                                Text="Utilizaçao de Tecnologia no Transito com Aplicaçao Física"
+                                TextAlignment="Center" />   
+
+                            <TextBlock
+                                Grid.Row="3"
+                                Margin="10"
+                                HorizontalAlignment="Center"
+                                Style="{StaticResource MaterialDesignBody1TextBlock}"
+                                Text="Dolor lorem commodo sit eos et te voluptua eos accusam at amet "
+                                TextAlignment="Center"
+                                TextWrapping="Wrap" />  
+
+                            <Button
+                                x:Name="StartCreateSession"
+                                Grid.Row="4"
+                                Margin="20"
+                                md:ButtonAssist.CornerRadius="10"
+                                Background="{DynamicResource PrimaryHueDarkBrush}"
+                                BorderThickness="0"
+                                Command="{Binding CreateSessionCommand}"
+                                CommandParameter="{x:Reference this}">  
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <md:PackIcon
+                                        Grid.Column="0"
+                                        VerticalAlignment="Center"
+                                        Kind="ClockStart" />
+                                            <TextBlock
+                                        Grid.Column="1"
+                                        Margin="10,0,0,0"
+                                        Text="Iniciar" />
+                                </Grid>
+                            </Button>
+
+                            <Button
+                                x:Name="NextCreateSession"
+                                Grid.Row="4"
+                                Margin="20"
+                                BorderThickness="0"
+                                Click="CreateSession"
+                                Command="{x:Static md:Transitioner.MoveNextCommand}"
+                                Style="{StaticResource MaterialDesignOutlinedButton}"
+                                Visibility="Collapsed">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <md:PackIcon
+                                        Grid.Column="0"
+                                        VerticalAlignment="Center"
+                                        Kind="PageNext" />
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        Margin="10,0,0,0"
+                                        Text="Prosseguir" />
+                                </Grid>
+                            </Button>
+                        </Grid>
+                    </md:Card>
                 </md:TransitionerSlide>
                 <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=SlideInFromBottom}">
                     <md:TransitionerSlide.BackwardWipe>
                         <md:SlideWipe />
                     </md:TransitionerSlide.BackwardWipe>
-                    <local:CreateSessionView />
+                    <!---->
                 </md:TransitionerSlide>
             </md:Transitioner>
             <Border

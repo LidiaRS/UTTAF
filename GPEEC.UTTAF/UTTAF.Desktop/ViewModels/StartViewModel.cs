@@ -15,38 +15,45 @@ using UTTAF.Desktop.Views.DialogHost;
 
 namespace UTTAF.Desktop.ViewModels
 {
-    internal class StartViewModel : ViewModelBase
-    {
-        public RelayCommand<StartView> CreateSessionCommand { get; private set; }
+	public class StartViewModel : ViewModelBase
+	{
+		private readonly SessionService _sessionService;
 
-        public StartViewModel() => Init();
+		public RelayCommand<StartView> CreateSessionCommand { get; private set; }
 
-        private void Init() => CreateSessionCommand = new RelayCommand<StartView>(CreateSession);
+		public StartViewModel(SessionService sessionService)
+		{
+			_sessionService = sessionService;
 
-        private void CreateSession(StartView startView)
-        {
-            MaterialDesignThemes.Wpf.DialogHost.Show(new InputNewSessionNameView(startView), "CreateSessionDH", async (s, e) =>
-            {
-                if ((bool)e.Parameter == true)
-                {
-                    var view = e.Session.Content as InputNewSessionNameView;
-                    string reference = view.Reference.Text;
-                    string password = view.Password.Password;
+			Init();
+		}
 
-                    IRestResponse response = await SessionService.InitSessionTaskAsync(new AuthSessionModel { SessionReference = reference, SessionPassword = password });
+		private void Init() => CreateSessionCommand = new RelayCommand<StartView>(CreateSession);
 
-                    if (response.StatusCode == HttpStatusCode.Created)
-                    {
-                        DataHelper.AuthSession = JsonSerializer.Deserialize<AuthSessionModel>(response.Content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                        DataHelper.AuthSession.SessionPassword = password;
+		private void CreateSession(StartView startView)
+		{
+			MaterialDesignThemes.Wpf.DialogHost.Show(new InputNewSessionNameView(startView), "CreateSessionDH", async (s, e) =>
+			{
+				if ((bool) e.Parameter == true)
+				{
+					var view = e.Session.Content as InputNewSessionNameView;
+					string reference = view.Reference.Text;
+					string password = view.Password.Password;
 
-                        startView.StartCreateSession.Visibility = Visibility.Collapsed;
-                        startView.NextCreateSession.Visibility = Visibility.Visible;
-                    }
-                    else if (response.StatusCode == HttpStatusCode.Conflict)
-                        MessageBox.Show(response.Content.Replace("\"", string.Empty));
-                }
-            });
-        }
-    }
+					IRestResponse response = await _sessionService.InitSessionTaskAsync(new AuthSessionModel { SessionReference = reference, SessionPassword = password });
+
+					if (response.StatusCode == HttpStatusCode.Created)
+					{
+						DataHelper.AuthSession = JsonSerializer.Deserialize<AuthSessionModel>(response.Content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+						DataHelper.AuthSession.SessionPassword = password;
+
+						startView.StartCreateSession.Visibility = Visibility.Collapsed;
+						startView.NextCreateSession.Visibility = Visibility.Visible;
+					}
+					else if (response.StatusCode == HttpStatusCode.Conflict)
+						MessageBox.Show(response.Content.Replace("\"", string.Empty));
+				}
+			});
+		}
+	}
 }

@@ -22,110 +22,116 @@ using UTTAF.Desktop.Views;
 
 namespace UTTAF.Desktop.ViewModels
 {
-    internal class CreateSessionViewModel : ViewModelBase
-    {
-        private DispatcherTimer timer;
-        private string _sessionReference;
-        private object _qrCodeImg;
+	public class CreateSessionViewModel : ViewModelBase
+	{
+		private readonly MainView _mainView;
+		private readonly SessionService _sessionService;
 
-        public object QrCode
-        {
-            get => _qrCodeImg;
-            set => Set(ref _qrCodeImg, value);
-        }
+		private DispatcherTimer timer;
+		private string __sessionReference;
+		private object __qrCodeImg;
 
-        public string SessionReference
-        {
-            get => _sessionReference;
-            set => Set(ref _sessionReference, value);
-        }
+		public object QrCode
+		{
+			get => __qrCodeImg;
+			set => Set(ref __qrCodeImg, value);
+		}
 
-        public ObservableCollection<AttendeeModel> Attendees { get; set; } = new ObservableCollection<AttendeeModel>();
+		public string SessionReference
+		{
+			get => __sessionReference;
+			set => Set(ref __sessionReference, value);
+		}
 
-        public RelayCommand<CreateSessionView> CancelSessionCreationCommand { get; private set; }
-        public RelayCommand StartSessionCommand { get; private set; }
+		public ObservableCollection<AttendeeModel> Attendees { get; set; } = new ObservableCollection<AttendeeModel>();
 
-        public CreateSessionViewModel()
-        {
-            CancelSessionCreationCommand = new RelayCommand<CreateSessionView>(CancelSessionCreation);
-            StartSessionCommand = new RelayCommand(StartSession);
-        }
+		public RelayCommand<CreateSessionView> CancelSessionCreationCommand { get; private set; }
+		public RelayCommand StartSessionCommand { get; private set; }
 
-        private async void StartSession()
-        {
-            DataHelper.AuthSession.SessionStatus = SessionStatusEnum.InProgress;
-            IRestResponse response = await SessionService.StartSessionTaskAsync(DataHelper.AuthSession);
+		public CreateSessionViewModel(MainView mainView, SessionService sessionService)
+		{
+			_mainView = mainView;
+			_sessionService = sessionService;
 
-            switch (response.StatusCode)
-            {
-                case HttpStatusCode.OK:
-                    timer.Stop();
-                    new MainView(Application.Current.MainWindow).Show();
-                    break;
+			CancelSessionCreationCommand = new RelayCommand<CreateSessionView>(CancelSessionCreation);
+			StartSessionCommand = new RelayCommand(StartSession);
+		}
 
-                case HttpStatusCode.NotFound:
-                case HttpStatusCode.BadRequest:
-                    MessageBox.Show(response.Content.Replace("\"", string.Empty));
-                    break;
-            }
-        }
+		private async void StartSession()
+		{
+			DataHelper.AuthSession.SessionStatus = SessionStatusEnum.InProgress;
+			IRestResponse response = await _sessionService.StartSessionTaskAsync(DataHelper.AuthSession);
 
-        public void Init()
-        {
-            Attendees.Clear();
-            SessionReference = DataHelper.AuthSession.SessionReference;
-            QrCode = GenerateQrCode();
+			switch (response.StatusCode)
+			{
+				case HttpStatusCode.OK:
+					timer.Stop();
+					_mainView.Show();
+					break;
 
-            timer = new DispatcherTimer()
-            {
-                Interval = new TimeSpan(0, 0, 0, 0, 500)
-            };
-            timer.Tick += async (sender, e) =>
-            {
-                IRestResponse response = await AttendeeService.GetAttendeesTaskAsync(DataHelper.AuthSession);
+				case HttpStatusCode.NotFound:
+				case HttpStatusCode.BadRequest:
+					MessageBox.Show(response.Content.Replace("\"", string.Empty));
+					break;
+			}
+		}
 
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    List<AttendeeModel> attendees = JsonSerializer.Deserialize<List<AttendeeModel>>(response.Content, new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true
-                    });
+		public void Init()
+		{
+			Attendees.Clear();
+			SessionReference = DataHelper.AuthSession.SessionReference;
+			QrCode = GenerateQrCode();
 
-                    Attendees.ToList().ForEach(att =>
-                    {
-                        if (!attendees.Any(x => x.Name == att.Name))
-                            Attendees.Remove(att);
-                    });
+			timer = new DispatcherTimer()
+			{
+				Interval = new TimeSpan(0, 0, 0, 0, 500)
+			};
+			timer.Tick += async (sender, e) =>
+			{
+				IRestResponse response = await AttendeeService.GetAttendeesTaskAsync(DataHelper.AuthSession);
 
-                    attendees.ForEach(att =>
-                    {
-                        if (!Attendees.Any(x => x.Name == att.Name))
-                            Attendees.Add(att);
-                    });
-                }
-            };
+				if (response.StatusCode == HttpStatusCode.OK)
+				{
+					List<AttendeeModel> attendees = JsonSerializer.Deserialize<List<AttendeeModel>>(response.Content, new JsonSerializerOptions
+					{
+						PropertyNameCaseInsensitive = true
+					});
 
-            timer.Start();
-        }
+					Attendees.ToList().ForEach(att =>
+					{
+						if (!attendees.Any(x => x.Name == att.Name))
+							Attendees.Remove(att);
+					});
 
-        private async void CancelSessionCreation(CreateSessionView sessionView)
-        {
-            IRestResponse response = await SessionService.DeleteSessionTaskAsync(DataHelper.AuthSession);
+					attendees.ForEach(att =>
+					{
+						if (!Attendees.Any(x => x.Name == att.Name))
+							Attendees.Add(att);
+					});
+				}
+			};
 
-            if (response.StatusCode == HttpStatusCode.OK)
-                sessionView.CancelSession();
-            else if (response.StatusCode == HttpStatusCode.NotFound)
-                MessageBox.Show(response.Content.Replace("\"", string.Empty));
+			timer.Start();
+		}
 
-            timer.Stop();
-        }
+		private async void CancelSessionCreation(CreateSessionView sessionView)
+		{
+			IRestResponse response = await _sessionService.DeleteSessionTaskAsync(DataHelper.AuthSession);
 
-        private object GenerateQrCode()
-        {
-            using var generator = new QRCodeGenerator();
-            using QRCodeData data = generator.CreateQrCode(SessionReference, QRCodeGenerator.ECCLevel.Q);
-            using var qRCode = new QRCode(data);
-            return qRCode.GetGraphic(10, System.Drawing.Color.Black, System.Drawing.Color.White, false);
-        }
-    }
+			if (response.StatusCode == HttpStatusCode.OK)
+				sessionView.CancelSession();
+			else if (response.StatusCode == HttpStatusCode.NotFound)
+				MessageBox.Show(response.Content.Replace("\"", string.Empty));
+
+			timer.Stop();
+		}
+
+		private object GenerateQrCode()
+		{
+			using var generator = new QRCodeGenerator();
+			using QRCodeData data = generator.CreateQrCode(SessionReference, QRCodeGenerator.ECCLevel.Q);
+			using var qRCode = new QRCode(data);
+			return qRCode.GetGraphic(10, System.Drawing.Color.Black, System.Drawing.Color.White, false);
+		}
+	}
 }

@@ -5,19 +5,27 @@ using UTTAF.Desktop.Services.Requests;
 
 namespace UTTAF.Desktop.Views
 {
-    public partial class MainView : Window
-    {
-        public MainView() => InitializeComponent();
+	public partial class MainView : Window
+	{
+		private readonly SessionService _sessionService;
+		private readonly ConfigureView _configureView;
 
-        public MainView(Window window) : this() => window.Close();
+		public MainView(SessionService sessionService, ConfigureView configureView)
+		{
+			_sessionService = sessionService;
+			_configureView = configureView;
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            await SessionService.DeleteSessionTaskAsync(DataHelper.AuthSession);
-            var newWindow = new ConfigureView();
-            Application.Current.MainWindow = newWindow;
-            Close();
-            newWindow.Show();
-        }
-    }
+			InitializeComponent();
+
+			_configureView.Close();
+		}
+
+		private async void Button_Click(object sender, RoutedEventArgs e)
+		{
+			await _sessionService.DeleteSessionTaskAsync(DataHelper.AuthSession);
+			Application.Current.MainWindow = _configureView;
+			Close();
+			_configureView.Show();
+		}
+	}
 }
