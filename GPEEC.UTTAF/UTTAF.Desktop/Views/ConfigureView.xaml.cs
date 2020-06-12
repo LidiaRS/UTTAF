@@ -9,7 +9,12 @@ namespace UTTAF.Desktop.Views
 {
 	public partial class ConfigureView : Window
 	{
-		public ConfigureView() => InitializeComponent();
+		public ConfigureView(ConfigureViewModel configureViewModel)
+		{
+			InitializeComponent();
+
+			DataContext = configureViewModel;
+		}
 
 		private void ClosingWindow(object sender, System.ComponentModel.CancelEventArgs e)
 		{

@@ -26,12 +26,9 @@ namespace UTTAF.Desktop
 			//Views
 			services.AddScoped<ConfigureView>();
 			services.AddScoped<MainView>();
-			services.AddScoped<CreateSessionView>();
-			services.AddScoped<StartView>();
 
 			//ViewModels
-			services.AddScoped<CreateSessionViewModel>();
-			services.AddScoped<StartViewModel>();
+			services.AddScoped<ConfigureViewModel>();
 
 			//Services
 			services.AddSingleton<SessionService>();

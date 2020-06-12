@@ -8,9 +8,9 @@ namespace UTTAF.Desktop.Views.DialogHost
     /// </summary>
     public partial class InputNewSessionNameView : UserControl
     {
-        private readonly StartView _view;
+        private readonly ConfigureView _view;
 
-        public InputNewSessionNameView(StartView view)
+        public InputNewSessionNameView(ConfigureView view)
         {
             InitializeComponent();
             _view = view;

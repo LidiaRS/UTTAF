@@ -15,24 +15,36 @@ using UTTAF.Desktop.Views.DialogHost;
 
 namespace UTTAF.Desktop.ViewModels
 {
-	public class StartViewModel : ViewModelBase
+	public class ConfigureViewModel : ViewModelBase
 	{
 		private readonly SessionService _sessionService;
+		private Visibility __startCreateSessionVisibility = Visibility.Visible;
+		private Visibility __nextCreateSessionVisibility = Visibility.Collapsed;
 
-		public RelayCommand<StartView> CreateSessionCommand { get; private set; }
+		public Visibility StartCreateSessionVisibility
+		{
+			get => __startCreateSessionVisibility;
+			set => Set(ref __startCreateSessionVisibility, value);
+		}
 
-		public StartViewModel(SessionService sessionService)
+		public Visibility NextCreateSessionVisibility
+		{
+			get => __nextCreateSessionVisibility;
+			set => Set(ref __nextCreateSessionVisibility, value);
+		}
+
+		public RelayCommand<ConfigureView> CreateSessionCommand { get; private set; }
+
+		public ConfigureViewModel(SessionService sessionService)
 		{
 			_sessionService = sessionService;
 
-			Init();
+			CreateSessionCommand = new RelayCommand<ConfigureView>(CreateSession);
 		}
 
-		private void Init() => CreateSessionCommand = new RelayCommand<StartView>(CreateSession);
-
-		private void CreateSession(StartView startView)
+		private void CreateSession(ConfigureView configureView)
 		{
-			MaterialDesignThemes.Wpf.DialogHost.Show(new InputNewSessionNameView(startView), "CreateSessionDH", async (s, e) =>
+			MaterialDesignThemes.Wpf.DialogHost.Show(new InputNewSessionNameView(configureView), "CreateSessionDH", async (s, e) =>
 			{
 				if ((bool) e.Parameter == true)
 				{
@@ -47,8 +59,8 @@ namespace UTTAF.Desktop.ViewModels
 						DataHelper.AuthSession = JsonSerializer.Deserialize<AuthSessionModel>(response.Content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 						DataHelper.AuthSession.SessionPassword = password;
 
-						startView.StartCreateSession.Visibility = Visibility.Collapsed;
-						startView.NextCreateSession.Visibility = Visibility.Visible;
+						StartCreateSessionVisibility = Visibility.Collapsed;
+						NextCreateSessionVisibility = Visibility.Visible;
 					}
 					else if (response.StatusCode == HttpStatusCode.Conflict)
 						MessageBox.Show(response.Content.Replace("\"", string.Empty));

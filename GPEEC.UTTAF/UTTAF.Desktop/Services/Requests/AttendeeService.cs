@@ -1,5 +1,4 @@
-﻿using Dependencies;
-using Dependencies.Services;
+﻿using Dependencies.Services;
 
 using RestSharp;
 
@@ -10,21 +9,21 @@ using UTTAF.Dependencies.Models;
 
 namespace UTTAF.Desktop.Services.Requests
 {
-    internal class AttendeeService
-    {
-        internal static async Task<IRestResponse> GetAttendeesTaskAsync(AuthSessionModel model)
-        {
-            var request = new RequestService()
-            {
-                Protocol = Protocols.HTTP,
-                URL = DataHelper.URLBase,
-                URN = "Attendee",
-                Method = Method.GET
-            };
-            request.Parameters.Add(nameof(model.SessionReference), model.SessionReference);
-            request.Parameters.Add(nameof(model.SessionPassword), model.SessionPassword);
+	public class AttendeeService
+	{
+		public static async Task<IRestResponse> GetAttendeesTaskAsync(AuthSessionModel model)
+		{
+			var request = new RequestService()
+			{
+				URL = DataHelper.URLBase,
+				URN = "Attendee",
+				Method = Method.GET
+			};
 
-            return await request.ExecuteTaskAsync();
-        }
-    }
+			request.Parameters.Add(nameof(model.SessionReference), model.SessionReference);
+			request.Parameters.Add(nameof(model.SessionPassword), model.SessionPassword);
+
+			return await request.ExecuteTaskAsync();
+		}
+	}
 }

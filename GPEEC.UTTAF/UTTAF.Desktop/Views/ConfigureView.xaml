@@ -3,7 +3,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:UTTAF.Desktop.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     Title="UTTAF - Utilizaçao de Tecnologia no Transito com Aplicaçao Física"
@@ -63,7 +62,7 @@
                                 Grid.Row="2"
                                 FontSize="10"
                                 Text="Utilizaçao de Tecnologia no Transito com Aplicaçao Física"
-                                TextAlignment="Center" />   
+                                TextAlignment="Center" />
 
                             <TextBlock
                                 Grid.Row="3"
@@ -72,17 +71,17 @@
                                 Style="{StaticResource MaterialDesignBody1TextBlock}"
                                 Text="Dolor lorem commodo sit eos et te voluptua eos accusam at amet "
                                 TextAlignment="Center"
-                                TextWrapping="Wrap" />  
+                                TextWrapping="Wrap" />
 
                             <Button
-                                x:Name="StartCreateSession"
                                 Grid.Row="4"
+                                Visibility="{Binding StartCreateSessionVisibility}"
                                 Margin="20"
                                 md:ButtonAssist.CornerRadius="10"
                                 Background="{DynamicResource PrimaryHueDarkBrush}"
                                 BorderThickness="0"
                                 Command="{Binding CreateSessionCommand}"
-                                CommandParameter="{x:Reference this}">  
+                                CommandParameter="{x:Reference this}">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
@@ -92,7 +91,7 @@
                                         Grid.Column="0"
                                         VerticalAlignment="Center"
                                         Kind="ClockStart" />
-                                            <TextBlock
+                                    <TextBlock
                                         Grid.Column="1"
                                         Margin="10,0,0,0"
                                         Text="Iniciar" />
@@ -107,7 +106,7 @@
                                 Click="CreateSession"
                                 Command="{x:Static md:Transitioner.MoveNextCommand}"
                                 Style="{StaticResource MaterialDesignOutlinedButton}"
-                                Visibility="Collapsed">
+                                Visibility="{Binding NextCreateSessionVisibility}">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
