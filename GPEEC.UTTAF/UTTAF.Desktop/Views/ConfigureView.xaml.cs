@@ -1,7 +1,4 @@
-﻿using MaterialDesignThemes.Wpf.Transitions;
-
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 
 using UTTAF.Desktop.ViewModels;
 
@@ -24,7 +21,18 @@ namespace UTTAF.Desktop.Views
 			//    (createSessionView.DataContext as CreateSessionViewModel).CancelSessionCreationCommand.Execute(createSessionView);
 		}
 
-		private void CreateSession(object sender, RoutedEventArgs e) =>
-			(((((((Application.Current.MainWindow as ConfigureView).Content as Grid).Children[2] as Grid).Children[0] as Transitioner).Items[1] as TransitionerSlide).Content as CreateSessionView).DataContext as CreateSessionViewModel).Init();
+		public void CancelSession()
+		{
+			//if (Application.Current.MainWindow is ConfigureView configure)
+			//{
+			//    var view = ((((configure.Content as Grid).Children[2] as Grid).Children[0] as Transitioner).Items[0] as TransitionerSlide).Content as StartView;
+			//    view.StartCreateSession.Visibility = Visibility.Visible;
+			//    view.NextCreateSession.Visibility = Visibility.Collapsed;
+
+			//    Transitioner.MoveFirstCommand.Execute(null, null);
+			//}
+		}
+
+		private void CreateSession(object sender, RoutedEventArgs e) => (DataContext as ConfigureViewModel).Init();
 	}
 }
