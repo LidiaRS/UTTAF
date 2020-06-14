@@ -33,6 +33,6 @@ namespace UTTAF.Desktop.Views
 			//}
 		}
 
-		private void CreateSession(object sender, RoutedEventArgs e) => (DataContext as ConfigureViewModel).Init();
+		private void CreateSession(object sender, RoutedEventArgs e) => (DataContext as ConfigureViewModel).InitSession();
 	}
 }

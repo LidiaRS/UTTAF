@@ -65,7 +65,7 @@ namespace UTTAF.Desktop.ViewModels
 		public RelayCommand<ConfigureView> CreateSessionCommand { get; private set; }
 
 		public RelayCommand<ConfigureView> CancelSessionCreationCommand { get; private set; }
-		public RelayCommand StartSessionCommand { get; private set; }
+		public RelayCommand<ConfigureView> StartSessionCommand { get; private set; }
 
 		public ConfigureViewModel(SessionService sessionService, IStartSessionService startSessionService)
 		{
@@ -73,7 +73,7 @@ namespace UTTAF.Desktop.ViewModels
 			_startSessionService = startSessionService;
 
 			CancelSessionCreationCommand = new RelayCommand<ConfigureView>(async x => await CancelSessionCreation(x));
-			StartSessionCommand = new RelayCommand(async () => await StartSession());
+			StartSessionCommand = new RelayCommand<ConfigureView>(async x => await StartSession(x));
 			CreateSessionCommand = new RelayCommand<ConfigureView>(async x => await CreateSession(x));
 		}
 
@@ -103,12 +103,13 @@ namespace UTTAF.Desktop.ViewModels
 			});
 		}
 
-		private async Task StartSession()
+		private async Task StartSession(ConfigureView configureView)
 		{
-			await _startSessionService.StartSessionAsync(timer);
+			if (await _startSessionService.StartSessionAsync(timer))
+				configureView.Close();
 		}
 
-		public void Init()
+		public void InitSession()
 		{
 			Attendees.Clear();
 			SessionReference = DataHelper.AuthSession.SessionReference;

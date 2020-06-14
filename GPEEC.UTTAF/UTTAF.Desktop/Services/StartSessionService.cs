@@ -23,7 +23,7 @@ namespace UTTAF.Desktop.Services
 			_mainView = mainView;
 		}
 
-		public async Task StartSessionAsync(DispatcherTimer timer)
+		public async Task<bool> StartSessionAsync(DispatcherTimer timer)
 		{
 			DataHelper.AuthSession.SessionStatus = SessionStatusEnum.InProgress;
 			IRestResponse response = await _sessionService.StartSessionTaskAsync(DataHelper.AuthSession);
@@ -33,12 +33,11 @@ namespace UTTAF.Desktop.Services
 				case HttpStatusCode.OK:
 					timer.Stop();
 					_mainView.Show();
-					break;
+					return true;
 
-				case HttpStatusCode.NotFound:
-				case HttpStatusCode.BadRequest:
+				default:
 					MessageBox.Show(response.Content.Replace("\"", string.Empty));
-					break;
+					return false;
 			}
 		}
 	}

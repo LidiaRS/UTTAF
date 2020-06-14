@@ -232,7 +232,8 @@
                             Grid.Row="4"
                             Margin="10"
                             Background="{DynamicResource PrimaryHueDarkBrush}"
-                            Command="{Binding StartSessionCommand}">
+                            Command="{Binding StartSessionCommand}"
+                            CommandParameter="{x:Reference this}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
