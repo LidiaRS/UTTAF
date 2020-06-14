@@ -62,6 +62,7 @@ namespace UTTAF.API.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("SessionDate")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("SessionPassword")

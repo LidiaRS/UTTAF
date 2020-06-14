@@ -12,10 +12,10 @@ namespace UTTAF.Dependencies.Models
         [Required]
         public string SessionReference { get; set; }
 
-        [NotNull]
+        [Required]
         public SessionStatusEnum SessionStatus { get; set; }
 
-        [NotNull]
+        [Required]
         public DateTime? SessionDate { get; set; }
     }
 }

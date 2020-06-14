@@ -9,8 +9,8 @@ using UTTAF.API.Data;
 namespace UTTAF.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200401071940_InitRobotSupport")]
-    partial class InitRobotSupport
+    [Migration("20200614075049_NotNullFields")]
+    partial class NotNullFields
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -64,6 +64,7 @@ namespace UTTAF.API.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("SessionDate")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("SessionPassword")
