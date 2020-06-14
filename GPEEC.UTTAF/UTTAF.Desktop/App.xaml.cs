@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Windows;
 
+using UTTAF.Desktop.Services;
 using UTTAF.Desktop.Services.Requests;
 using UTTAF.Desktop.ViewModels;
 using UTTAF.Desktop.Views;
@@ -32,6 +33,7 @@ namespace UTTAF.Desktop
 
 			//Services
 			services.AddSingleton<SessionService>();
+			services.AddScoped<IStartSessionService, StartSessionService>();
 		}
 
 		private void Application_Startup(object sender, StartupEventArgs e)

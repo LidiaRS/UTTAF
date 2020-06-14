@@ -11,44 +11,43 @@ using UTTAF.API.Repository.Interfaces;
 
 namespace UTTAF.API
 {
-    public class Startup
-    {
-        public Startup(IConfiguration configuration) => Configuration = configuration;
+	public class Startup
+	{
+		public Startup(IConfiguration configuration) => Configuration = configuration;
 
-        public IConfiguration Configuration { get; }
+		public IConfiguration Configuration { get; }
 
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddControllers();
-            services.AddDbContext<DataContext>
-            (
-                options => options.UseSqlite(Configuration["ConnectionString"], 
-                builder => builder.MigrationsAssembly("UTTAF.API"))
-            );
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.AddControllers();
 
-            services.AddScoped<ISessionRepository, SessionRepository>();
-            services.AddScoped<IAttendeeRepository, AttendeeRepository>();
-            services.AddScoped<IRobotRepository, RobotRepository>();
-        }
+			services.AddDbContext<DataContext>
+			(
+				options => options.UseSqlite(Configuration["ConnectionString"],
+				builder => builder.MigrationsAssembly(typeof(DataContext).Assembly.FullName))
+			);
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-            {
-                DataContext context = serviceScope.ServiceProvider.GetRequiredService<DataContext>();
-                context.Database.Migrate();
-            }
+			services.AddScoped<ISessionRepository, SessionRepository>();
+			services.AddScoped<IAttendeeRepository, AttendeeRepository>();
+			services.AddScoped<IRobotRepository, RobotRepository>();
+		}
 
-            if (env.IsDevelopment())
-                app.UseDeveloperExceptionPage();
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+		{
+			using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+			{
+				DataContext context = serviceScope.ServiceProvider.GetRequiredService<DataContext>();
+				context.Database.Migrate();
+			}
 
-            //app.UseHttpsRedirection();
+			if (env.IsDevelopment())
+				app.UseDeveloperExceptionPage();
 
-            app.UseRouting();
+			app.UseRouting();
 
-            app.UseAuthorization();
+			app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => endpoints.MapControllers());
-        }
-    }
+			app.UseEndpoints(endpoints => endpoints.MapControllers());
+		}
+	}
 }

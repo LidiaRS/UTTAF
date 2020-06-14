@@ -15,9 +15,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
-using UTTAF.Dependencies.Enums;
 using UTTAF.Dependencies.Helpers;
 using UTTAF.Dependencies.Models;
+using UTTAF.Desktop.Services;
 using UTTAF.Desktop.Services.Requests;
 using UTTAF.Desktop.Views;
 using UTTAF.Desktop.Views.DialogHost;
@@ -27,6 +27,7 @@ namespace UTTAF.Desktop.ViewModels
 	public class ConfigureViewModel : ViewModelBase
 	{
 		private readonly SessionService _sessionService;
+		private readonly IStartSessionService _startSessionService;
 		private readonly MainView _mainView;
 
 		private DispatcherTimer timer;
@@ -66,10 +67,10 @@ namespace UTTAF.Desktop.ViewModels
 		public RelayCommand<ConfigureView> CancelSessionCreationCommand { get; private set; }
 		public RelayCommand StartSessionCommand { get; private set; }
 
-		public ConfigureViewModel(SessionService sessionService, MainView mainView)
+		public ConfigureViewModel(SessionService sessionService, IStartSessionService startSessionService)
 		{
 			_sessionService = sessionService;
-			_mainView = mainView;
+			_startSessionService = startSessionService;
 
 			CancelSessionCreationCommand = new RelayCommand<ConfigureView>(async x => await CancelSessionCreation(x));
 			StartSessionCommand = new RelayCommand(async () => await StartSession());
@@ -104,21 +105,7 @@ namespace UTTAF.Desktop.ViewModels
 
 		private async Task StartSession()
 		{
-			DataHelper.AuthSession.SessionStatus = SessionStatusEnum.InProgress;
-			IRestResponse response = await _sessionService.StartSessionTaskAsync(DataHelper.AuthSession);
-
-			switch (response.StatusCode)
-			{
-				case HttpStatusCode.OK:
-					timer.Stop();
-					_mainView.Show();
-					break;
-
-				case HttpStatusCode.NotFound:
-				case HttpStatusCode.BadRequest:
-					MessageBox.Show(response.Content.Replace("\"", string.Empty));
-					break;
-			}
+			await _startSessionService.StartSessionAsync(timer);
 		}
 
 		public void Init()
