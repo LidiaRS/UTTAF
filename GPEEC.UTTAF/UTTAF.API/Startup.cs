@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using UTTAF.API.Data;
+using UTTAF.API.Hubs;
 using UTTAF.API.Repository;
 using UTTAF.API.Repository.Interfaces;
 
@@ -20,6 +21,7 @@ namespace UTTAF.API
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllers();
+			services.AddSignalR();
 
 			services.AddDbContext<DataContext>
 			(
@@ -47,7 +49,14 @@ namespace UTTAF.API
 
 			app.UseAuthorization();
 
-			app.UseEndpoints(endpoints => endpoints.MapControllers());
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapControllers();
+				endpoints.MapHub<SessionHub>("/session");
+				endpoints.MapHub<AttendeeHub>("/attendee");
+				endpoints.MapHub<RobotHub>("/robot");
+				endpoints.MapHub<PlatformHub>("/platform");
+			});
 		}
 	}
 }
