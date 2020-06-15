@@ -14,10 +14,10 @@ namespace UTTAF.API.Models
         [Required]
         public string SessionReference { get; set; }
 
-        [NotNull]
+        [Required]
         public RobotStatusEnum RobotStatus { get; set; }
 
-        [NotNull]
+        [Required]
         public DateTime DataOperation { get; set; }
     }
 }

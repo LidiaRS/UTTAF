@@ -9,7 +9,7 @@ using UTTAF.API.Data;
 namespace UTTAF.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200614075049_NotNullFields")]
+    [Migration("20200615045735_NotNullFields")]
     partial class NotNullFields
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
