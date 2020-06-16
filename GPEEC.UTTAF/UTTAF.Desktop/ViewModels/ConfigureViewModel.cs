@@ -15,8 +15,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
+using UTTAF.Dependencies.Data.VOs;
 using UTTAF.Dependencies.Helpers;
-using UTTAF.Dependencies.Models;
 using UTTAF.Desktop.Services;
 using UTTAF.Desktop.Services.Requests;
 using UTTAF.Desktop.Views;
@@ -28,7 +28,6 @@ namespace UTTAF.Desktop.ViewModels
 	{
 		private readonly SessionService _sessionService;
 		private readonly IStartSessionService _startSessionService;
-		private readonly MainView _mainView;
 
 		private DispatcherTimer timer;
 		private string __sessionReference;
@@ -61,7 +60,7 @@ namespace UTTAF.Desktop.ViewModels
 			set => Set(ref __sessionReference, value);
 		}
 
-		public ObservableCollection<AttendeeModel> Attendees { get; set; } = new ObservableCollection<AttendeeModel>();
+		public ObservableCollection<AttendeeVO> Attendees { get; set; } = new ObservableCollection<AttendeeVO>();
 		public RelayCommand<ConfigureView> CreateSessionCommand { get; private set; }
 
 		public RelayCommand<ConfigureView> CancelSessionCreationCommand { get; private set; }
@@ -87,11 +86,11 @@ namespace UTTAF.Desktop.ViewModels
 					string reference = view.Reference.Text;
 					string password = view.Password.Password;
 
-					IRestResponse response = await _sessionService.InitSessionTaskAsync(new AuthSessionModel { SessionReference = reference, SessionPassword = password });
+					IRestResponse response = await _sessionService.InitSessionTaskAsync(new AuthSessionVO { SessionReference = reference, SessionPassword = password });
 
 					if (response.StatusCode == HttpStatusCode.Created)
 					{
-						DataHelper.AuthSession = JsonSerializer.Deserialize<AuthSessionModel>(response.Content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+						DataHelper.AuthSession = JsonSerializer.Deserialize<AuthSessionVO>(response.Content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 						DataHelper.AuthSession.SessionPassword = password;
 
 						StartCreateSessionVisibility = Visibility.Collapsed;
@@ -125,7 +124,7 @@ namespace UTTAF.Desktop.ViewModels
 
 				if (response.StatusCode == HttpStatusCode.OK)
 				{
-					List<AttendeeModel> attendees = JsonSerializer.Deserialize<List<AttendeeModel>>(response.Content, new JsonSerializerOptions
+					List<AttendeeVO> attendees = JsonSerializer.Deserialize<List<AttendeeVO>>(response.Content, new JsonSerializerOptions
 					{
 						PropertyNameCaseInsensitive = true
 					});

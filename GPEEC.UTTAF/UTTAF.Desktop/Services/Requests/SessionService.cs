@@ -4,14 +4,14 @@ using RestSharp;
 
 using System.Threading.Tasks;
 
+using UTTAF.Dependencies.Data.VOs;
 using UTTAF.Dependencies.Helpers;
-using UTTAF.Dependencies.Models;
 
 namespace UTTAF.Desktop.Services.Requests
 {
 	public class SessionService
 	{
-		public async Task<IRestResponse> InitSessionTaskAsync(AuthSessionModel authSession)
+		public async Task<IRestResponse> InitSessionTaskAsync(AuthSessionVO authSession)
 		{
 			return await new RequestService()
 			{
@@ -22,7 +22,7 @@ namespace UTTAF.Desktop.Services.Requests
 			}.ExecuteTaskAsync();
 		}
 
-		public async Task<IRestResponse> StartSessionTaskAsync(AuthSessionModel authSession)
+		public async Task<IRestResponse> StartSessionTaskAsync(AuthSessionVO authSession)
 		{
 			return await new RequestService()
 			{
@@ -33,7 +33,7 @@ namespace UTTAF.Desktop.Services.Requests
 			}.ExecuteTaskAsync();
 		}
 
-		public async Task<IRestResponse> DeleteSessionTaskAsync(AuthSessionModel model)
+		public async Task<IRestResponse> DeleteSessionTaskAsync(AuthSessionVO model)
 		{
 			return await new RequestService()
 			{

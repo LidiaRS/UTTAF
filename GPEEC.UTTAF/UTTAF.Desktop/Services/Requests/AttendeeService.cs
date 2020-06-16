@@ -4,14 +4,14 @@ using RestSharp;
 
 using System.Threading.Tasks;
 
+using UTTAF.Dependencies.Data.VOs;
 using UTTAF.Dependencies.Helpers;
-using UTTAF.Dependencies.Models;
 
 namespace UTTAF.Desktop.Services.Requests
 {
 	public class AttendeeService
 	{
-		public static async Task<IRestResponse> GetAttendeesTaskAsync(AuthSessionModel model)
+		public static async Task<IRestResponse> GetAttendeesTaskAsync(AuthSessionVO model)
 		{
 			var request = new RequestService()
 			{

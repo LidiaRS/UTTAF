@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="clr-namespace:UTTAF.Desktop.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:models="clr-namespace:UTTAF.Dependencies.Models;assembly=UTTAF.Dependencies"
+    xmlns:VOs="clr-namespace:UTTAF.Dependencies.Data.VOs;assembly=UTTAF.Dependencies"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     x:Name="this"
@@ -197,7 +197,7 @@
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
-                                    <DataTemplate DataType="{x:Type models:AttendeeModel}">
+                                    <DataTemplate DataType="{x:Type VOs:AttendeeVO}">
                                         <Border
                                             Width="130"
                                             BorderBrush="White"
