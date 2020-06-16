@@ -8,9 +8,7 @@ namespace UTTAF.API.Hubs
 {
 	public class AttendeeHub : Hub
 	{
-		public AttendeeHub()
-		{
-		}
+		public AttendeeHub() { }
 
 		[HubMethodName("Join")]
 		public async Task JoinAtSessionAsync(AttendeeVO newAttendee) { }
