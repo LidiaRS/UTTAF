@@ -2,7 +2,7 @@
 
 using System.Threading.Tasks;
 
-using UTTAF.Dependencies.Models;
+using UTTAF.Dependencies.Data.VOs;
 
 namespace UTTAF.API.Hubs
 {
@@ -11,12 +11,12 @@ namespace UTTAF.API.Hubs
 		public SessionHub() { }
 
 		[HubMethodName("Create")]
-		public async Task CreateSessionAsync(AuthSessionModel newSession) { }
+		public async Task CreateSessionAsync(AuthSessionVO newSession) { }
 
 		[HubMethodName("Start")]
-		public async Task MarkSessionWithStartedAsync(AuthSessionModel session) { }
+		public async Task MarkSessionWithStartedAsync(AuthSessionVO session) { }
 
 		[HubMethodName("Delete")]
-		public async Task DeleteSessionAsync(AuthSessionModel session) { }
+		public async Task DeleteSessionAsync(AuthSessionVO session) { }
 	}
 }

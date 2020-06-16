@@ -6,12 +6,12 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using UTTAF.API.Data;
+using UTTAF.API.Models;
 using UTTAF.API.Repository.Interfaces;
-using UTTAF.Dependencies.Models;
 
 namespace UTTAF.API.Repository
 {
-    public class AttendeeRepository : Repository, IAttendeeRepository
+	public class AttendeeRepository : Repository, IAttendeeRepository
     {
         public AttendeeRepository(DataContext context) : base(context)
         {

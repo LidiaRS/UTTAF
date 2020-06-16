@@ -2,21 +2,23 @@
 
 using System.Threading.Tasks;
 
-using UTTAF.Dependencies.Models;
+using UTTAF.Dependencies.Data.VOs;
 
 namespace UTTAF.API.Hubs
 {
 	public class AttendeeHub : Hub
 	{
-		public AttendeeHub() { }
+		public AttendeeHub()
+		{
+		}
 
 		[HubMethodName("Join")]
-		public async Task JoinAtSessionAsync(AttendeeModel newAttendee) { }
+		public async Task JoinAtSessionAsync(AttendeeVO newAttendee) { }
 
 		[HubMethodName("Leave")]
-		public async Task LeaveAtSessionTaskAsync(AttendeeModel attendee) { }
+		public async Task LeaveAtSessionTaskAsync(AttendeeVO attendee) { }
 
 		[HubMethodName("Attendees")]
-		public async Task AttendeesInSessionTaskAsync(AuthSessionModel session) { }
+		public async Task AttendeesInSessionTaskAsync(AttendeeVO session) { }
 	}
 }

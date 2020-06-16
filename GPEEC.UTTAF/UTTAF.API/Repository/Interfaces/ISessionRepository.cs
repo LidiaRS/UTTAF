@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
 
-using UTTAF.Dependencies.Models;
+using UTTAF.API.Models;
 
 namespace UTTAF.API.Repository.Interfaces
 {
-    public interface ISessionRepository
+	public interface ISessionRepository
     {
         Task<AuthSessionModel> AddAsync(AuthSessionModel authSession);
 

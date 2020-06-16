@@ -5,18 +5,16 @@ using UTTAF.Dependencies.Enums;
 
 namespace UTTAF.API.Models
 {
-	public class RobotModel
+	public class SessionModel
 	{
 		[Key]
-		public Guid RobotId { get; set; }
-
 		[Required]
 		public string SessionReference { get; set; }
 
 		[Required]
-		public RobotStatusEnum RobotStatus { get; set; }
+		public SessionStatusEnum SessionStatus { get; set; }
 
 		[Required]
-		public DateTime DataOperation { get; set; }
+		public DateTime? SessionDate { get; set; }
 	}
 }

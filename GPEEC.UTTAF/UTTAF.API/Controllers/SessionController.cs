@@ -4,14 +4,14 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
+using UTTAF.API.Models;
 using UTTAF.API.Repository.Interfaces;
 using UTTAF.Dependencies.Enums;
-using UTTAF.Dependencies.Models;
 using UTTAF.Dependencies.Services;
 
 namespace UTTAF.API.Controllers
 {
-    [Route("api/[controller]")]
+	[Route("api/[controller]")]
     [ApiController]
     public class SessionController : ControllerBase
     {

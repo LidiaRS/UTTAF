@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using UTTAF.Dependencies.Models;
+using UTTAF.API.Models;
 
 namespace UTTAF.API.Repository.Interfaces
 {
-    public interface IAttendeeRepository
+	public interface IAttendeeRepository
     {
         Task<AttendeeModel> AddAttendeeTaskAsync(AttendeeModel attendee);
 
