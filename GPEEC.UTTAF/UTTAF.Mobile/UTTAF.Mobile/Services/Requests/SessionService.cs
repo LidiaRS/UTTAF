@@ -5,12 +5,12 @@ using RestSharp;
 
 using System.Threading.Tasks;
 
+using UTTAF.Dependencies.Data.VOs;
 using UTTAF.Dependencies.Helpers;
-using UTTAF.Dependencies.Models;
 
 namespace UTTAF.Mobile.Services.Requests
 {
-    internal class SessionService
+	internal class SessionService
     {
         internal static async Task<IRestResponse> SessionStartedTaskAsync(string reference)
         {
@@ -22,7 +22,7 @@ namespace UTTAF.Mobile.Services.Requests
                 Method = Method.GET
             };
 
-            request.Parameters.Add(nameof(SessionModel.SessionReference), reference);
+            request.Parameters.Add(nameof(SessionVO.SessionReference), reference);
 
             return await request.ExecuteTaskAsync();
         }
