@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-using UTTAF.API.Data.Converters.Interfaces;
+﻿using UTTAF.API.Data.Converters.Interfaces;
 using UTTAF.API.Models;
 using UTTAF.Dependencies.Data.VOs;
 
@@ -32,24 +29,6 @@ namespace UTTAF.API.Data.Converters
 				SessionStatus = origin.SessionStatus,
 				SessionReference = origin.SessionReference,
 				SessionDate = origin.SessionDate
-			};
-		}
-
-		public List<SessionVO> ParseList(List<SessionModel> origin)
-		{
-			return origin switch
-			{
-				null => null,
-				_ => origin.Select(x => Parse(x)).ToList()
-			};
-		}
-
-		public List<SessionModel> ParseList(List<SessionVO> origin)
-		{
-			return origin switch
-			{
-				null => null,
-				_ => origin.Select(x => Parse(x)).ToList()
 			};
 		}
 	}
