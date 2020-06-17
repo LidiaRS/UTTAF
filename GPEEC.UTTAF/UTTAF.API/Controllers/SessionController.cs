@@ -40,17 +40,6 @@ namespace UTTAF.API.Controllers
             return BadRequest();
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> RemoveSessionTaskAsync([FromBody]AuthSessionModel authSession)
-        {
-            authSession.SessionPassword = SecurityService.CalculateHash256(authSession.SessionPassword);
-            if (await _sessionRepository.RemoveTaskAsync(authSession))
-                if (await _attendeeRepository.ClearAttendeersTaskAsync(authSession))
-                    return Ok();
-
-            return NotFound($"Nao foi possivel encontrar uma sessao com o nome: {authSession.SessionReference}");
-        }
-
         [HttpGet("Started")]
         public async Task<IActionResult> SessionStartedTaskAsync([Required]string sessionReference)
         {
@@ -84,6 +73,17 @@ namespace UTTAF.API.Controllers
                 return BadRequest("Nao foi possivel alterar o status, verifique se a senha está correta.");
             }
             return BadRequest();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> RemoveSessionTaskAsync([FromBody] AuthSessionModel authSession)
+        {
+            authSession.SessionPassword = SecurityService.CalculateHash256(authSession.SessionPassword);
+            if (await _sessionRepository.RemoveTaskAsync(authSession))
+                if (await _attendeeRepository.ClearAttendeersTaskAsync(authSession))
+                    return Ok();
+
+            return NotFound($"Nao foi possivel encontrar uma sessao com o nome: {authSession.SessionReference}");
         }
     }
 }
