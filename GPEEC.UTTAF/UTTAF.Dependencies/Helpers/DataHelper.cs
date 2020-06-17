@@ -6,7 +6,7 @@ namespace UTTAF.Dependencies.Helpers
 	{
 		public static string URLBase { get; } = "http://localhost:5000/api";
 
-		public static AuthSessionVO AuthSession { get; set; }
+		public static SessionVO AuthSession { get; set; }
 		public static AttendeeVO Attendee { get; set; }
 	}
 }

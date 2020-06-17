@@ -1,24 +1,46 @@
 ﻿using System;
 using System.Threading.Tasks;
 
+using UTTAF.API.Data.Converters;
+using UTTAF.API.Models;
+using UTTAF.API.Repository.Interfaces;
 using UTTAF.Dependencies.Data.VOs;
 
 namespace UTTAF.API.Business
 {
 	public class SessionBusiness : ISessionBusiness
 	{
-		public Task<AuthSessionVO> AddSessionTaskAsync(AuthSessionVO authSession) => throw new NotImplementedException();
+		private readonly ISessionRepository _sessionRepository;
+		private readonly SessionConverter _sessionConverter;
 
-		public Task<AuthSessionVO> ChangeStatusSessionTaskAsync(AuthSessionVO authSession) => throw new NotImplementedException();
+		public SessionBusiness(ISessionRepository sessionRepository, SessionConverter sessionConverter)
+		{
+			_sessionRepository = sessionRepository;
+			_sessionConverter = sessionConverter;
+		}
 
-		public Task<bool> ExistsByAuthSessionTaskAsync(AuthSessionVO authSession) => throw new NotImplementedException();
+		public Task<SessionVO> AddSessionTaskAsync(SessionVO session) => throw new NotImplementedException();
 
-		public Task<bool> ExistsBySessionReferenceAndPasswordTaskAsync(string reference, string password) => throw new NotImplementedException();
+		public async Task<SessionVO> FindBySessionReferenceTaskAsync(string sessionReference) =>
+			_sessionConverter.Parse(await _sessionRepository.FindBySessionReferenceTaskAsync(sessionReference));
 
-		public Task<bool> ExistsBySessionReferenceTaskAsync(string reference) => throw new NotImplementedException();
+		public async Task<SessionVO> ChangeStatusSessionTaskAsync(SessionVO newSession)
+		{
+			if (!(await _sessionRepository.FindBySessionReferenceTaskAsync(newSession.SessionReference) is SessionModel currentSession))
+				return null;
 
-		public Task<bool> RemoveTaskAsync(AuthSessionVO authSession) => throw new NotImplementedException();
+			newSession.SessionDate = currentSession.SessionDate;
 
-		public Task<bool> SessionStartedTaskAsync(string reference) => throw new NotImplementedException();
+			return _sessionConverter.Parse(await _sessionRepository.ChangeStatusSessionTaskAsync(currentSession, _sessionConverter.Parse(newSession)));
+		}
+
+		public async Task<bool> RemoveTaskAsync(SessionVO session)
+		{
+			if (!(await _sessionRepository.FindBySessionReferenceTaskAsync(session.SessionReference) is SessionModel authSessionModel))
+				return false;
+
+			await _sessionRepository.RemoveTaskAsync(authSessionModel);
+			return true;
+		}
 	}
 }

@@ -5,19 +5,13 @@ using UTTAF.API.Models;
 namespace UTTAF.API.Repository.Interfaces
 {
 	public interface ISessionRepository
-    {
-        Task<AuthSessionModel> AddAsync(AuthSessionModel authSession);
+	{
+		Task<SessionModel> AddAsync(SessionModel session);
 
-        Task<bool> ExistsTaskAsync(AuthSessionModel authSession);
+		Task<SessionModel> FindBySessionReferenceTaskAsync(string sessionReference);
 
-        Task<bool> ExistsTaskAsync(string reference, string password);
+		Task<SessionModel> ChangeStatusSessionTaskAsync(SessionModel currentSession, SessionModel newSession);
 
-        Task<bool> ExistsTaskAsync(string reference);
-
-        Task<bool> SessionStartedTaskAsync(string reference);
-
-        Task<bool> RemoveTaskAsync(AuthSessionModel authSession);
-
-        Task<AuthSessionModel> ChangeStatusSessionTaskAsync(AuthSessionModel authSession);
-    }
+		Task RemoveTaskAsync(SessionModel session);
+	}
 }

@@ -6,18 +6,12 @@ namespace UTTAF.API.Business
 {
 	public interface ISessionBusiness
 	{
-		Task<AuthSessionVO> AddSessionTaskAsync(AuthSessionVO authSession);
+		Task<SessionVO> AddSessionTaskAsync(SessionVO session);
 
-		Task<bool> ExistsBySessionReferenceTaskAsync(string reference);
+		Task<SessionVO> FindBySessionReferenceTaskAsync(string sessionReference);
 
-		Task<bool> ExistsBySessionReferenceAndPasswordTaskAsync(string reference, string password);
+		Task<SessionVO> ChangeStatusSessionTaskAsync(SessionVO session);
 
-		Task<bool> ExistsByAuthSessionTaskAsync(AuthSessionVO authSession);
-
-		Task<bool> SessionStartedTaskAsync(string reference);
-
-		Task<bool> RemoveTaskAsync(AuthSessionVO authSession);
-
-		Task<AuthSessionVO> ChangeStatusSessionTaskAsync(AuthSessionVO authSession);
+		Task<bool> RemoveTaskAsync(SessionVO session);
 	}
 }

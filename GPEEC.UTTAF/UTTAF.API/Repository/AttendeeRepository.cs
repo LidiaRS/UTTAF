@@ -31,7 +31,7 @@ namespace UTTAF.API.Repository
             return att.Entity;
         }
 
-        public async Task<bool> ClearAttendeersTaskAsync(AuthSessionModel model)
+        public async Task<bool> ClearAttendeersTaskAsync(SessionModel model)
         {
             if (await GetAttendersTaskAsync(model.SessionReference) is IList<AttendeeModel> att)
             {

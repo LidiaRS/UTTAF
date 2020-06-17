@@ -6,10 +6,20 @@ namespace UTTAF.Dependencies.Data.Clients.Interfaces
 {
 	public interface ISessionClient
 	{
-		Task CreatedSessionAsync(AuthSessionVO createdSession);
+		Task CreatedSessionAsync(SessionVO createdSession, string message);
 
-		Task NotCreatedSessionAsync();
+		Task NotCreatedSessionAsync(string message);
 
-		Task AlreadyExistsSessionAsync();
+		Task AlreadyExistsSessionAsync(string message);
+
+		Task NotExistsThisSessionAsync(string message);
+
+		Task UpdatedSessionStatusAsync(SessionVO updatedSession, string message);
+
+		Task NotUpdatedSessionStatusAsync(string message);
+
+		Task RemovedSessionAsync(string message);
+
+		Task NotRemovedSessionAsync(string message);
 	}
 }

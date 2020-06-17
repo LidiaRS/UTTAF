@@ -11,7 +11,7 @@ namespace UTTAF.API.Repository.Interfaces
 
         Task<IEnumerable<AttendeeModel>> GetAttendersTaskAsync(string reference);
 
-        Task<bool> ClearAttendeersTaskAsync(AuthSessionModel model);
+        Task<bool> ClearAttendeersTaskAsync(SessionModel model);
 
         Task<bool> LeaveAttendeeTaskAsync(AttendeeModel attendee);
     }
