@@ -7,7 +7,7 @@ using UTTAF.Dependencies.Data.VOs;
 
 namespace UTTAF.API.Data.Converters
 {
-	public class AttendeeConverter : IParser<AttendeeModel, AttendeeVO>, IParser<AttendeeVO, AttendeeModel>
+	public class AttendeeConverter : IParser<AttendeeModel, AttendeeVO>, IParser<AttendeeVO, AttendeeModel>, IParserList<AttendeeModel, AttendeeVO>, IParserList<AttendeeVO, AttendeeModel>
 	{
 		public AttendeeModel Parse(AttendeeVO origin)
 		{
@@ -35,7 +35,7 @@ namespace UTTAF.API.Data.Converters
 			};
 		}
 
-		public List<AttendeeModel> ParseList(List<AttendeeVO> origin)
+		public IEnumerable<AttendeeModel> ParseList(IEnumerable<AttendeeVO> origin)
 		{
 			return origin switch
 			{
@@ -44,7 +44,7 @@ namespace UTTAF.API.Data.Converters
 			};
 		}
 
-		public List<AttendeeVO> ParseList(List<AttendeeModel> origin)
+		public IEnumerable<AttendeeVO> ParseList(IEnumerable<AttendeeModel> origin)
 		{
 			return origin switch
 			{
