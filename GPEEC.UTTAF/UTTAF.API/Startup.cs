@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using UTTAF.API.Business;
 using UTTAF.API.Data;
 using UTTAF.API.Hubs;
 using UTTAF.API.Repository;
@@ -29,6 +30,10 @@ namespace UTTAF.API
 				builder => builder.MigrationsAssembly(typeof(DataContext).Assembly.FullName))
 			);
 
+			//Businesses
+			services.AddScoped<ISessionBusiness, SessionBusiness>();
+
+			//Repositories
 			services.AddScoped<ISessionRepository, SessionRepository>();
 			services.AddScoped<IAttendeeRepository, AttendeeRepository>();
 			services.AddScoped<IRobotRepository, RobotRepository>();
