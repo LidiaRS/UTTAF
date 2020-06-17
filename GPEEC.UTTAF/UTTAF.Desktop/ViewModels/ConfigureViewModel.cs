@@ -86,12 +86,11 @@ namespace UTTAF.Desktop.ViewModels
 					string reference = view.Reference.Text;
 					string password = view.Password.Password;
 
-					IRestResponse response = await _sessionService.InitSessionTaskAsync(new AuthSessionVO { SessionReference = reference, SessionPassword = password });
+					IRestResponse response = await _sessionService.InitSessionTaskAsync(new SessionVO { SessionReference = reference });
 
 					if (response.StatusCode == HttpStatusCode.Created)
 					{
-						DataHelper.AuthSession = JsonSerializer.Deserialize<AuthSessionVO>(response.Content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-						DataHelper.AuthSession.SessionPassword = password;
+						DataHelper.AuthSession = JsonSerializer.Deserialize<SessionVO>(response.Content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
 						StartCreateSessionVisibility = Visibility.Collapsed;
 						NextCreateSessionVisibility = Visibility.Visible;

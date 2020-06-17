@@ -11,7 +11,7 @@ namespace UTTAF.Desktop.Services.Requests
 {
 	public class SessionService
 	{
-		public async Task<IRestResponse> InitSessionTaskAsync(AuthSessionVO authSession)
+		public async Task<IRestResponse> InitSessionTaskAsync(SessionVO authSession)
 		{
 			return await new RequestService()
 			{
@@ -22,7 +22,7 @@ namespace UTTAF.Desktop.Services.Requests
 			}.ExecuteTaskAsync();
 		}
 
-		public async Task<IRestResponse> StartSessionTaskAsync(AuthSessionVO authSession)
+		public async Task<IRestResponse> StartSessionTaskAsync(SessionVO authSession)
 		{
 			return await new RequestService()
 			{
@@ -33,7 +33,7 @@ namespace UTTAF.Desktop.Services.Requests
 			}.ExecuteTaskAsync();
 		}
 
-		public async Task<IRestResponse> DeleteSessionTaskAsync(AuthSessionVO model)
+		public async Task<IRestResponse> DeleteSessionTaskAsync(SessionVO model)
 		{
 			return await new RequestService()
 			{

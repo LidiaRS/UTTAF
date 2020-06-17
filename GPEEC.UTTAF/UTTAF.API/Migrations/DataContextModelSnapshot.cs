@@ -16,6 +16,25 @@ namespace UTTAF.API.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.3");
 
+            modelBuilder.Entity("UTTAF.API.Models.AttendeeModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SessionReference")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Attendees");
+                });
+
             modelBuilder.Entity("UTTAF.API.Models.RobotModel", b =>
                 {
                     b.Property<Guid>("RobotId")
@@ -37,35 +56,12 @@ namespace UTTAF.API.Migrations
                     b.ToTable("Robots");
                 });
 
-            modelBuilder.Entity("UTTAF.Dependencies.Models.AttendeeModel", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("SessionReference")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Attendees");
-                });
-
-            modelBuilder.Entity("UTTAF.Dependencies.Models.AuthSessionModel", b =>
+            modelBuilder.Entity("UTTAF.API.Models.SessionModel", b =>
                 {
                     b.Property<string>("SessionReference")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("SessionDate")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("SessionPassword")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

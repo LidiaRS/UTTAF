@@ -11,7 +11,7 @@ namespace UTTAF.Desktop.Services.Requests
 {
 	public class AttendeeService
 	{
-		public static async Task<IRestResponse> GetAttendeesTaskAsync(AuthSessionVO model)
+		public static async Task<IRestResponse> GetAttendeesTaskAsync(SessionVO model)
 		{
 			var request = new RequestService()
 			{
@@ -21,7 +21,6 @@ namespace UTTAF.Desktop.Services.Requests
 			};
 
 			request.Parameters.Add(nameof(model.SessionReference), model.SessionReference);
-			request.Parameters.Add(nameof(model.SessionPassword), model.SessionPassword);
 
 			return await request.ExecuteTaskAsync();
 		}

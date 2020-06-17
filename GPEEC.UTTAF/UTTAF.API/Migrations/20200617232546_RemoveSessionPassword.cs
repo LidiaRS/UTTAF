@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UTTAF.API.Migrations
 {
-    public partial class NotNullFields : Migration
+    public partial class RemoveSessionPassword : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,8 +40,7 @@ namespace UTTAF.API.Migrations
                 {
                     SessionReference = table.Column<string>(nullable: false),
                     SessionStatus = table.Column<int>(nullable: false),
-                    SessionDate = table.Column<DateTime>(nullable: false),
-                    SessionPassword = table.Column<string>(nullable: false)
+                    SessionDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
