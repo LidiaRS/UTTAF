@@ -1,4 +1,4 @@
-name: .NET Core
+name: Asp.Net Core WebAPI
 
 on: [push]
 
