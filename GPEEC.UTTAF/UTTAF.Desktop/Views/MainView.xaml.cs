@@ -7,9 +7,9 @@ namespace UTTAF.Desktop.Views
 {
 	public partial class MainView : Window
 	{
-		private readonly SessionService _sessionService;
+		private readonly SessionRequestService _sessionService;
 
-		public MainView(SessionService sessionService)
+		public MainView(SessionRequestService sessionService)
 		{
 			_sessionService = sessionService;
 

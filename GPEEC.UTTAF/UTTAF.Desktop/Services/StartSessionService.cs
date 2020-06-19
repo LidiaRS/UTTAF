@@ -15,9 +15,9 @@ namespace UTTAF.Desktop.Services
 	public class StartSessionService : IStartSessionService
 	{
 		private readonly MainView _mainView;
-		private readonly SessionService _sessionService;
+		private readonly SessionRequestService _sessionService;
 
-		public StartSessionService(SessionService sessionService, MainView mainView)
+		public StartSessionService(SessionRequestService sessionService, MainView mainView)
 		{
 			_sessionService = sessionService;
 			_mainView = mainView;

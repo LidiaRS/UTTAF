@@ -32,7 +32,7 @@ namespace UTTAF.Desktop
 			services.AddScoped<ConfigureViewModel>();
 
 			//Services
-			services.AddSingleton<SessionService>();
+			services.AddSingleton<SessionRequestService>();
 			services.AddScoped<IStartSessionService, StartSessionService>();
 		}
 

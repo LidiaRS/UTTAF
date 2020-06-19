@@ -6,6 +6,7 @@
     <UseWPF>true</UseWPF>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <Platforms>AnyCPU;x64</Platforms>
+    <AssemblyName>UTTAF</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -52,6 +53,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="HubClients\" />
   </ItemGroup>
 
 </Project>

@@ -26,7 +26,7 @@ namespace UTTAF.Desktop.ViewModels
 {
 	public class ConfigureViewModel : ViewModelBase
 	{
-		private readonly SessionService _sessionService;
+		private readonly SessionRequestService _sessionService;
 		private readonly IStartSessionService _startSessionService;
 
 		private DispatcherTimer timer;
@@ -66,7 +66,7 @@ namespace UTTAF.Desktop.ViewModels
 		public RelayCommand<ConfigureView> CancelSessionCreationCommand { get; private set; }
 		public RelayCommand<ConfigureView> StartSessionCommand { get; private set; }
 
-		public ConfigureViewModel(SessionService sessionService, IStartSessionService startSessionService)
+		public ConfigureViewModel(SessionRequestService sessionService, IStartSessionService startSessionService)
 		{
 			_sessionService = sessionService;
 			_startSessionService = startSessionService;
@@ -119,7 +119,7 @@ namespace UTTAF.Desktop.ViewModels
 			};
 			timer.Tick += async (sender, e) =>
 			{
-				IRestResponse response = await AttendeeService.GetAttendeesTaskAsync(DataHelper.AuthSession);
+				IRestResponse response = await AttendeeRequestService.GetAttendeesTaskAsync(DataHelper.AuthSession);
 
 				if (response.StatusCode == HttpStatusCode.OK)
 				{
