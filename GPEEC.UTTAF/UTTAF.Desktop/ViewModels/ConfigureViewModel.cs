@@ -18,7 +18,6 @@ using System.Windows.Threading;
 using UTTAF.Dependencies.Data.VOs;
 using UTTAF.Dependencies.Helpers;
 using UTTAF.Desktop.Services;
-using UTTAF.Desktop.Services.Requests;
 using UTTAF.Desktop.Views;
 using UTTAF.Desktop.Views.DialogHost;
 
