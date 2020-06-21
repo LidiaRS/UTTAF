@@ -2,7 +2,7 @@
 
 using UTTAF.Dependencies.Helpers;
 
-namespace UTTAF.Dependencies.Services.HubConnections
+namespace UTTAF.Dependencies.Clients.Services.HubConnections
 {
 	public class SessionConnection
 	{

@@ -2,7 +2,7 @@
 
 using UTTAF.Dependencies.Data.VOs;
 
-namespace UTTAF.Dependencies.Data.Clients.Interfaces
+namespace UTTAF.Dependencies.Interfaces.Clients
 {
 	public interface ISessionClient
 	{

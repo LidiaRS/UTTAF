@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UTTAF.API", "UTTAF.API\UTTA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTTAF.Mobile.Android", "UTTAF.Mobile\UTTAF.Mobile.Android\UTTAF.Mobile.Android.csproj", "{EB03CB1C-D13B-4C34-A983-C588CEC692B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTTAF.Dependencies.Clients", "UTTAF.Dependencies.Client\UTTAF.Dependencies.Clients.csproj", "{0EA4E88C-9B62-4EEC-926C-F260A544A5CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,22 @@ Global
 		{EB03CB1C-D13B-4C34-A983-C588CEC692B5}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{EB03CB1C-D13B-4C34-A983-C588CEC692B5}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
 		{EB03CB1C-D13B-4C34-A983-C588CEC692B5}.Release|x64.ActiveCfg = Release|Any CPU
+		{0EA4E88C-9B62-4EEC-926C-F260A544A5CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EA4E88C-9B62-4EEC-926C-F260A544A5CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EA4E88C-9B62-4EEC-926C-F260A544A5CC}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{0EA4E88C-9B62-4EEC-926C-F260A544A5CC}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{0EA4E88C-9B62-4EEC-926C-F260A544A5CC}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{0EA4E88C-9B62-4EEC-926C-F260A544A5CC}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{0EA4E88C-9B62-4EEC-926C-F260A544A5CC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0EA4E88C-9B62-4EEC-926C-F260A544A5CC}.Debug|x64.Build.0 = Debug|Any CPU
+		{0EA4E88C-9B62-4EEC-926C-F260A544A5CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EA4E88C-9B62-4EEC-926C-F260A544A5CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EA4E88C-9B62-4EEC-926C-F260A544A5CC}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{0EA4E88C-9B62-4EEC-926C-F260A544A5CC}.Release|iPhone.Build.0 = Release|Any CPU
+		{0EA4E88C-9B62-4EEC-926C-F260A544A5CC}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{0EA4E88C-9B62-4EEC-926C-F260A544A5CC}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{0EA4E88C-9B62-4EEC-926C-F260A544A5CC}.Release|x64.ActiveCfg = Release|Any CPU
+		{0EA4E88C-9B62-4EEC-926C-F260A544A5CC}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace UTTAF.Dependencies.Extensions
+namespace UTTAF.Dependencies.Clients.Extensions
 {
 	public static class HubConnectionBindExtensions
 	{

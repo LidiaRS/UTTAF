@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UTTAF.Dependencies\UTTAF.Dependencies.csproj" />
+    <ProjectReference Include="..\UTTAF.Dependencies.Client\UTTAF.Dependencies.Clients.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,9 +3,9 @@
 using System.Threading.Tasks;
 
 using UTTAF.API.Business;
-using UTTAF.Dependencies.Data.Clients.Interfaces;
-using UTTAF.Dependencies.Data.Hubs.Interfaces;
 using UTTAF.Dependencies.Data.VOs;
+using UTTAF.Dependencies.Interfaces.Clients;
+using UTTAF.Dependencies.Interfaces.Hubs;
 
 namespace UTTAF.API.Hubs
 {

@@ -4,8 +4,8 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Windows;
 
+using UTTAF.Dependencies.Clients.Services.HubConnections;
 using UTTAF.Desktop.Services;
-using UTTAF.Desktop.Services.Requests;
 using UTTAF.Desktop.ViewModels;
 using UTTAF.Desktop.Views;
 
@@ -32,8 +32,10 @@ namespace UTTAF.Desktop
 			services.AddScoped<ConfigureViewModel>();
 
 			//Services
-			services.AddSingleton<SessionRequestService>();
 			services.AddScoped<IStartSessionService, StartSessionService>();
+
+			//Hub Connections
+			services.AddSingleton<SessionConnection>();
 		}
 
 		private void Application_Startup(object sender, StartupEventArgs e)
