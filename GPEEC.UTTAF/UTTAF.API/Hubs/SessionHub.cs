@@ -4,11 +4,12 @@ using System.Threading.Tasks;
 
 using UTTAF.API.Business;
 using UTTAF.Dependencies.Data.Clients.Interfaces;
+using UTTAF.Dependencies.Data.Hubs.Interfaces;
 using UTTAF.Dependencies.Data.VOs;
 
 namespace UTTAF.API.Hubs
 {
-	public class SessionHub : Hub<ISessionClient>
+	public class SessionHub : Hub<ISessionClient>, ISessionHub
 	{
 		private readonly ISessionBusiness _sessionBusiness;
 
