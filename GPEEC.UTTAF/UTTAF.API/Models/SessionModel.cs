@@ -15,6 +15,6 @@ namespace UTTAF.API.Models
 		public SessionStatusEnum SessionStatus { get; set; }
 
 		[Required]
-		public DateTime? SessionDate { get; set; }
+		public DateTime SessionDate { get; set; }
 	}
 }

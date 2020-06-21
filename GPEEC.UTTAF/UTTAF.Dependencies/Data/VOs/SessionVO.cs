@@ -10,6 +10,6 @@ namespace UTTAF.Dependencies.Data.VOs
 
 		public SessionStatusEnum SessionStatus { get; set; }
 
-		public DateTime? SessionDate { get; set; }
+		public DateTime SessionDate { get; set; }
 	}
 }

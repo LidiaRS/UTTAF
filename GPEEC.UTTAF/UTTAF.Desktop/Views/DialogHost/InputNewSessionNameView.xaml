@@ -31,15 +31,6 @@
             md:HintAssist.Hint="Referencial"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
 
-        <PasswordBox
-            x:Name="Password"
-            Grid.Row="2"
-            Margin="0,10,0,20"
-            md:HintAssist.Foreground="Black"
-            md:HintAssist.HelperText="Senha de autenticaçao"
-            md:HintAssist.Hint="Senha"
-            Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
-
         <Grid Grid.Row="3" HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />

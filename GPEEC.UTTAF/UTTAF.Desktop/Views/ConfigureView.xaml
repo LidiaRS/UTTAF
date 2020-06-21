@@ -108,10 +108,12 @@
                                 Grid.Row="4"
                                 Margin="20"
                                 BorderThickness="0"
-                                Click="CreateSession"
-                                Command="{x:Static md:Transitioner.MoveNextCommand}"
+                                Command="{Binding ContinueCommand}"
                                 Style="{StaticResource MaterialDesignOutlinedButton}"
                                 Visibility="{Binding NextCreateSessionVisibility}">
+                                <Button.CommandBindings>
+                                    <CommandBinding Command="{x:Static md:Transitioner.MoveNextCommand}" />
+                                </Button.CommandBindings>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />

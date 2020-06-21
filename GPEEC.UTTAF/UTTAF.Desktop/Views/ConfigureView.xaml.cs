@@ -32,7 +32,5 @@ namespace UTTAF.Desktop.Views
 			//    Transitioner.MoveFirstCommand.Execute(null, null);
 			//}
 		}
-
-		private void CreateSession(object sender, RoutedEventArgs e) => (DataContext as ConfigureViewModel).InitSession();
 	}
 }

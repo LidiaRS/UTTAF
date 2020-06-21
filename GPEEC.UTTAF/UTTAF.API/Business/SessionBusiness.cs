@@ -19,7 +19,15 @@ namespace UTTAF.API.Business
 			_sessionConverter = sessionConverter;
 		}
 
-		public Task<SessionVO> AddSessionTaskAsync(SessionVO session) => throw new NotImplementedException();
+		public async Task<SessionVO> AddSessionTaskAsync(SessionVO session)
+		{
+			if (!(_sessionConverter.Parse(session) is SessionModel sessionModel))
+				return null;
+
+			session.SessionDate = DateTime.Now;
+
+			return _sessionConverter.Parse(await _sessionRepository.AddAsync(sessionModel));
+		}
 
 		public async Task<SessionVO> FindBySessionReferenceTaskAsync(string sessionReference) =>
 			_sessionConverter.Parse(await _sessionRepository.FindBySessionReferenceTaskAsync(sessionReference));

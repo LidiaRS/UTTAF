@@ -3,21 +3,14 @@ using GalaSoft.MvvmLight.Command;
 
 using QRCoder;
 
-using RestSharp;
-
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Net;
-using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
 
+using UTTAF.Dependencies.Clients.Helpers;
+using UTTAF.Dependencies.Clients.Services;
 using UTTAF.Dependencies.Data.VOs;
-using UTTAF.Dependencies.Helpers;
-using UTTAF.Desktop.Services;
+using UTTAF.Dependencies.Enums;
 using UTTAF.Desktop.Views;
 using UTTAF.Desktop.Views.DialogHost;
 
@@ -25,13 +18,13 @@ namespace UTTAF.Desktop.ViewModels
 {
 	public class ConfigureViewModel : ViewModelBase
 	{
-		private readonly SessionRequestService _sessionService;
-		private readonly IStartSessionService _startSessionService;
+		private ConfigureView configureView;
 
-		private DispatcherTimer timer;
+		private readonly SessionService _sessionService;
+		private MainView _mainView;
+
 		private string __sessionReference;
 		private object __qrCodeImg;
-
 		private Visibility __startCreateSessionVisibility = Visibility.Visible;
 		private Visibility __nextCreateSessionVisibility = Visibility.Collapsed;
 
@@ -60,100 +53,137 @@ namespace UTTAF.Desktop.ViewModels
 		}
 
 		public ObservableCollection<AttendeeVO> Attendees { get; set; } = new ObservableCollection<AttendeeVO>();
-		public RelayCommand<ConfigureView> CreateSessionCommand { get; private set; }
 
+		public RelayCommand<ConfigureView> CreateSessionCommand { get; private set; }
 		public RelayCommand<ConfigureView> CancelSessionCreationCommand { get; private set; }
 		public RelayCommand<ConfigureView> StartSessionCommand { get; private set; }
+		public RelayCommand ContinueCommand { get; private set; }
 
-		public ConfigureViewModel(SessionRequestService sessionService, IStartSessionService startSessionService)
+		public ConfigureViewModel(SessionService sessionService, MainView mainView)
 		{
 			_sessionService = sessionService;
-			_startSessionService = startSessionService;
+			_mainView = mainView;
 
 			CancelSessionCreationCommand = new RelayCommand<ConfigureView>(async x => await CancelSessionCreation(x));
 			StartSessionCommand = new RelayCommand<ConfigureView>(async x => await StartSession(x));
 			CreateSessionCommand = new RelayCommand<ConfigureView>(async x => await CreateSession(x));
+			ContinueCommand = new RelayCommand(async () => await InitSessionAsync());
+
+			Initialize();
+		}
+
+		private void Initialize()
+		{
+			_sessionService.CreatedSession((session, message) =>
+			{
+				DataHelper.AuthSession = session;
+
+				StartCreateSessionVisibility = Visibility.Collapsed;
+				NextCreateSessionVisibility = Visibility.Visible;
+			});
+
+			_sessionService.AlreadyExistsSession(message =>
+			{
+				MessageBox.Show(message);
+			});
+
+			_sessionService.NotCreatedSession(message =>
+			{
+				MessageBox.Show(message);
+			});
+
+			_sessionService.UpdatedSessionStatus((_, message) =>
+			{
+				MessageBox.Show(message);
+
+				_mainView.Show();
+			});
+
+			_sessionService.NotExistsThisSession(message =>
+			{
+				MessageBox.Show(message);
+			});
+
+			_sessionService.NotUpdatedSessionStatus(message =>
+			{
+				MessageBox.Show(message);
+			});
 		}
 
 		private async Task CreateSession(ConfigureView configureView)
 		{
 			await MaterialDesignThemes.Wpf.DialogHost.Show(new InputNewSessionNameView(configureView), "CreateSessionDH", async (s, e) =>
 			{
-				if ((bool) e.Parameter == true)
+				if ((bool)e.Parameter == true)
 				{
 					var view = e.Session.Content as InputNewSessionNameView;
 					string reference = view.Reference.Text;
-					string password = view.Password.Password;
 
-					IRestResponse response = await _sessionService.InitSessionTaskAsync(new SessionVO { SessionReference = reference });
-
-					if (response.StatusCode == HttpStatusCode.Created)
-					{
-						DataHelper.AuthSession = JsonSerializer.Deserialize<SessionVO>(response.Content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-						StartCreateSessionVisibility = Visibility.Collapsed;
-						NextCreateSessionVisibility = Visibility.Visible;
-					}
-					else if (response.StatusCode == HttpStatusCode.Conflict)
-						MessageBox.Show(response.Content.Replace("\"", string.Empty));
+					await _sessionService.CreateSessionAsync(new SessionVO { SessionReference = reference });
 				}
 			});
 		}
 
 		private async Task StartSession(ConfigureView configureView)
 		{
-			if (await _startSessionService.StartSessionAsync(timer))
-				configureView.Close();
+			SessionVO currentSession = DataHelper.AuthSession;
+			currentSession.SessionStatus = SessionStatusEnum.InProgress;
+
+			await _sessionService.MarkSessionWithStartedAsync(currentSession);
+
+			this.configureView = configureView;
+			//if (await _startSessionService.StartSessionAsync(timer))
+			//	configureView.Close();
 		}
 
-		public void InitSession()
+		private async Task InitSessionAsync()
 		{
 			Attendees.Clear();
 			SessionReference = DataHelper.AuthSession.SessionReference;
 			QrCode = GenerateQrCode();
 
-			timer = new DispatcherTimer()
-			{
-				Interval = new TimeSpan(0, 0, 0, 0, 500)
-			};
-			timer.Tick += async (sender, e) =>
-			{
-				IRestResponse response = await AttendeeRequestService.GetAttendeesTaskAsync(DataHelper.AuthSession);
+			//timer = new DispatcherTimer()
+			//{
+			//	Interval = new TimeSpan(0, 0, 0, 0, 500)
+			//};
+			//timer.Tick += async (sender, e) =>
+			//{
+			//	IRestResponse response = await AttendeeRequestService.GetAttendeesTaskAsync(DataHelper.AuthSession);
 
-				if (response.StatusCode == HttpStatusCode.OK)
-				{
-					List<AttendeeVO> attendees = JsonSerializer.Deserialize<List<AttendeeVO>>(response.Content, new JsonSerializerOptions
-					{
-						PropertyNameCaseInsensitive = true
-					});
+			//	if (response.StatusCode == HttpStatusCode.OK)
+			//	{
+			//		List<AttendeeVO> attendees = JsonSerializer.Deserialize<List<AttendeeVO>>(response.Content, new JsonSerializerOptions
+			//		{
+			//			PropertyNameCaseInsensitive = true
+			//		});
 
-					Attendees.ToList().ForEach(att =>
-					{
-						if (!attendees.Any(x => x.Name == att.Name))
-							Attendees.Remove(att);
-					});
+			//		Attendees.ToList().ForEach(att =>
+			//		{
+			//			if (!attendees.Any(x => x.Name == att.Name))
+			//				Attendees.Remove(att);
+			//		});
 
-					attendees.ForEach(att =>
-					{
-						if (!Attendees.Any(x => x.Name == att.Name))
-							Attendees.Add(att);
-					});
-				}
-			};
+			//		attendees.ForEach(att =>
+			//		{
+			//			if (!Attendees.Any(x => x.Name == att.Name))
+			//				Attendees.Add(att);
+			//		});
+			//	}
+			//};
 
-			timer.Start();
+			//timer.Start();
 		}
 
 		private async Task CancelSessionCreation(ConfigureView configureView)
 		{
-			IRestResponse response = await _sessionService.DeleteSessionTaskAsync(DataHelper.AuthSession);
+			//IRestResponse response = await _sessionService.DeleteSessionTaskAsync(DataHelper.AuthSession);
 
-			if (response.StatusCode == HttpStatusCode.OK)
-				configureView.CancelSession();
-			else if (response.StatusCode == HttpStatusCode.NotFound)
-				MessageBox.Show(response.Content.Replace("\"", string.Empty));
+			//if (response.StatusCode == HttpStatusCode.OK)
+			//	configureView.CancelSession();
+			//else if (response.StatusCode == HttpStatusCode.NotFound)
+			//	MessageBox.Show(response.Content.Replace("\"", string.Empty));
 
-			timer.Stop();
+			//timer.Stop();
 		}
 
 		private object GenerateQrCode()

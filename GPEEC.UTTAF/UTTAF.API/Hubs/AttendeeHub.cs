@@ -8,15 +8,20 @@ namespace UTTAF.API.Hubs
 {
 	public class AttendeeHub : Hub
 	{
-		public AttendeeHub() { }
+		public AttendeeHub()
+		{
+		}
 
-		[HubMethodName("Join")]
-		public async Task JoinAtSessionAsync(AttendeeVO newAttendee) { }
+		public async Task JoinAtSessionAsync(AttendeeVO newAttendee)
+		{
+		}
 
-		[HubMethodName("Leave")]
-		public async Task LeaveAtSessionTaskAsync(AttendeeVO attendee) { }
+		public async Task LeaveAtSessionTaskAsync(AttendeeVO attendee)
+		{
+		}
 
-		[HubMethodName("Attendees")]
-		public async Task AttendeesInSessionTaskAsync(AttendeeVO session) { }
+		public async Task AttendeesInSessionTaskAsync(AttendeeVO session)
+		{
+		}
 	}
 }

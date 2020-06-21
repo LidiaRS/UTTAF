@@ -22,66 +22,39 @@ namespace UTTAF.Dependencies.Clients.Services
 
 		//Invoke
 
-		public async Task CreateSessionAsync(SessionVO newSession)
-		{
+		public async Task CreateSessionAsync(SessionVO newSession) =>
 			await _connection.InvokeAsync(nameof(CreateSessionAsync), newSession);
-		}
 
-		public async Task DeleteSessionAsync(SessionVO session)
-		{
+		public async Task DeleteSessionAsync(SessionVO session) =>
 			await _connection.InvokeAsync(nameof(DeleteSessionAsync), session);
-		}
 
-		public async Task MarkSessionWithStartedAsync(SessionVO newSession)
-		{
+		public async Task MarkSessionWithStartedAsync(SessionVO newSession) =>
 			await _connection.InvokeAsync(nameof(MarkSessionWithStartedAsync), newSession);
-		}
 
 		//On<T>
 
-		public IDisposable CreatedSession(Action<SessionVO, string> action)
-		{
-			return _connection.BindOnInterface<SessionVO, string, ISessionClient>(x => x.CreatedSessionAsync, action);
-		}
+		public IDisposable CreatedSession(Action<SessionVO, string> action) =>
+			_connection.BindOnInterface<SessionVO, string, ISessionClient>(x => x.CreatedSessionAsync, action);
 
-		public Task CreatedSessionAsync(SessionVO createdSession, string message)
-		{
-			throw new NotImplementedException();
-		}
+		public IDisposable NotCreatedSession(Action<string> action) =>
+			_connection.BindOnInterface<string, ISessionClient>(x => x.NotCreatedSessionAsync, action);
 
-		public Task NotCreatedSessionAsync(string message)
-		{
-			throw new NotImplementedException();
-		}
+		public IDisposable AlreadyExistsSession(Action<string> action) =>
+			_connection.BindOnInterface<string, ISessionClient>(x => x.AlreadyExistsSessionAsync, action);
 
-		public Task AlreadyExistsSessionAsync(string message)
-		{
-			throw new NotImplementedException();
-		}
+		public IDisposable NotExistsThisSession(Action<string> action) =>
+			_connection.BindOnInterface<string, ISessionClient>(x => x.NotExistsThisSessionAsync, action);
 
-		public Task NotExistsThisSessionAsync(string message)
-		{
-			throw new NotImplementedException();
-		}
+		public IDisposable UpdatedSessionStatus(Action<SessionVO, string> action) =>
+			_connection.BindOnInterface<SessionVO, string, ISessionClient>(x => x.UpdatedSessionStatusAsync, action);
 
-		public Task UpdatedSessionStatusAsync(SessionVO updatedSession, string message)
-		{
-			throw new NotImplementedException();
-		}
+		public IDisposable NotUpdatedSessionStatus(Action<string> action) =>
+			_connection.BindOnInterface<string, ISessionClient>(x => x.NotUpdatedSessionStatusAsync, action);
 
-		public Task NotUpdatedSessionStatusAsync(string message)
-		{
-			throw new NotImplementedException();
-		}
+		public IDisposable RemovedSession(Action<string> action) =>
+			_connection.BindOnInterface<string, ISessionClient>(x => x.RemovedSessionAsync, action);
 
-		public Task RemovedSessionAsync(string message)
-		{
-			throw new NotImplementedException();
-		}
-
-		public Task NotRemovedSessionAsync(string message)
-		{
-			throw new NotImplementedException();
-		}
+		public IDisposable NotRemovedSession(Action<string> action) =>
+			_connection.BindOnInterface<string, ISessionClient>(x => x.NotRemovedSessionAsync, action);
 	}
 }
