@@ -67,7 +67,7 @@ namespace UTTAF.Desktop.ViewModels
 			CancelSessionCreationCommand = new Command<ConfigureView>(async x => await CancelSessionCreation(x));
 			StartSessionCommand = new Command<ConfigureView>(async x => await StartSession(x));
 			CreateSessionCommand = new Command<ConfigureView>(async x => await CreateSession(x));
-			ContinueCommand = new Command(async () => await InitSessionAsync());
+			ContinueCommand = new Command<ConfigureView>(async (x) => await InitSessionAsync(x));
 
 			Initialize();
 		}
@@ -112,7 +112,7 @@ namespace UTTAF.Desktop.ViewModels
 
 		private async Task CreateSession(ConfigureView configureView)
 		{
-			await MaterialDesignThemes.Wpf.DialogHost.Show(new InputNewSessionNameView(configureView), "CreateSessionDH", async (s, e) =>
+			await MaterialDesignThemes.Wpf.DialogHost.Show(new InputNewSessionNameView(), "CreateSessionDH", async (s, e) =>
 			{
 				if ((bool)e.Parameter == true)
 				{
@@ -136,11 +136,12 @@ namespace UTTAF.Desktop.ViewModels
 			//	configureView.Close();
 		}
 
-		private async Task InitSessionAsync()
+		private async Task InitSessionAsync(ConfigureView configureView)
 		{
 			Attendees.Clear();
 			SessionReference = DataHelper.AuthSession.SessionReference;
 			QrCode = GenerateQrCode();
+			configureView.NextCreateSession.Command.Execute(null);
 
 			//timer = new DispatcherTimer()
 			//{
