@@ -5,8 +5,8 @@ using RestSharp;
 
 using System.Threading.Tasks;
 
+using UTTAF.Dependencies.Clients.Helpers;
 using UTTAF.Dependencies.Data.VOs;
-using UTTAF.Dependencies.Helpers;
 
 namespace UTTAF.Mobile.Services.Requests
 {
@@ -17,7 +17,7 @@ namespace UTTAF.Mobile.Services.Requests
 			return await new RequestService()
 			{
 				Protocol = Protocols.HTTP,
-				URL = DataHelper.URLBase,
+				URL = DataHelper.URL,
 				URN = "Attendee/Join",
 				Body = attendee,
 				Method = Method.POST
@@ -29,7 +29,7 @@ namespace UTTAF.Mobile.Services.Requests
 			return await new RequestService()
 			{
 				Protocol = Protocols.HTTP,
-				URL = DataHelper.URLBase,
+				URL = DataHelper.URL,
 				URN = "Attendee/Leave",
 				Body = attendee,
 				Method = Method.DELETE

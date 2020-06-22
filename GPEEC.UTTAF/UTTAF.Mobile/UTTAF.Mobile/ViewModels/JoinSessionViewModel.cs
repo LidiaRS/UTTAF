@@ -1,10 +1,12 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
-using System.Collections.Generic;
-
+using UTTAF.Dependencies.Clients;
 using UTTAF.Dependencies.Data.VOs;
 using UTTAF.Mobile.Services;
+
+using Xamarin.Forms;
 
 using ZXing;
 using ZXing.Mobile;
@@ -13,37 +15,37 @@ namespace UTTAF.Mobile.ViewModels
 {
 	internal class JoinSessionViewModel : ViewModelBase
 	{
-		private string _sessionReference;
-		private string _attendee;
+		private string __sessionReference;
+		private string __attendee;
 
 		public string SessionReference
 		{
-			get => _sessionReference;
-			set => Set(ref _sessionReference, value);
+			get => __sessionReference;
+			set => Set(ref __sessionReference, value);
 		}
 
 		public string Attendee
 		{
-			get => _attendee;
-			set => Set(ref _attendee, value);
+			get => __attendee;
+			set => Set(ref __attendee, value);
 		}
 
-		public RelayCommand JoinAtSessionWithQrCodeCommand { get; private set; }
-		public RelayCommand JoinAtSessionCommand { get; private set; }
+		public ICommand JoinAtSessionWithQrCodeCommand { get; private set; }
+		public ICommand JoinAtSessionCommand { get; private set; }
 
 		public JoinSessionViewModel() => Init();
 
 		private void Init()
 		{
 			//commands
-			JoinAtSessionWithQrCodeCommand = new RelayCommand(JoinAtSessionWithQrCode);
-			JoinAtSessionCommand = new RelayCommand(JoinAtSession);
+			JoinAtSessionWithQrCodeCommand = new Command(async () => await JoinAtSessionWithQrCodeAsync());
+			JoinAtSessionCommand = new Command(async () => await JoinAtSessionAsync());
 		}
 
-		private async void JoinAtSession() =>
+		private async Task JoinAtSessionAsync() =>
 			await JoinAtSessionService.JoinAsync(new AttendeeVO { SessionReference = SessionReference, Name = Attendee });
 
-		private async void JoinAtSessionWithQrCode()
+		private async Task JoinAtSessionWithQrCodeAsync()
 		{
 			Result result = await new MobileBarcodeScanner()
 			{

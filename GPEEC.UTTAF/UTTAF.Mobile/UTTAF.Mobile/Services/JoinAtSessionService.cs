@@ -6,8 +6,8 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 
+using UTTAF.Dependencies.Clients.Helpers;
 using UTTAF.Dependencies.Data.VOs;
-using UTTAF.Dependencies.Helpers;
 using UTTAF.Mobile.Services.Requests;
 using UTTAF.Mobile.Views;
 

@@ -1,13 +1,12 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-
-using RestSharp;
+﻿using RestSharp;
 
 using System;
 using System.Net;
+using System.Windows.Input;
 
+using UTTAF.Dependencies.Clients;
+using UTTAF.Dependencies.Clients.Helpers;
 using UTTAF.Dependencies.Data.VOs;
-using UTTAF.Dependencies.Helpers;
 using UTTAF.Mobile.Services;
 using UTTAF.Mobile.Services.Requests;
 using UTTAF.Mobile.Util;
@@ -17,9 +16,10 @@ using Xamarin.Forms;
 
 namespace UTTAF.Mobile.ViewModels
 {
-	internal class JoinedSessionViewModel : ViewModelBase
+	public class JoinedSessionViewModel : ViewModelBase
 	{
 		private Timer timer;
+
 		private AttendeeVO __attendee;
 
 		public AttendeeVO Attendee
@@ -28,7 +28,7 @@ namespace UTTAF.Mobile.ViewModels
 			set => Set(ref __attendee, value);
 		}
 
-		public RelayCommand ExitSessionCommand { get; private set; }
+		public ICommand ExitSessionCommand { get; private set; }
 
 		public JoinedSessionViewModel() => Init();
 
@@ -61,7 +61,7 @@ namespace UTTAF.Mobile.ViewModels
 			timer.Start();
 
 			//commands
-			ExitSessionCommand = new RelayCommand(ExitSession);
+			ExitSessionCommand = new Command(ExitSession);
 		}
 
 		private async void ExitSession()
