@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using UTTAF.Dependencies.Clients.Extensions;
 using UTTAF.Dependencies.Clients.Services.HubConnections;
 using UTTAF.Dependencies.Data.VOs;
-using UTTAF.Dependencies.Interfaces.Clients;
-using UTTAF.Dependencies.Interfaces.Hubs;
+using UTTAF.Dependencies.Interfaces.RPC.Clients;
+using UTTAF.Dependencies.Interfaces.RPC.Hubs;
 
 namespace UTTAF.Dependencies.Clients.Services
 {
