@@ -111,9 +111,9 @@
                                 Command="{Binding ContinueCommand}"
                                 Style="{StaticResource MaterialDesignOutlinedButton}"
                                 Visibility="{Binding NextCreateSessionVisibility}">
-                                <Button.CommandBindings>
+                                <!--<Button.CommandBindings>
                                     <CommandBinding Command="{x:Static md:Transitioner.MoveNextCommand}" />
-                                </Button.CommandBindings>
+                                </Button.CommandBindings>-->
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />

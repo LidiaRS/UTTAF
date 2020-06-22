@@ -1,16 +1,16 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-
-using QRCoder;
+﻿using QRCoder;
 
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
+using UTTAF.Dependencies.Clients;
 using UTTAF.Dependencies.Clients.Helpers;
 using UTTAF.Dependencies.Clients.Services;
 using UTTAF.Dependencies.Data.VOs;
 using UTTAF.Dependencies.Enums;
+using UTTAF.Desktop.Commands;
 using UTTAF.Desktop.Views;
 using UTTAF.Desktop.Views.DialogHost;
 
@@ -54,20 +54,20 @@ namespace UTTAF.Desktop.ViewModels
 
 		public ObservableCollection<AttendeeVO> Attendees { get; set; } = new ObservableCollection<AttendeeVO>();
 
-		public RelayCommand<ConfigureView> CreateSessionCommand { get; private set; }
-		public RelayCommand<ConfigureView> CancelSessionCreationCommand { get; private set; }
-		public RelayCommand<ConfigureView> StartSessionCommand { get; private set; }
-		public RelayCommand ContinueCommand { get; private set; }
+		public ICommand CreateSessionCommand { get; private set; }
+		public ICommand CancelSessionCreationCommand { get; private set; }
+		public ICommand StartSessionCommand { get; private set; }
+		public ICommand ContinueCommand { get; private set; }
 
 		public ConfigureViewModel(SessionService sessionService, MainView mainView)
 		{
 			_sessionService = sessionService;
 			_mainView = mainView;
 
-			CancelSessionCreationCommand = new RelayCommand<ConfigureView>(async x => await CancelSessionCreation(x));
-			StartSessionCommand = new RelayCommand<ConfigureView>(async x => await StartSession(x));
-			CreateSessionCommand = new RelayCommand<ConfigureView>(async x => await CreateSession(x));
-			ContinueCommand = new RelayCommand(async () => await InitSessionAsync());
+			CancelSessionCreationCommand = new Command<ConfigureView>(async x => await CancelSessionCreation(x));
+			StartSessionCommand = new Command<ConfigureView>(async x => await StartSession(x));
+			CreateSessionCommand = new Command<ConfigureView>(async x => await CreateSession(x));
+			ContinueCommand = new Command(async () => await InitSessionAsync());
 
 			Initialize();
 		}

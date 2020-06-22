@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight;
-
+﻿using UTTAF.Dependencies.Clients;
 using UTTAF.Desktop.Models;
 
 namespace UTTAF.Desktop.ViewModels
