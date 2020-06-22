@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using UTTAF.API.Business;
 using UTTAF.Dependencies.Data.VOs;
 using UTTAF.Dependencies.Enums;
-using UTTAF.Dependencies.Interfaces.Clients;
-using UTTAF.Dependencies.Interfaces.Hubs;
+using UTTAF.Dependencies.Interfaces.RPC.Clients;
+using UTTAF.Dependencies.Interfaces.RPC.Hubs;
 
 namespace UTTAF.API.Hubs
 {

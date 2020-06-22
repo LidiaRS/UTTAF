@@ -2,7 +2,7 @@
 
 using UTTAF.Dependencies.Data.VOs;
 
-namespace UTTAF.Dependencies.Interfaces.Hubs
+namespace UTTAF.Dependencies.Interfaces.RPC.Hubs
 {
 	public interface ISessionHub
 	{
