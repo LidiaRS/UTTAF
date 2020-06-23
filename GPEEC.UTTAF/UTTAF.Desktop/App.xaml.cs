@@ -43,7 +43,7 @@ namespace UTTAF.Desktop
 
 		private void Application_Startup(object sender, StartupEventArgs e)
 		{
-			ServiceProvider.GetService<ConfigureView>().Show();
+			ServiceProvider.GetRequiredService<ConfigureView>().Show();
 		}
 	}
 }
