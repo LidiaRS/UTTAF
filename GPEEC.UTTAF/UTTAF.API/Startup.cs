@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using UTTAF.API.Business;
+using UTTAF.API.Business.Interfaces;
 using UTTAF.API.Data;
 using UTTAF.API.Data.Converters;
 using UTTAF.API.Hubs;
@@ -32,6 +33,7 @@ namespace UTTAF.API
 
 			//Businesses
 			services.AddScoped<ISessionBusiness, SessionBusiness>();
+			services.AddScoped<IAttendeeBusiness, AttendeeBusiness>();
 
 			//Repositories
 			services.AddScoped<ISessionRepository, SessionRepository>();
@@ -60,7 +62,6 @@ namespace UTTAF.API
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapHub<SessionHub>("/session");
-				endpoints.MapHub<AttendeeHub>("/attendee");
 				endpoints.MapHub<RobotHub>("/robot");
 				endpoints.MapHub<PlatformHub>("/platform");
 			});
