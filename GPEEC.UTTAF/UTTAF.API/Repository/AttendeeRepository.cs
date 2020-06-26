@@ -24,7 +24,7 @@ namespace UTTAF.API.Repository
 			return att.Entity;
 		}
 
-		public async Task<AttendeeModel> FindByNameTaskAsync(AttendeeModel attendee) =>
+		public async Task<AttendeeModel> FindByNameInSessionTaskAsync(AttendeeModel attendee) =>
 			await _context.Attendees.SingleOrDefaultAsync(x => x.Name == attendee.Name && x.SessionReference == attendee.SessionReference);
 
 		public async Task LeaveAttendeeTaskAsync(AttendeeModel attendee)

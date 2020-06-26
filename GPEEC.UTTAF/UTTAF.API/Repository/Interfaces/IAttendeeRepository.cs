@@ -8,7 +8,7 @@ namespace UTTAF.API.Repository.Interfaces
 	{
 		Task<AttendeeModel> AddAttendeeTaskAsync(AttendeeModel attendee);
 
-		Task<AttendeeModel> FindByNameTaskAsync(AttendeeModel attendee);
+		Task<AttendeeModel> FindByNameInSessionTaskAsync(AttendeeModel attendee);
 
 		Task LeaveAttendeeTaskAsync(AttendeeModel attendee);
 	}
