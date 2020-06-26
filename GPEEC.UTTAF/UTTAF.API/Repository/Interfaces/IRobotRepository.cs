@@ -4,12 +4,10 @@ using UTTAF.API.Models;
 
 namespace UTTAF.API.Repository.Interfaces
 {
-    public interface IRobotRepository
-    {
-        Task<RobotModel> AddTaskAsync(RobotModel robot);
+	public interface IRobotRepository
+	{
+		Task<RobotModel> AddTaskAsync(RobotModel robot);
 
-        Task<bool> InMovingTaskAsync(string sessionReference);
-
-        Task<bool> ExistsTaskAsync(string sessionReference);
-    }
+		Task<RobotModel> FindBySessionReferenceTaskAsync(string sessionReference);
+	}
 }

@@ -13,8 +13,12 @@ namespace UTTAF.API.Hubs
 		{
 		}
 
-		public async Task NewRobotAsync(RobotModel newRobot, string sessionPassword) { }
+		public async Task NewRobotAsync(RobotModel newRobot, string sessionPassword)
+		{
+		}
 
-		public async Task FoundCardAsync(CardModel card) { }
+		public async Task FoundCardAsync(CardModel card)
+		{
+		}
 	}
 }
