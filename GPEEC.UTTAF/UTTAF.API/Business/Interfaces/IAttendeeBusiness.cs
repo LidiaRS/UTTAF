@@ -8,8 +8,8 @@ namespace UTTAF.API.Business.Interfaces
 	{
 		Task<AttendeeVO> JoinAtSessionTaskAsync(AttendeeVO newAttendee);
 
-		Task LeaveAtSessionAsync(AttendeeVO attendee);
+		Task<AttendeeVO> FindByNameTaskAsync(AttendeeVO attendee);
 
-		Task<bool> ExistsAtSessionByNameTaskAsync(AttendeeVO attendee);
+		Task LeaveAtSessionAsync(AttendeeVO attendee);
 	}
 }
