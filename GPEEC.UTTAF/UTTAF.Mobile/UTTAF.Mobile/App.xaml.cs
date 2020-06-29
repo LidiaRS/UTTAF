@@ -18,22 +18,20 @@ namespace UTTAF.Mobile
 		{
 			InitializeComponent();
 
-			MainPage = new StartView();
-
-			ServiceProvider = new HostBuilder().ConfigureServices(ConfigureServices).Build().Services;
+			ServiceProvider = Host.CreateDefaultBuilder().ConfigureServices(ConfigureServices).Build().Services;
 		}
 
 		private void ConfigureServices(HostBuilderContext builder, IServiceCollection services)
 		{
 			//Views
-			services.AddSingleton<StartView>();
+			services.AddScoped<StartView>();
 			services.AddScoped<JoinSessionView>();
 			services.AddSingleton<MovingRobotView>();
 			services.AddScoped<JoinedSessionView>();
 
 			//ViewModels
 			services.AddScoped<JoinSessionViewModel>();
-			services.AddSingleton<JoinedSessionViewModel>();
+			services.AddScoped<JoinedSessionViewModel>();
 		}
 
 		protected override void OnStart()

@@ -14,7 +14,7 @@ namespace UTTAF.API.Repository
 		{
 		}
 
-		public async Task<SessionModel> AddAsync(SessionModel session)
+		public async Task<SessionModel> AddTaskAsync(SessionModel session)
 		{
 			SessionModel addedSession = (await _context.Sessions.AddAsync(session)).Entity;
 			await _context.SaveChangesAsync();

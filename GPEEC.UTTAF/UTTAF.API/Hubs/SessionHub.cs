@@ -100,13 +100,12 @@ namespace UTTAF.API.Hubs
 			}
 
 			await Clients.Caller.JoinedAtSessionAsync(joinedAttendee, session, "Agora voce está participando da sessao!");
-			//TODO: Enviar msg para os demais participantes
 			//TODO: Adicionar participante na listagem no desktop
 		}
 
 		public async Task LeaveAtSessionAsync(AttendeeVO attendee)
 		{
-			if (!(await _sessionBusiness.FindBySessionReferenceTaskAsync(attendee.SessionReference) is SessionVO session))
+			if (!(await _sessionBusiness.FindBySessionReferenceTaskAsync(attendee.SessionReference) is SessionVO))
 			{
 				await Clients.Caller.NotExistsThisSessionAsync("Nao existe uma sessao com esse nome!");
 				return;
@@ -118,8 +117,9 @@ namespace UTTAF.API.Hubs
 				return;
 			}
 
-			await _attendeeBusiness.LeaveAtSessionAsync(attendee);
+			await _attendeeBusiness.LeaveAtSessionAsync(currentAttendee);
 			await Clients.Caller.ExitedAtSessionAsync("Voce deixou a sessao!");
+			//TODO: Remover participante da listagem no desktop
 		}
 	}
 }

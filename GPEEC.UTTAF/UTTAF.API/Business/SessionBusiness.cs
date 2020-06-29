@@ -26,7 +26,7 @@ namespace UTTAF.API.Business
 
 			session.SessionDate = DateTime.Now;
 
-			return _sessionConverter.Parse(await _sessionRepository.AddAsync(sessionModel));
+			return _sessionConverter.Parse(await _sessionRepository.AddTaskAsync(sessionModel));
 		}
 
 		public async Task<SessionVO> FindBySessionReferenceTaskAsync(string sessionReference) =>

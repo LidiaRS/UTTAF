@@ -6,7 +6,7 @@ namespace UTTAF.API.Repository.Interfaces
 {
 	public interface ISessionRepository
 	{
-		Task<SessionModel> AddAsync(SessionModel session);
+		Task<SessionModel> AddTaskAsync(SessionModel session);
 
 		Task<SessionModel> FindBySessionReferenceTaskAsync(string sessionReference);
 

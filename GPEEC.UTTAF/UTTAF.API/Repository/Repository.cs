@@ -2,10 +2,10 @@
 
 namespace UTTAF.API.Repository
 {
-    public class Repository
-    {
-        protected readonly DataContext _context;
+	public class Repository
+	{
+		protected readonly DataContext _context;
 
-        protected Repository(DataContext context) => _context = context;
-    }
+		protected Repository(DataContext context) => _context = context;
+	}
 }

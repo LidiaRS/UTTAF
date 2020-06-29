@@ -17,7 +17,7 @@ namespace UTTAF.Desktop
 
 		protected override void OnStartup(StartupEventArgs e)
 		{
-			ServiceProvider = new HostBuilder().ConfigureServices(ConfigureServices).Build().Services;
+			ServiceProvider = Host.CreateDefaultBuilder().ConfigureServices(ConfigureServices).Build().Services;
 
 			base.OnStartup(e);
 		}
