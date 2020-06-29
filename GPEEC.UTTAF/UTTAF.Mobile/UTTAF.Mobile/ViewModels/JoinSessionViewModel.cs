@@ -1,20 +1,21 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
 
 using UTTAF.Dependencies.Clients;
 using UTTAF.Dependencies.Data.VOs;
 using UTTAF.Mobile.Services;
+using UTTAF.Mobile.Services.Interfaces;
 
 using Xamarin.Forms;
 
 using ZXing;
-using ZXing.Mobile;
 
 namespace UTTAF.Mobile.ViewModels
 {
 	internal class JoinSessionViewModel : ViewModelBase
 	{
+		private readonly IBarCodeService _barCodeService;
+
 		private string __sessionReference;
 		private string __attendee;
 
@@ -33,33 +34,31 @@ namespace UTTAF.Mobile.ViewModels
 		public ICommand JoinAtSessionWithQrCodeCommand { get; private set; }
 		public ICommand JoinAtSessionCommand { get; private set; }
 
-		public JoinSessionViewModel() => Init();
+		public JoinSessionViewModel(IBarCodeService barCodeService)
+		{
+			_barCodeService = barCodeService;
 
-		private void Init()
+			Initialize();
+		}
+
+		private void Initialize()
 		{
 			//commands
 			JoinAtSessionWithQrCodeCommand = new Command(async () => await JoinAtSessionWithQrCodeAsync());
 			JoinAtSessionCommand = new Command(async () => await JoinAtSessionAsync());
 		}
 
-		private async Task JoinAtSessionAsync() =>
+		private async Task JoinAtSessionAsync()
+		{
 			await JoinAtSessionService.JoinAsync(new AttendeeVO { SessionReference = SessionReference, Name = Attendee });
+		}
 
 		private async Task JoinAtSessionWithQrCodeAsync()
 		{
-			Result result = await new MobileBarcodeScanner()
-			{
-				BottomText = "Aponte para o QrCode",
-				TopText = "UTTAF",
-				CameraUnsupportedMessage = "Camera não suportada!"
-			}.Scan(new MobileBarcodeScanningOptions
-			{
-				AutoRotate = false,
-				PossibleFormats = new List<BarcodeFormat> { BarcodeFormat.QR_CODE }
-			});
+			Result qrCodeScannedResult = await _barCodeService.ScanQrCodeTaskAsync();
 
-			if (result != null)
-				await JoinAtSessionService.JoinAsync(new AttendeeVO { SessionReference = SessionReference = result.Text, Name = Attendee });
+			if (qrCodeScannedResult != null)
+				await JoinAtSessionService.JoinAsync(new AttendeeVO { SessionReference = SessionReference = qrCodeScannedResult.Text, Name = Attendee });
 		}
 	}
 }

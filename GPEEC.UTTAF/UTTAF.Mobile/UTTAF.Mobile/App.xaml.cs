@@ -3,6 +3,8 @@ using Microsoft.Extensions.Hosting;
 
 using System;
 
+using UTTAF.Mobile.Services;
+using UTTAF.Mobile.Services.Interfaces;
 using UTTAF.Mobile.ViewModels;
 using UTTAF.Mobile.Views;
 
@@ -32,6 +34,9 @@ namespace UTTAF.Mobile
 			//ViewModels
 			services.AddScoped<JoinSessionViewModel>();
 			services.AddScoped<JoinedSessionViewModel>();
+
+			//Serices
+			services.AddSingleton<IBarCodeService, BarCodeService>();
 		}
 
 		protected override void OnStart()
