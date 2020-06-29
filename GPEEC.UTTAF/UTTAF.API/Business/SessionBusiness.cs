@@ -42,9 +42,9 @@ namespace UTTAF.API.Business
 			return _sessionConverter.Parse(await _sessionRepository.ChangeStatusSessionTaskAsync(currentSession, _sessionConverter.Parse(newSession)));
 		}
 
-		public async Task<bool> RemoveTaskAsync(SessionVO session)
+		public async Task<bool> RemoveTaskAsync(string sessionReference)
 		{
-			if (!(await _sessionRepository.FindBySessionReferenceTaskAsync(session.SessionReference) is SessionModel authSessionModel))
+			if (!(await _sessionRepository.FindBySessionReferenceTaskAsync(sessionReference) is SessionModel authSessionModel))
 				return false;
 
 			await _sessionRepository.RemoveTaskAsync(authSessionModel);

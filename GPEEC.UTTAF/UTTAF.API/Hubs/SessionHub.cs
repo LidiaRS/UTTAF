@@ -62,15 +62,15 @@ namespace UTTAF.API.Hubs
 			await Clients.Caller.UpdatedSessionStatusAsync(updatedSession, "Sessao iniciada com sucesso!");
 		}
 
-		public async Task DeleteSessionAsync(SessionVO session)
+		public async Task DeleteSessionAsync(string sessionReference)
 		{
-			if (!(await _sessionBusiness.FindBySessionReferenceTaskAsync(session.SessionReference) is SessionVO))
+			if (!(await _sessionBusiness.FindBySessionReferenceTaskAsync(sessionReference) is SessionVO))
 			{
 				await Clients.Caller.NotExistsThisSessionAsync("Nao existe uma sessao com esse nome!");
 				return;
 			}
 
-			if (!await _sessionBusiness.RemoveTaskAsync(session))
+			if (!await _sessionBusiness.RemoveTaskAsync(sessionReference))
 			{
 				await Clients.Caller.NotRemovedSessionAsync("Nao foi possivel remover a sessao, tente novamente!");
 				return;

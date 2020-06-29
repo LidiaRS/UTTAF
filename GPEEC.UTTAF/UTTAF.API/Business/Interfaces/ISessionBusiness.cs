@@ -12,6 +12,6 @@ namespace UTTAF.API.Business
 
 		Task<SessionVO> ChangeStatusSessionTaskAsync(SessionVO session);
 
-		Task<bool> RemoveTaskAsync(SessionVO session);
+		Task<bool> RemoveTaskAsync(string sessionReference);
 	}
 }

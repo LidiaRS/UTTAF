@@ -10,6 +10,6 @@ namespace UTTAF.Dependencies.Interfaces.RPC.Hubs
 
 		Task MarkSessionWithStartedAsync(SessionVO newSession);
 
-		Task DeleteSessionAsync(SessionVO session);
+		Task DeleteSessionAsync(string sessionReference);
 	}
 }
