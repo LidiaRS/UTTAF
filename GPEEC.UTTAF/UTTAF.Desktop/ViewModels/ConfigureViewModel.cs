@@ -1,16 +1,15 @@
-﻿using QRCoder;
-
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
 using UTTAF.Dependencies.Clients;
 using UTTAF.Dependencies.Clients.Helpers;
-using UTTAF.Dependencies.Clients.Services;
 using UTTAF.Dependencies.Data.VOs;
 using UTTAF.Dependencies.Enums;
 using UTTAF.Desktop.Commands;
+using UTTAF.Desktop.Services;
+using UTTAF.Desktop.Services.Interfaces;
 using UTTAF.Desktop.Views;
 using UTTAF.Desktop.Views.DialogHost;
 
@@ -18,10 +17,10 @@ namespace UTTAF.Desktop.ViewModels
 {
 	public class ConfigureViewModel : ViewModelBase
 	{
-		private ConfigureView configureView;
+		private MainView mainView;
 
 		private readonly SessionService _sessionService;
-		private MainView _mainView;
+		private readonly IBarCodeService _barCodeService;
 
 		private string __sessionReference;
 		private object __qrCodeImg;
@@ -59,10 +58,11 @@ namespace UTTAF.Desktop.ViewModels
 		public ICommand StartSessionCommand { get; private set; }
 		public ICommand ContinueCommand { get; private set; }
 
-		public ConfigureViewModel(SessionService sessionService, MainView mainView)
+		public ConfigureViewModel(SessionService sessionService, MainView mainView, IBarCodeService barCodeService)
 		{
 			_sessionService = sessionService;
-			_mainView = mainView;
+			this.mainView = mainView;
+			_barCodeService = barCodeService;
 
 			CancelSessionCreationCommand = new Command<ConfigureView>(async x => await CancelSessionCreation(x));
 			StartSessionCommand = new Command<ConfigureView>(async x => await StartSession(x));
@@ -96,7 +96,7 @@ namespace UTTAF.Desktop.ViewModels
 			{
 				MessageBox.Show(message);
 
-				_mainView.Show();
+				mainView.Show();
 			});
 
 			_sessionService.NotExistsThisSession(message =>
@@ -105,6 +105,11 @@ namespace UTTAF.Desktop.ViewModels
 			});
 
 			_sessionService.NotUpdatedSessionStatus(message =>
+			{
+				MessageBox.Show(message);
+			});
+
+			_sessionService.RemovedSession(message =>
 			{
 				MessageBox.Show(message);
 			});
@@ -130,8 +135,6 @@ namespace UTTAF.Desktop.ViewModels
 			currentSession.SessionStatus = SessionStatusEnum.InProgress;
 
 			await _sessionService.MarkSessionWithStartedAsync(currentSession);
-
-			this.configureView = configureView;
 			//if (await _startSessionService.StartSessionAsync(timer))
 			//	configureView.Close();
 		}
@@ -140,7 +143,7 @@ namespace UTTAF.Desktop.ViewModels
 		{
 			Attendees.Clear();
 			SessionReference = DataHelper.AuthSession.SessionReference;
-			QrCode = GenerateQrCode();
+			QrCode = _barCodeService.GenerateQrCodeTaskAsync(SessionReference);
 			configureView.NextCreateSession.Command.Execute(null);
 
 			//timer = new DispatcherTimer()
@@ -177,6 +180,7 @@ namespace UTTAF.Desktop.ViewModels
 
 		private async Task CancelSessionCreation(ConfigureView configureView)
 		{
+			await _sessionService.DeleteSessionAsync(SessionReference);
 			//IRestResponse response = await _sessionService.DeleteSessionTaskAsync(DataHelper.AuthSession);
 
 			//if (response.StatusCode == HttpStatusCode.OK)
@@ -185,14 +189,6 @@ namespace UTTAF.Desktop.ViewModels
 			//	MessageBox.Show(response.Content.Replace("\"", string.Empty));
 
 			//timer.Stop();
-		}
-
-		private object GenerateQrCode()
-		{
-			using var generator = new QRCodeGenerator();
-			using QRCodeData data = generator.CreateQrCode(SessionReference, QRCodeGenerator.ECCLevel.Q);
-			using var qRCode = new QRCode(data);
-			return qRCode.GetGraphic(10, System.Drawing.Color.Black, System.Drawing.Color.White, false);
 		}
 	}
 }

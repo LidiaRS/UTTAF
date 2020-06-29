@@ -4,8 +4,9 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Windows;
 
-using UTTAF.Dependencies.Clients.Services;
 using UTTAF.Dependencies.Clients.Services.HubConnections;
+using UTTAF.Desktop.Services;
+using UTTAF.Desktop.Services.Interfaces;
 using UTTAF.Desktop.ViewModels;
 using UTTAF.Desktop.Views;
 
@@ -34,6 +35,7 @@ namespace UTTAF.Desktop
 
 			// --------- Services ---------
 			services.AddSingleton<SessionService>();
+			services.AddSingleton<IBarCodeService, BarCodeService>();
 
 			//Hub Connections
 			services.AddSingleton<SessionConnection>();

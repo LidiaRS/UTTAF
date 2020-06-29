@@ -9,7 +9,7 @@ using UTTAF.Dependencies.Data.VOs;
 using UTTAF.Dependencies.Interfaces.RPC.Clients;
 using UTTAF.Dependencies.Interfaces.RPC.Hubs;
 
-namespace UTTAF.Dependencies.Clients.Services
+namespace UTTAF.Desktop.Services
 {
 	public class SessionService : ISessionHub
 	{
@@ -20,16 +20,26 @@ namespace UTTAF.Dependencies.Clients.Services
 			_connection = sessionConnection.Connection;
 		}
 
+		public async Task ConnectAsync()
+		{
+			await _connection.StartAsync();
+		}
+
+		public async Task DesconeectAsync()
+		{
+			await _connection.StopAsync();
+		}
+
 		//Invoke
 
 		public async Task CreateSessionAsync(SessionVO newSession) =>
 			await _connection.InvokeAsync(nameof(CreateSessionAsync), newSession);
 
-		public async Task DeleteSessionAsync(SessionVO session) =>
-			await _connection.InvokeAsync(nameof(DeleteSessionAsync), session);
-
 		public async Task MarkSessionWithStartedAsync(SessionVO newSession) =>
 			await _connection.InvokeAsync(nameof(MarkSessionWithStartedAsync), newSession);
+
+		public async Task DeleteSessionAsync(string sessionReference) =>
+			await _connection.InvokeAsync(nameof(DeleteSessionAsync), sessionReference);
 
 		//On<T>
 

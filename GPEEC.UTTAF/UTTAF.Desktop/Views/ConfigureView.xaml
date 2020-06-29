@@ -11,7 +11,6 @@
     Title="UTTAF - Utilizaçao de Tecnologia no Transito com Aplicaçao Física"
     Width="450"
     Height="690"
-    Closing="ClosingWindow"
     mc:Ignorable="d">
     <Window.Resources>
         <converters:ImageBindingConverter x:Key="imgConverter" />
