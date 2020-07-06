@@ -12,8 +12,6 @@ namespace UTTAF.Dependencies.Interfaces.RPC.Clients
 
 		Task NotExistsAttendeeWithThisNameAsync(string message);
 
-		Task NotExistsAttendeeWithNameAsync(string message);
-
 		Task ExitedAtSessionAsync(string message);
 	}
 }
