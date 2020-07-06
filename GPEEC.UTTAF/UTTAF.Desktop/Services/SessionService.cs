@@ -33,13 +33,13 @@ namespace UTTAF.Desktop.Services
 		//Invoke
 
 		public async Task CreateSessionAsync(SessionVO newSession) =>
-			await _connection.InvokeAsync(nameof(CreateSessionAsync), newSession);
+			await _connection.InvokeAsync(newSession);
 
-		public async Task MarkSessionWithStartedAsync(SessionVO newSession) =>
-			await _connection.InvokeAsync(nameof(MarkSessionWithStartedAsync), newSession);
+		public async Task MarkSessionWithStartedAsync(SessionVO newSessionStatus) =>
+			await _connection.InvokeAsync(newSessionStatus);
 
 		public async Task DeleteSessionAsync(string sessionReference) =>
-			await _connection.InvokeAsync(nameof(DeleteSessionAsync), sessionReference);
+			await _connection.InvokeAsync(sessionReference);
 
 		//On<T>
 
