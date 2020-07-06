@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 
 using System;
 
+using UTTAF.Dependencies.Clients.Services.HubConnections;
 using UTTAF.Mobile.Services;
 using UTTAF.Mobile.Services.Interfaces;
 using UTTAF.Mobile.ViewModels;
@@ -26,7 +27,7 @@ namespace UTTAF.Mobile
 		private void ConfigureServices(HostBuilderContext builder, IServiceCollection services)
 		{
 			//Views
-			services.AddScoped<StartView>();
+			services.AddSingleton<StartView>();
 			services.AddScoped<JoinSessionView>();
 			services.AddSingleton<MovingRobotView>();
 			services.AddScoped<JoinedSessionView>();
@@ -37,6 +38,7 @@ namespace UTTAF.Mobile
 
 			//Serices
 			services.AddSingleton<IBarCodeService, BarCodeService>();
+			services.AddSingleton<SessionConnection>();
 			services.AddSingleton<AttendeeHubService>();
 		}
 

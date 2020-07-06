@@ -1,10 +1,16 @@
-﻿using System.Threading.Tasks;
+﻿using Logikoz.XamarinUtilities.Utilities;
+
+using Microsoft.Extensions.DependencyInjection;
+
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 using UTTAF.Dependencies.Clients;
+using UTTAF.Dependencies.Clients.Helpers;
 using UTTAF.Dependencies.Data.VOs;
 using UTTAF.Mobile.Services;
 using UTTAF.Mobile.Services.Interfaces;
+using UTTAF.Mobile.Views;
 
 using Xamarin.Forms;
 
@@ -12,20 +18,14 @@ using ZXing;
 
 namespace UTTAF.Mobile.ViewModels
 {
-	internal class JoinSessionViewModel : ViewModelBase
+	public class JoinSessionViewModel : ViewModelBase
 	{
 		private readonly IBarCodeService _barCodeService;
 		private readonly AttendeeHubService _attendeeHubService;
-		private string __sessionReference;
-		private string __attendee;
 
-		public string SessionReference
-		{
-			get => __sessionReference;
-			set => Set(ref __sessionReference, value);
-		}
+		private AttendeeVO __attendee;
 
-		public string Attendee
+		public AttendeeVO Attendee
 		{
 			get => __attendee;
 			set => Set(ref __attendee, value);
@@ -44,24 +44,34 @@ namespace UTTAF.Mobile.ViewModels
 
 		private void Initialize()
 		{
+			Attendee = new AttendeeVO();
+
 			//commands
 			JoinAtSessionWithQrCodeCommand = new Command(async () => await JoinAtSessionWithQrCodeAsync());
 			JoinAtSessionCommand = new Command(async () => await JoinAtSessionAsync());
 
-			_attendeeHubService.ExitedAtSession(async message =>
+			_attendeeHubService.JoinedAtSession(async (attendee, session, message) =>
 			{
-				await Application.Current.MainPage.DisplayAlert("Concluido!", message, "OK");
+				//TODO: refatorar isso para um service
+				DataHelper.Attendee = attendee;
+				DataHelper.AuthSession = session;
+				await PopPushViewUtil.PushModalAsync(((App)Application.Current).ServiceProvider.GetRequiredService<JoinedSessionView>(), true);
+			});
+
+			_attendeeHubService.NotJoinedAtSession(async message =>
+			{
+				await Application.Current.MainPage.DisplayAlert("Ops!", message, "OK");
 			});
 
 			_attendeeHubService.NotExistsAttendeeWithThisName(async message =>
 			{
-				await Application.Current.MainPage.DisplayAlert("Concluido!", message, "OK");
+				await Application.Current.MainPage.DisplayAlert("Ops!", message, "OK");
 			});
 		}
 
 		private async Task JoinAtSessionAsync()
 		{
-			await JoinAtSessionService.JoinAsync(new AttendeeVO { SessionReference = SessionReference, Name = Attendee });
+			await _attendeeHubService.JoinAtSessionAsync(Attendee);
 		}
 
 		private async Task JoinAtSessionWithQrCodeAsync()
@@ -69,7 +79,10 @@ namespace UTTAF.Mobile.ViewModels
 			Result qrCodeScannedResult = await _barCodeService.ScanQrCodeTaskAsync();
 
 			if (qrCodeScannedResult != null)
-				await JoinAtSessionService.JoinAsync(new AttendeeVO { SessionReference = SessionReference = qrCodeScannedResult.Text, Name = Attendee });
+			{
+				Attendee.SessionReference = qrCodeScannedResult.Text;
+				await _attendeeHubService.JoinAtSessionAsync(Attendee);
+			}
 		}
 	}
 }

@@ -5,15 +5,15 @@ using Xamarin.Forms.Xaml;
 
 namespace UTTAF.Mobile.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class JoinedSessionView : ContentPage
-    {
-        public JoinedSessionView()
-        {
-            InitializeComponent();
-            BindingContext = new JoinedSessionViewModel();
-        }
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class JoinedSessionView : ContentPage
+	{
+		public JoinedSessionView(JoinedSessionViewModel joinedSessionViewModel)
+		{
+			InitializeComponent();
+			BindingContext = joinedSessionViewModel;
+		}
 
-        protected override bool OnBackButtonPressed() => true;
-    }
+		protected override bool OnBackButtonPressed() => true;
+	}
 }

@@ -1,15 +1,12 @@
-﻿using RestSharp;
+﻿using Microsoft.Extensions.DependencyInjection;
 
-using System;
-using System.Net;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 using UTTAF.Dependencies.Clients;
 using UTTAF.Dependencies.Clients.Helpers;
 using UTTAF.Dependencies.Data.VOs;
 using UTTAF.Mobile.Services;
-using UTTAF.Mobile.Services.Requests;
-using UTTAF.Mobile.Util;
 using UTTAF.Mobile.Views;
 
 using Xamarin.Forms;
@@ -18,7 +15,7 @@ namespace UTTAF.Mobile.ViewModels
 {
 	public class JoinedSessionViewModel : ViewModelBase
 	{
-		private Timer timer;
+		private readonly AttendeeHubService _attendeeHubService;
 
 		private AttendeeVO __attendee;
 
@@ -30,46 +27,34 @@ namespace UTTAF.Mobile.ViewModels
 
 		public ICommand ExitSessionCommand { get; private set; }
 
-		public JoinedSessionViewModel() => Init();
+		public JoinedSessionViewModel(AttendeeHubService attendeeHubService)
+		{
+			_attendeeHubService = attendeeHubService;
 
-		private void Init()
+			Initialize();
+		}
+
+		private void Initialize()
 		{
 			Attendee = DataHelper.Attendee;
 
-			timer = new Timer()
+			_attendeeHubService.UpdatedSessionStatus((session, message) =>
 			{
-				Interval = TimeSpan.FromSeconds(1)
-			};
+				Application.Current.MainPage = ((App)Application.Current).ServiceProvider.GetRequiredService<MovingRobotView>();
+			});
 
-			timer.Tick += async () =>
+			_attendeeHubService.NotUpdatedSessionStatus(async message =>
 			{
-				IRestResponse response = await SessionService.SessionStartedTaskAsync(Attendee.SessionReference);
-				switch (response.StatusCode)
-				{
-					case HttpStatusCode.OK:
-						CancelTimer();
-						Application.Current.MainPage = new MovingRobotView();
-						break;
-
-					case HttpStatusCode.NotFound:
-						CancelTimer();
-						await Application.Current.MainPage.DisplayAlert("Ops!", response.Content.Replace("\"", string.Empty), "Ok");
-						break;
-				}
-			};
-
-			timer.Start();
+				await Application.Current.MainPage.DisplayAlert("Ops!", message, "Ok");
+			});
 
 			//commands
-			ExitSessionCommand = new Command(ExitSession);
+			ExitSessionCommand = new Command(async () => await ExitSessionAsync());
 		}
 
-		private async void ExitSession()
+		private async Task ExitSessionAsync()
 		{
-			if (await ExitSessionService.ExitTaskAsync(Attendee))
-				CancelTimer();
+			await _attendeeHubService.LeaveAtSessionAsync(Attendee);
 		}
-
-		private void CancelTimer() => timer.Stop();
 	}
 }
