@@ -16,10 +16,5 @@ namespace UTTAF.Dependencies.Clients.Extensions
 		{
 			await connection.InvokeAsync(methodName, arg);
 		}
-
-		public static async Task InvokeAsync(this HubConnection connection, object arg1, object arg2, [CallerMemberName] string methodName = null)
-		{
-			await connection.InvokeAsync(methodName, arg1, arg2);
-		}
 	}
 }

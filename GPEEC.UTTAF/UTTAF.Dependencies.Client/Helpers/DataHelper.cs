@@ -4,7 +4,7 @@ namespace UTTAF.Dependencies.Clients.Helpers
 {
 	public static class DataHelper
 	{
-		public static string URL { get; } = "http://localhost:5000";
+		public static string URL { get; } = "http://192.168.1.6:5050";
 
 		public static SessionVO AuthSession { get; set; }
 		public static AttendeeVO Attendee { get; set; }
