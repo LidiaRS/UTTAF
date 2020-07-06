@@ -48,5 +48,14 @@ namespace UTTAF.Mobile.Services
 
 		public IDisposable ExitedAtSession(Action<string> action) =>
 			_connection.BindOnInterface<string, IAttendeeClient>(x => x.ExitedAtSessionAsync, action);
+
+		public IDisposable NotExistsThisSession(Action<string> action) =>
+			_connection.BindOnInterface<string, ISessionClient>(x => x.NotExistsThisSessionAsync, action);
+
+		public IDisposable UpdatedSessionStatus(Action<SessionVO, string> action) =>
+			_connection.BindOnInterface<SessionVO, string, ISessionClient>(x => x.UpdatedSessionStatusAsync, action);
+
+		public IDisposable NotUpdatedSessionStatus(Action<string> action) =>
+			_connection.BindOnInterface<string, ISessionClient>(x => x.NotUpdatedSessionStatusAsync, action);
 	}
 }
