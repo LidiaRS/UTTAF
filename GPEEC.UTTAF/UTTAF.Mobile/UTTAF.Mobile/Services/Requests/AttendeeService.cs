@@ -1,39 +1,27 @@
-﻿using Dependencies;
-using Dependencies.Services;
-
-using RestSharp;
+﻿using Microsoft.AspNetCore.SignalR.Client;
 
 using System.Threading.Tasks;
 
-using UTTAF.Dependencies.Clients.Helpers;
+using UTTAF.Dependencies.Clients.Extensions;
+using UTTAF.Dependencies.Clients.Services.HubConnections;
 using UTTAF.Dependencies.Data.VOs;
+using UTTAF.Dependencies.Interfaces.RPC.Hubs;
 
 namespace UTTAF.Mobile.Services.Requests
 {
-	internal class AttendeeService
+	public class AttendeeService : IAttendeeHub
 	{
-		internal async static Task<IRestResponse> JoinAtSessionTaskAsync(AttendeeVO attendee)
+		private readonly HubConnection _connection;
+		
+		public AttendeeService(SessionConnection sessionConnection)
 		{
-			return await new RequestService()
-			{
-				Protocol = Protocols.HTTP,
-				URL = DataHelper.URL,
-				URN = "Attendee/Join",
-				Body = attendee,
-				Method = Method.POST
-			}.ExecuteTaskAsync();
+			_connection = sessionConnection.Connection;
 		}
 
-		internal async static Task<IRestResponse> LeaveAtSessionTaskAsync(AttendeeVO attendee)
-		{
-			return await new RequestService()
-			{
-				Protocol = Protocols.HTTP,
-				URL = DataHelper.URL,
-				URN = "Attendee/Leave",
-				Body = attendee,
-				Method = Method.DELETE
-			}.ExecuteTaskAsync();
-		}
+		public async Task JoinAtSessionAsync(AttendeeVO newAttendee) => 
+			await _connection.InvokeAsync(newAttendee);
+
+		public async Task LeaveAtSessionAsync(AttendeeVO attendee) => 
+			await _connection.InvokeAsync(attendee);
 	}
 }
