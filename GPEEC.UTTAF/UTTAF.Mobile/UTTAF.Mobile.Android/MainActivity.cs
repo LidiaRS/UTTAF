@@ -8,38 +8,33 @@ using Syncfusion.Licensing;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-using ZXing.Mobile;
-using ZXing.Net.Mobile.Android;
-
 namespace UTTAF.Mobile.Droid
 {
-    [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
-    public class MainActivity : FormsAppCompatActivity
-    {
-        protected override void OnCreate(Bundle savedInstanceState)
-        {
-            SyncfusionLicenseProvider.RegisterLicense("MjMxNzAyQDMxMzgyZTMxMmUzMFpUWHhFaXA0SkxwMWd5RzhZcnpzMVhsTjBNWDBRYmUvbWc2NmpzZ0gveGc9");
+	[Activity(ScreenOrientation = ScreenOrientation.Portrait)]
+	public class MainActivity : FormsAppCompatActivity
+	{
+		protected override void OnCreate(Bundle savedInstanceState)
+		{
+			SyncfusionLicenseProvider.RegisterLicense("MjMxNzAyQDMxMzgyZTMxMmUzMFpUWHhFaXA0SkxwMWd5RzhZcnpzMVhsTjBNWDBRYmUvbWc2NmpzZ0gveGc9");
 
-            TabLayoutResource = Resource.Layout.Tabbar;
-            ToolbarResource = Resource.Layout.Toolbar;
+			TabLayoutResource = Resource.Layout.Tabbar;
+			ToolbarResource = Resource.Layout.Toolbar;
 
-            base.OnCreate(savedInstanceState);
+			base.OnCreate(savedInstanceState);
 
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            Forms.Init(this, savedInstanceState);
-            FormsMaterial.Init(this, savedInstanceState);
-            ZXing.Net.Mobile.Forms.Android.Platform.Init();
-            MobileBarcodeScanner.Initialize(Application);
+			Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+			Forms.Init(this, savedInstanceState);
+			FormsMaterial.Init(this, savedInstanceState);
+			ZXing.Net.Mobile.Forms.Android.Platform.Init();
 
-            LoadApplication(new App());
-        }
+			LoadApplication(new App());
+		}
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
-        {
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-            PermissionsHandler.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+		public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+		{
+			Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
+			base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+		}
+	}
 }
