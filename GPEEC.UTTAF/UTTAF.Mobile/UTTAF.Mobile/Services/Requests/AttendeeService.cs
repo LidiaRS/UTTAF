@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 
 using UTTAF.Dependencies.Clients.Extensions;
+using UTTAF.Dependencies.Clients.Interfaces;
 using UTTAF.Dependencies.Clients.Services.HubConnections;
 using UTTAF.Dependencies.Data.VOs;
 using UTTAF.Dependencies.Interfaces.RPC.Clients;
@@ -11,7 +12,7 @@ using UTTAF.Dependencies.Interfaces.RPC.Hubs;
 
 namespace UTTAF.Mobile.Services.Requests
 {
-	public class AttendeeService : IAttendeeHub
+	public class AttendeeService : IAttendeeHub, IConnectionManager
 	{
 		private readonly HubConnection _connection;
 
@@ -19,6 +20,12 @@ namespace UTTAF.Mobile.Services.Requests
 		{
 			_connection = sessionConnection.Connection;
 		}
+
+		public async Task ConnectAsync() => 
+			await _connection.StartAsync();
+
+		public async Task DesconeectAsync() =>
+			await _connection.StopAsync();
 
 		// Invokers
 

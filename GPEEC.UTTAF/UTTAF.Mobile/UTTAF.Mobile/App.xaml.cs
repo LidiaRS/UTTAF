@@ -5,6 +5,7 @@ using System;
 
 using UTTAF.Mobile.Services;
 using UTTAF.Mobile.Services.Interfaces;
+using UTTAF.Mobile.Services.Requests;
 using UTTAF.Mobile.ViewModels;
 using UTTAF.Mobile.Views;
 
@@ -37,6 +38,7 @@ namespace UTTAF.Mobile
 
 			//Serices
 			services.AddSingleton<IBarCodeService, BarCodeService>();
+			services.AddSingleton<AttendeeService>();
 		}
 
 		protected override void OnStart()
