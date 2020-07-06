@@ -6,7 +6,6 @@ using System.Net;
 using System.Threading.Tasks;
 
 using UTTAF.Dependencies.Data.VOs;
-using UTTAF.Mobile.Services.Requests;
 using UTTAF.Mobile.Views;
 
 using Xamarin.Forms;
@@ -15,10 +14,9 @@ namespace UTTAF.Mobile.Services
 {
 	internal class ExitSessionService
 	{
-		public static async Task<bool> ExitTaskAsync(AttendeeVO attendee)
-		{
-			IRestResponse response = await AttendeeService.LeaveAtSessionTaskAsync(attendee);
 
+		public async Task<bool> ExitTaskAsync(AttendeeVO attendee)
+		{
 			if (response.StatusCode == HttpStatusCode.OK)
 			{
 				await Application.Current.MainPage.DisplayAlert("Concluido!", "Voce deixou a sessao 😥", "OK");

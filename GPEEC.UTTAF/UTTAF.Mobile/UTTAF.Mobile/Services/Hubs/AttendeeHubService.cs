@@ -10,18 +10,18 @@ using UTTAF.Dependencies.Data.VOs;
 using UTTAF.Dependencies.Interfaces.RPC.Clients;
 using UTTAF.Dependencies.Interfaces.RPC.Hubs;
 
-namespace UTTAF.Mobile.Services.Requests
+namespace UTTAF.Mobile.Services
 {
-	public class AttendeeService : IAttendeeHub, IConnectionManager
+	public class AttendeeHubService : IAttendeeHub, IConnectionManager
 	{
 		private readonly HubConnection _connection;
 
-		public AttendeeService(SessionConnection sessionConnection)
+		public AttendeeHubService(SessionConnection sessionConnection)
 		{
 			_connection = sessionConnection.Connection;
 		}
 
-		public async Task ConnectAsync() => 
+		public async Task ConnectAsync() =>
 			await _connection.StartAsync();
 
 		public async Task DesconeectAsync() =>

@@ -15,7 +15,7 @@ namespace UTTAF.Mobile.ViewModels
 	internal class JoinSessionViewModel : ViewModelBase
 	{
 		private readonly IBarCodeService _barCodeService;
-
+		private readonly AttendeeHubService _attendeeHubService;
 		private string __sessionReference;
 		private string __attendee;
 
@@ -34,9 +34,10 @@ namespace UTTAF.Mobile.ViewModels
 		public ICommand JoinAtSessionWithQrCodeCommand { get; private set; }
 		public ICommand JoinAtSessionCommand { get; private set; }
 
-		public JoinSessionViewModel(IBarCodeService barCodeService)
+		public JoinSessionViewModel(IBarCodeService barCodeService, AttendeeHubService attendeeHubService)
 		{
 			_barCodeService = barCodeService;
+			_attendeeHubService = attendeeHubService;
 
 			Initialize();
 		}
@@ -46,6 +47,16 @@ namespace UTTAF.Mobile.ViewModels
 			//commands
 			JoinAtSessionWithQrCodeCommand = new Command(async () => await JoinAtSessionWithQrCodeAsync());
 			JoinAtSessionCommand = new Command(async () => await JoinAtSessionAsync());
+
+			_attendeeHubService.ExitedAtSession(async message =>
+			{
+				await Application.Current.MainPage.DisplayAlert("Concluido!", message, "OK");
+			});
+
+			_attendeeHubService.NotExistsAttendeeWithThisName(async message =>
+			{
+				await Application.Current.MainPage.DisplayAlert("Concluido!", message, "OK");
+			});
 		}
 
 		private async Task JoinAtSessionAsync()

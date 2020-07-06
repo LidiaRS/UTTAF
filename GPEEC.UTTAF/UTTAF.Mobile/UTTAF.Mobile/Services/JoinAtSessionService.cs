@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 using UTTAF.Dependencies.Clients.Helpers;
 using UTTAF.Dependencies.Data.VOs;
-using UTTAF.Mobile.Services.Requests;
 using UTTAF.Mobile.Views;
 
 using Xamarin.Forms;
@@ -19,7 +18,7 @@ namespace UTTAF.Mobile.Services
 	{
 		internal static async Task JoinAsync(AttendeeVO attendee)
 		{
-			IRestResponse response = await AttendeeService.JoinAtSessionTaskAsync(attendee);
+			IRestResponse response = await AttendeeHubService.JoinAtSessionTaskAsync(attendee);
 
 			if (response.StatusCode == HttpStatusCode.Created)
 			{
