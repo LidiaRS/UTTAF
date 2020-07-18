@@ -74,45 +74,45 @@ namespace UTTAF.Desktop.ViewModels
 
 		private void Initialize()
 		{
-			_sessionService.CreatedSession((session, message) =>
+			_sessionService.CreatedSession((session, message) => Application.Current.Dispatcher.Invoke(() =>
 			{
 				DataHelper.AuthSession = session;
 
 				StartCreateSessionVisibility = Visibility.Collapsed;
 				NextCreateSessionVisibility = Visibility.Visible;
-			});
+			}));
 
-			_sessionService.AlreadyExistsSession(message =>
+			_sessionService.AlreadyExistsSession(message => Application.Current.Dispatcher.Invoke(() =>
 			{
 				MessageBox.Show(message);
-			});
+			}));
 
-			_sessionService.NotCreatedSession(message =>
+			_sessionService.NotCreatedSession(message => Application.Current.Dispatcher.Invoke(() =>
 			{
 				MessageBox.Show(message);
-			});
+			}));
 
-			_sessionService.UpdatedSessionStatus((_, message) =>
+			_sessionService.UpdatedSessionStatus((session, message) => Application.Current.Dispatcher.Invoke(() =>
 			{
 				MessageBox.Show(message);
 
 				mainView.Show();
-			});
+			}));
 
-			_sessionService.NotExistsThisSession(message =>
+			_sessionService.NotExistsThisSession(message => Application.Current.Dispatcher.Invoke(() =>
 			{
 				MessageBox.Show(message);
-			});
+			}));
 
-			_sessionService.NotUpdatedSessionStatus(message =>
+			_sessionService.NotUpdatedSessionStatus(message => Application.Current.Dispatcher.Invoke(() =>
 			{
 				MessageBox.Show(message);
-			});
+			}));
 
-			_sessionService.RemovedSession(message =>
+			_sessionService.RemovedSession(message => Application.Current.Dispatcher.Invoke(() =>
 			{
 				MessageBox.Show(message);
-			});
+			}));
 		}
 
 		private async Task CreateSession(ConfigureView configureView)
