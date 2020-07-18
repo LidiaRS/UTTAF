@@ -38,15 +38,15 @@ namespace UTTAF.Mobile.ViewModels
 		{
 			Attendee = DataHelper.Attendee;
 
-			_attendeeHubService.UpdatedSessionStatus((session, message) =>
+			_attendeeHubService.UpdatedSessionStatus((session, message) => Application.Current.Dispatcher.BeginInvokeOnMainThread(() =>
 			{
 				Application.Current.MainPage = ((App)Application.Current).ServiceProvider.GetRequiredService<MovingRobotView>();
-			});
+			}));
 
-			_attendeeHubService.NotUpdatedSessionStatus(async message =>
+			_attendeeHubService.NotUpdatedSessionStatus(message => Application.Current.Dispatcher.BeginInvokeOnMainThread(async () =>
 			{
 				await Application.Current.MainPage.DisplayAlert("Ops!", message, "Ok");
-			});
+			}));
 
 			//commands
 			ExitSessionCommand = new Command(async () => await ExitSessionAsync());

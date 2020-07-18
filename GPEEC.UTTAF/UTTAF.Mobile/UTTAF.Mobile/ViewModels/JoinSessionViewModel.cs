@@ -13,6 +13,7 @@ using UTTAF.Mobile.Services.Interfaces;
 using UTTAF.Mobile.Views;
 
 using Xamarin.Forms;
+using Xamarin.Forms.Markup;
 
 using ZXing;
 
@@ -50,23 +51,23 @@ namespace UTTAF.Mobile.ViewModels
 			JoinAtSessionWithQrCodeCommand = new Command(async () => await JoinAtSessionWithQrCodeAsync());
 			JoinAtSessionCommand = new Command(async () => await JoinAtSessionAsync());
 
-			_attendeeHubService.JoinedAtSession(async (attendee, session, message) =>
+			_attendeeHubService.JoinedAtSession((attendee, session, message) => Application.Current.Dispatcher.BeginInvokeOnMainThread(async () =>
 			{
 				//TODO: refatorar isso para um service
 				DataHelper.Attendee = attendee;
 				DataHelper.AuthSession = session;
 				await PopPushViewUtil.PushModalAsync(((App)Application.Current).ServiceProvider.GetRequiredService<JoinedSessionView>(), true);
-			});
+			}));
 
-			_attendeeHubService.NotJoinedAtSession(async message =>
+			_attendeeHubService.NotJoinedAtSession(message => Application.Current.Dispatcher.BeginInvokeOnMainThread(async () =>
 			{
 				await Application.Current.MainPage.DisplayAlert("Ops!", message, "OK");
-			});
+			}));
 
-			_attendeeHubService.NotExistsAttendeeWithThisName(async message =>
+			_attendeeHubService.NotExistsAttendeeWithThisName(message => Application.Current.Dispatcher.BeginInvokeOnMainThread(async () =>
 			{
 				await Application.Current.MainPage.DisplayAlert("Ops!", message, "OK");
-			});
+			}));
 		}
 
 		private async Task JoinAtSessionAsync()
