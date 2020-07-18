@@ -5,8 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-using UTTAF.Dependencies.Clients;
 using UTTAF.Dependencies.Clients.Helpers;
+using UTTAF.Dependencies.Clients.ViewModels;
 using UTTAF.Dependencies.Data.VOs;
 using UTTAF.Mobile.Services;
 using UTTAF.Mobile.Services.Interfaces;
@@ -19,7 +19,7 @@ using ZXing;
 
 namespace UTTAF.Mobile.ViewModels
 {
-	public class JoinSessionViewModel : ViewModelBase
+	public class JoinSessionViewModel : ViewModel
 	{
 		private readonly IBarCodeService _barCodeService;
 		private readonly AttendeeHubService _attendeeHubService;

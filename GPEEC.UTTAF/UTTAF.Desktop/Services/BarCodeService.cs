@@ -6,7 +6,7 @@ namespace UTTAF.Desktop.Services
 {
 	public class BarCodeService : IBarCodeService
 	{
-		public object GenerateQrCodeTaskAsync(string value)
+		public object GenerateQrCode(string value)
 		{
 			using var generator = new QRCodeGenerator();
 			using QRCodeData data = generator.CreateQrCode(value, QRCodeGenerator.ECCLevel.Q);

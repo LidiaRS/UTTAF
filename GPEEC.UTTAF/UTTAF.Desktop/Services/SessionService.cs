@@ -40,7 +40,7 @@ namespace UTTAF.Desktop.Services
 			await _connection.InvokeAsync(newSessionStatus);
 
 		public async Task DeleteSessionAsync(string sessionReference) =>
-			await _connection.InvokeAsync(sessionReference);
+			await _connection.InvokeAsync(sessionReference, nameof(DeleteSessionAsync));
 
 		//On<T>
 

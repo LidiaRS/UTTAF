@@ -1,10 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.Extensions.DependencyInjection;
+
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-using UTTAF.Dependencies.Clients;
 using UTTAF.Dependencies.Clients.Helpers;
+using UTTAF.Dependencies.Clients.ViewModels;
 using UTTAF.Dependencies.Data.VOs;
 using UTTAF.Dependencies.Enums;
 using UTTAF.Desktop.Commands;
@@ -15,10 +17,8 @@ using UTTAF.Desktop.Views.DialogHost;
 
 namespace UTTAF.Desktop.ViewModels
 {
-	public class ConfigureViewModel : ViewModelBase
+	public class ConfigureViewModel : ViewModel
 	{
-		private MainView mainView;
-
 		private readonly SessionService _sessionService;
 		private readonly IBarCodeService _barCodeService;
 
@@ -58,16 +58,15 @@ namespace UTTAF.Desktop.ViewModels
 		public ICommand StartSessionCommand { get; private set; }
 		public ICommand ContinueCommand { get; private set; }
 
-		public ConfigureViewModel(SessionService sessionService, MainView mainView, IBarCodeService barCodeService)
+		public ConfigureViewModel(SessionService sessionService, IBarCodeService barCodeService)
 		{
 			_sessionService = sessionService;
-			this.mainView = mainView;
 			_barCodeService = barCodeService;
 
-			CancelSessionCreationCommand = new Command<ConfigureView>(async x => await CancelSessionCreation(x));
-			StartSessionCommand = new Command<ConfigureView>(async x => await StartSession(x));
-			CreateSessionCommand = new Command<ConfigureView>(async x => await CreateSession(x));
-			ContinueCommand = new Command<ConfigureView>(async (x) => await InitSessionAsync(x));
+			CancelSessionCreationCommand = new Command(async () => await CancelSessionCreation());
+			StartSessionCommand = new Command(async () => await StartSession());
+			CreateSessionCommand = new Command(async () => await CreateSession());
+			ContinueCommand = new Command<ConfigureView>((x) => InitializeSession(x));
 
 			Initialize();
 		}
@@ -96,7 +95,8 @@ namespace UTTAF.Desktop.ViewModels
 			{
 				MessageBox.Show(message);
 
-				mainView.Show();
+				((App)Application.Current).ServiceProvider.GetRequiredService<MainView>().Show();
+				((App)Application.Current).ServiceProvider.GetRequiredService<ConfigureView>().Close();
 			}));
 
 			_sessionService.NotExistsThisSession(message => Application.Current.Dispatcher.Invoke(() =>
@@ -112,10 +112,13 @@ namespace UTTAF.Desktop.ViewModels
 			_sessionService.RemovedSession(message => Application.Current.Dispatcher.Invoke(() =>
 			{
 				MessageBox.Show(message);
+				StartCreateSessionVisibility = Visibility.Visible;
+				NextCreateSessionVisibility = Visibility.Collapsed;
+				((App)Application.Current).ServiceProvider.GetRequiredService<ConfigureView>().CancelCreateSession.Command.Execute(null);
 			}));
 		}
 
-		private async Task CreateSession(ConfigureView configureView)
+		private async Task CreateSession()
 		{
 			await MaterialDesignThemes.Wpf.DialogHost.Show(new InputNewSessionNameView(), "CreateSessionDH", async (s, e) =>
 			{
@@ -129,66 +132,25 @@ namespace UTTAF.Desktop.ViewModels
 			});
 		}
 
-		private async Task StartSession(ConfigureView configureView)
+		private async Task StartSession()
 		{
 			SessionVO currentSession = DataHelper.AuthSession;
 			currentSession.SessionStatus = SessionStatusEnum.InProgress;
 
 			await _sessionService.MarkSessionWithStartedAsync(currentSession);
-			//if (await _startSessionService.StartSessionAsync(timer))
-			//	configureView.Close();
 		}
 
-		private async Task InitSessionAsync(ConfigureView configureView)
+		private void InitializeSession(ConfigureView configureView)
 		{
 			Attendees.Clear();
 			SessionReference = DataHelper.AuthSession.SessionReference;
-			QrCode = _barCodeService.GenerateQrCodeTaskAsync(SessionReference);
+			QrCode = _barCodeService.GenerateQrCode(SessionReference);
 			configureView.NextCreateSession.Command.Execute(null);
-
-			//timer = new DispatcherTimer()
-			//{
-			//	Interval = new TimeSpan(0, 0, 0, 0, 500)
-			//};
-			//timer.Tick += async (sender, e) =>
-			//{
-			//	IRestResponse response = await AttendeeRequestService.GetAttendeesTaskAsync(DataHelper.AuthSession);
-
-			//	if (response.StatusCode == HttpStatusCode.OK)
-			//	{
-			//		List<AttendeeVO> attendees = JsonSerializer.Deserialize<List<AttendeeVO>>(response.Content, new JsonSerializerOptions
-			//		{
-			//			PropertyNameCaseInsensitive = true
-			//		});
-
-			//		Attendees.ToList().ForEach(att =>
-			//		{
-			//			if (!attendees.Any(x => x.Name == att.Name))
-			//				Attendees.Remove(att);
-			//		});
-
-			//		attendees.ForEach(att =>
-			//		{
-			//			if (!Attendees.Any(x => x.Name == att.Name))
-			//				Attendees.Add(att);
-			//		});
-			//	}
-			//};
-
-			//timer.Start();
 		}
 
-		private async Task CancelSessionCreation(ConfigureView configureView)
+		private async Task CancelSessionCreation()
 		{
 			await _sessionService.DeleteSessionAsync(SessionReference);
-			//IRestResponse response = await _sessionService.DeleteSessionTaskAsync(DataHelper.AuthSession);
-
-			//if (response.StatusCode == HttpStatusCode.OK)
-			//	configureView.CancelSession();
-			//else if (response.StatusCode == HttpStatusCode.NotFound)
-			//	MessageBox.Show(response.Content.Replace("\"", string.Empty));
-
-			//timer.Stop();
 		}
 	}
 }

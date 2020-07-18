@@ -84,7 +84,6 @@
                                 Background="{DynamicResource PrimaryHueDarkBrush}"
                                 BorderThickness="0"
                                 Command="{Binding CreateSessionCommand}"
-                                CommandParameter="{x:Reference this}"
                                 Visibility="{Binding StartCreateSessionVisibility}">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -234,8 +233,7 @@
                             Grid.Row="4"
                             Margin="10"
                             Background="{DynamicResource PrimaryHueDarkBrush}"
-                            Command="{Binding StartSessionCommand}"
-                            CommandParameter="{x:Reference this}">
+                            Command="{Binding StartSessionCommand}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
@@ -253,10 +251,13 @@
                             </Grid>
                         </Button>
                         <Button
+                            x:Name="CancelCreateSession"
+                            Command="{x:Static md:Transitioner.MoveFirstCommand}"
+                            Visibility="Collapsed" />
+                        <Button
                             Grid.Row="5"
                             Margin="10,0"
                             Command="{Binding CancelSessionCreationCommand}"
-                            CommandParameter="{x:Reference this}"
                             Content="Cancelar"
                             Style="{StaticResource MaterialDesignOutlinedButton}" />
                     </Grid>

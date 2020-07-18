@@ -2,6 +2,6 @@
 {
 	public interface IBarCodeService
 	{
-		object GenerateQrCodeTaskAsync(string value);
+		object GenerateQrCode(string value);
 	}
 }

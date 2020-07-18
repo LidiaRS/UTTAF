@@ -1,18 +1,18 @@
 ﻿using System.Windows;
 
-using UTTAF.Dependencies.Clients.Services.HubConnections;
+using UTTAF.Desktop.Services;
 using UTTAF.Desktop.ViewModels;
 
 namespace UTTAF.Desktop.Views
 {
 	public partial class ConfigureView : Window
 	{
-		public ConfigureView(ConfigureViewModel configureViewModel, SessionConnection sessionConnection)
+		public ConfigureView(ConfigureViewModel configureViewModel, SessionService sessionService)
 		{
 			InitializeComponent();
 			DataContext = configureViewModel;
 
-			Closing += async (s, e) => await sessionConnection.Connection.DisposeAsync();
+			Closing += async (s, e) => await sessionService.DesconeectAsync();
 		}
 
 		public void CancelSession()

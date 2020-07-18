@@ -1,9 +1,9 @@
-﻿using UTTAF.Dependencies.Clients;
+﻿using UTTAF.Dependencies.Clients.ViewModels;
 using UTTAF.Desktop.Models;
 
 namespace UTTAF.Desktop.ViewModels
 {
-	public class MainViewModel : ViewModelBase
+	public class MainViewModel : ViewModel
 	{
 		private MainModel __mainModel;
 

@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace UTTAF.Dependencies.Clients
+namespace UTTAF.Dependencies.Clients.ViewModels
 {
-	public class ViewModelBase : INotifyPropertyChanged
+	public class ViewModel : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 

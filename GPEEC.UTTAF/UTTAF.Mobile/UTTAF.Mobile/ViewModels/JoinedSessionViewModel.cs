@@ -3,8 +3,8 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-using UTTAF.Dependencies.Clients;
 using UTTAF.Dependencies.Clients.Helpers;
+using UTTAF.Dependencies.Clients.ViewModels;
 using UTTAF.Dependencies.Data.VOs;
 using UTTAF.Mobile.Services;
 using UTTAF.Mobile.Views;
@@ -13,7 +13,7 @@ using Xamarin.Forms;
 
 namespace UTTAF.Mobile.ViewModels
 {
-	public class JoinedSessionViewModel : ViewModelBase
+	public class JoinedSessionViewModel : ViewModel
 	{
 		private readonly AttendeeHubService _attendeeHubService;
 
