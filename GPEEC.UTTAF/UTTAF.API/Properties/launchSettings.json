@@ -19,9 +19,7 @@
 		},
 		"UTTAF.API": {
 			"commandName": "Project",
-			"launchBrowser": false,
-			"launchUrl": "api",
-			"applicationUrl": "https://localhost:5051;https://localhost:5050;http://192.168.1.6:5050",
+			"applicationUrl": "https://localhost:5051;https://localhost:5050",
 			"environmentVariables": {
 				"ASPNETCORE_ENVIRONMENT": "Development"
 			}
