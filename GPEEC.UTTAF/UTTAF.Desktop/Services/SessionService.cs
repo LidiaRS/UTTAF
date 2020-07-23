@@ -73,5 +73,8 @@ namespace UTTAF.Desktop.Services
 
 		public IDisposable JoinedAtSession(Action<AttendeeVO, SessionVO, string> action) =>
 			_connection.BindOnInterface<AttendeeVO, SessionVO, string, IAttendeeClient>(x => x.JoinedAtSessionAsync, action);
+
+		public IDisposable NotJoinedAtSession(Action<string> action) =>
+			_connection.BindOnInterface<string, IAttendeeClient>(x => x.NotJoinedAtSessionAsync, action);
 	}
 }
