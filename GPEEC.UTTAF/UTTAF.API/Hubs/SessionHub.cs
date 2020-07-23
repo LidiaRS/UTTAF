@@ -100,7 +100,7 @@ namespace UTTAF.API.Hubs
 			}
 
 			await Clients.Caller.JoinedAtSessionAsync(joinedAttendee, session, "Agora voce está participando da sessao!");
-			//TODO: Adicionar participante na listagem no desktop
+			await Groups.AddToGroupAsync(Context.ConnectionId, session.SessionReference);
 		}
 
 		public async Task LeaveAtSessionAsync(AttendeeVO attendee)
@@ -119,7 +119,7 @@ namespace UTTAF.API.Hubs
 
 			await _attendeeBusiness.LeaveAtSessionAsync(currentAttendee);
 			await Clients.Caller.ExitedAtSessionAsync("Voce deixou a sessao!");
-			//TODO: Remover participante da listagem no desktop
+			await Groups.RemoveFromGroupAsync(Context.ConnectionId, currentAttendee.SessionReference);
 		}
 	}
 }
