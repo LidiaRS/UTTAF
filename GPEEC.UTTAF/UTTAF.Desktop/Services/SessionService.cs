@@ -67,5 +67,8 @@ namespace UTTAF.Desktop.Services
 
 		public IDisposable NotRemovedSession(Action<string> action) =>
 			_connection.BindOnInterface<string, ISessionClient>(x => x.NotRemovedSessionAsync, action);
+
+		public IDisposable NotExistsAttendeeWithThisName(Action<string> action) =>
+			_connection.BindOnInterface<string, IAttendeeClient>(x => x.NotExistsAttendeeWithThisNameAsync, action);
 	}
 }
