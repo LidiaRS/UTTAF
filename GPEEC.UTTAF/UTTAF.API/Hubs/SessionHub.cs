@@ -37,6 +37,7 @@ namespace UTTAF.API.Hubs
 			}
 
 			await Clients.Caller.CreatedSessionAsync(addedSession, "Sessao criada com sucesso!");
+			await Groups.AddToGroupAsync(Context.ConnectionId, addedSession.SessionReference);
 		}
 
 		public async Task MarkSessionWithStartedAsync(SessionVO newSession)
@@ -77,6 +78,7 @@ namespace UTTAF.API.Hubs
 			}
 
 			await Clients.Caller.RemovedSessionAsync("Sessao removida com sucesso!");
+			await Groups.RemoveFromGroupAsync(Context.ConnectionId, sessionReference);
 		}
 
 		public async Task JoinAtSessionAsync(AttendeeVO newAttendee)
