@@ -116,11 +116,6 @@ namespace UTTAF.Desktop.ViewModels
 				NextCreateSessionVisibility = Visibility.Collapsed;
 				((App)Application.Current).ServiceProvider.GetRequiredService<ConfigureView>().CancelCreateSession.Command.Execute(null);
 			}));
-
-			_sessionService.NotJoinedAtSession(message => Application.Current.Dispatcher.Invoke(() =>
-			{
-				MessageBox.Show(message);
-			}));
 		}
 
 		private async Task CreateSession()
