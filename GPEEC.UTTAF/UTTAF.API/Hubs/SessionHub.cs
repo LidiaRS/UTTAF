@@ -100,6 +100,7 @@ namespace UTTAF.API.Hubs
 			}
 
 			await Clients.Caller.JoinedAtSessionAsync(joinedAttendee, session, "Agora voce está participando da sessao!");
+			await Clients.OthersInGroup(joinedAttendee.SessionReference).AttendeeExitedAsync(joinedAttendee, $"{joinedAttendee.Name} agora está participando da sessao!");
 			await Groups.AddToGroupAsync(Context.ConnectionId, session.SessionReference);
 		}
 
@@ -119,6 +120,7 @@ namespace UTTAF.API.Hubs
 
 			await _attendeeBusiness.LeaveAtSessionAsync(currentAttendee);
 			await Clients.Caller.ExitedAtSessionAsync("Voce deixou a sessao!");
+			await Clients.OthersInGroup(currentAttendee.SessionReference).AttendeeExitedAsync(currentAttendee, $"{currentAttendee.Name} deixou a sessao!");
 			await Groups.RemoveFromGroupAsync(Context.ConnectionId, currentAttendee.SessionReference);
 		}
 	}

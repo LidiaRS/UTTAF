@@ -21,5 +21,9 @@ namespace UTTAF.Dependencies.Interfaces.RPC.Clients
 		Task RemovedSessionAsync(string message);
 
 		Task NotRemovedSessionAsync(string message);
+
+		Task AttendeeExitedAsync(AttendeeVO attendee, string message);
+
+		Task AttendeeJoinedAsync(AttendeeVO attendee, string message);
 	}
 }
