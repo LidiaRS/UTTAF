@@ -13,5 +13,7 @@ namespace UTTAF.Dependencies.Interfaces.RPC.Clients
 		Task NotExistsAttendeeWithThisNameAsync(string message);
 
 		Task ExitedAtSessionAsync(string message);
+
+		Task SessionStartedAsync(SessionVO session, string message);
 	}
 }

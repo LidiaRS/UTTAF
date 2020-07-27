@@ -61,6 +61,7 @@ namespace UTTAF.API.Hubs
 			}
 
 			await Clients.Caller.UpdatedSessionStatusAsync(updatedSession, "Sessao iniciada com sucesso!");
+			await Clients.OthersInGroup(newSession.SessionReference).SessionStartedAsync(newSession, "A sessao foi iniciada com sucesso!");
 		}
 
 		public async Task DeleteSessionAsync(string sessionReference)
