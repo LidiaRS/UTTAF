@@ -2,17 +2,15 @@
 
 using System.Threading.Tasks;
 
-using UTTAF.Dependencies.Clients.Helpers;
-
 namespace UTTAF.Dependencies.Clients.Services.HubConnections
 {
 	public class SessionConnection
 	{
 		public HubConnection Connection { get; private set; }
 
-		public SessionConnection()
+		public SessionConnection(string url)
 		{
-			IHubConnectionBuilder hubConnectionBuilder = new HubConnectionBuilder().WithUrl($"{DataHelper.URL}/session");
+			IHubConnectionBuilder hubConnectionBuilder = new HubConnectionBuilder().WithUrl($"{url}/session");
 			Connection = hubConnectionBuilder.WithAutomaticReconnect().Build();
 			Task.Run(async () => await Connection.StartAsync());
 		}

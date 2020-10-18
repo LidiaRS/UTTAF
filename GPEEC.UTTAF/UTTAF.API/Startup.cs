@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
+using System.Text.Json;
 
 using UTTAF.API.Business;
 using UTTAF.API.Business.Interfaces;
@@ -61,6 +64,18 @@ namespace UTTAF.API
 
 			app.UseEndpoints(endpoints =>
 			{
+				endpoints.MapGet("/", async (e) =>
+				{
+					string[] fullName = typeof(Startup).Assembly.FullName.Split(',');
+
+					await e.Response.WriteAsync(JsonSerializer.Serialize(new
+					{
+						Status = true,
+						Environment = env.EnvironmentName,
+						Name = fullName[0],
+						Version = fullName[1].Remove(0, 9)
+					}));
+				});
 				endpoints.MapHub<SessionHub>("/session");
 				endpoints.MapHub<RobotHub>("/robot");
 				endpoints.MapHub<PlatformHub>("/platform");

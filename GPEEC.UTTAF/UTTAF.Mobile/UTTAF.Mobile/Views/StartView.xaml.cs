@@ -10,7 +10,10 @@ namespace UTTAF.Mobile.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class StartView : ContentPage
 	{
-		public StartView() => InitializeComponent();
+		public StartView()
+		{
+			InitializeComponent();
+		}
 
 		private async void JoinSession(object sender, System.EventArgs e)
 		{

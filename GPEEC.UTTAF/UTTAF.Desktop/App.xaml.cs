@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Windows;
 
+using UTTAF.Dependencies.Clients.Helpers;
 using UTTAF.Dependencies.Clients.Services.HubConnections;
 using UTTAF.Desktop.Services;
 using UTTAF.Desktop.Services.Interfaces;
@@ -38,7 +39,7 @@ namespace UTTAF.Desktop
 			services.AddSingleton<IBarCodeService, BarCodeService>();
 
 			//Hub Connections
-			services.AddSingleton<SessionConnection>();
+			services.AddSingleton(new SessionConnection(DataHelper.URL));
 
 			// --------- Services ---------
 		}
@@ -46,6 +47,7 @@ namespace UTTAF.Desktop
 		private void Application_Startup(object sender, StartupEventArgs e)
 		{
 			ServiceProvider.GetRequiredService<ConfigureView>().Show();
+			ServiceProvider.GetRequiredService<SessionConnection>();
 		}
 	}
 }

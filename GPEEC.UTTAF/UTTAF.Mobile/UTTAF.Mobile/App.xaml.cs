@@ -2,7 +2,8 @@
 using Microsoft.Extensions.Hosting;
 
 using System;
-
+using System.Threading.Tasks;
+using UTTAF.Dependencies.Clients.Helpers;
 using UTTAF.Dependencies.Clients.Services.HubConnections;
 using UTTAF.Mobile.Services;
 using UTTAF.Mobile.Services.Interfaces;
@@ -21,15 +22,17 @@ namespace UTTAF.Mobile
 		{
 			InitializeComponent();
 
-			ServiceProvider = Host.CreateDefaultBuilder().ConfigureServices(ConfigureServices).Build().Services;
+			var hostBuilder = new HostBuilder();
+			hostBuilder.UseContentRoot(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+			ServiceProvider = hostBuilder.ConfigureServices(ConfigureServices).Build().Services;
 		}
 
 		private void ConfigureServices(HostBuilderContext builder, IServiceCollection services)
 		{
 			//Views
-			services.AddSingleton<StartView>();
+			services.AddScoped<StartView>();
 			services.AddScoped<JoinSessionView>();
-			services.AddSingleton<MovingRobotView>();
+			services.AddScoped<MovingRobotView>();
 			services.AddScoped<JoinedSessionView>();
 
 			//ViewModels
@@ -38,17 +41,21 @@ namespace UTTAF.Mobile
 
 			//Serices
 			services.AddSingleton<IBarCodeService, BarCodeService>();
-			services.AddSingleton<SessionConnection>();
 			services.AddSingleton<AttendeeHubService>();
+
+			services.AddSingleton(new SessionConnection(DataHelper.URLMobile));
 		}
 
 		protected override void OnStart()
 		{
 			MainPage = ServiceProvider.GetRequiredService<StartView>();
+
+			ServiceProvider.GetRequiredService<SessionConnection>();
 		}
 
-		protected override void OnSleep()
+		protected async override void OnSleep()
 		{
+			await ServiceProvider.GetRequiredService<SessionConnection>().Connection.StopAsync();
 		}
 
 		protected override void OnResume()

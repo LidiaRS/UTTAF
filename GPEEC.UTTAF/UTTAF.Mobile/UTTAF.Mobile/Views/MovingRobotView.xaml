@@ -1,34 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="UTTAF.Mobile.Views.MovingRobotView"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-    xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    BackgroundColor="{DynamicResource DarkBlue}"
-    mc:Ignorable="d">
-    <StackLayout VerticalOptions="CenterAndExpand">
-        <forms:AnimationView
-            Animation="MovingRobot.json"
-            AutoPlay="True"
-            HeightRequest="300"
-            HorizontalOptions="Center"
-            Loop="True"
-            VerticalOptions="Start"
-            WidthRequest="300" />
+	x:Class="UTTAF.Mobile.Views.MovingRobotView"
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+	xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	BackgroundColor="{DynamicResource DarkBlue}"
+	mc:Ignorable="d">
+	<StackLayout VerticalOptions="CenterAndExpand">
+		<forms:AnimationView
+			Animation="MovingRobot.json"
+			AutoPlay="True"
+			HeightRequest="300"
+			HorizontalOptions="Center"
+			RepeatMode="Infinite"
+			VerticalOptions="Start"
+			WidthRequest="300" />
 
-        <Label
-            FontAttributes="Bold"
-            FontSize="18"
-            HorizontalTextAlignment="Center"
-            Text="O robo está se movendo!"
-            TextColor="White"
-            VerticalOptions="Center" />
-        <Label
-            HorizontalTextAlignment="Center"
-            Text="Logo encontrará um obstáculo, aguarde!"
-            TextColor="White"
-            VerticalOptions="Center" />
-    </StackLayout>
+		<Label
+			FontAttributes="Bold"
+			FontSize="18"
+			HorizontalTextAlignment="Center"
+			Text="O robo está se movendo!"
+			TextColor="White"
+			VerticalOptions="Center" />
+		<Label
+			HorizontalTextAlignment="Center"
+			Text="Logo encontrará um obstáculo, aguarde!"
+			TextColor="White"
+			VerticalOptions="Center" />
+	</StackLayout>
 </ContentPage>

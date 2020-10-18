@@ -13,7 +13,6 @@ using UTTAF.Mobile.Services.Interfaces;
 using UTTAF.Mobile.Views;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Markup;
 
 using ZXing;
 

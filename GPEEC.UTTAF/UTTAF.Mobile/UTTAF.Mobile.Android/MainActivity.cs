@@ -15,7 +15,7 @@ namespace UTTAF.Mobile.Droid
 	{
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
-			SyncfusionLicenseProvider.RegisterLicense("MjMxNzAyQDMxMzgyZTMxMmUzMFpUWHhFaXA0SkxwMWd5RzhZcnpzMVhsTjBNWDBRYmUvbWc2NmpzZ0gveGc9");
+			SyncfusionLicenseProvider.RegisterLicense("MzM3MTQzQDMxMzgyZTMzMmUzMFRhVFQ2cGFkS08yd1pQc2hRd0dDQWF2eGRjb1BUaEtoc05Denl1bHZ2Nms9");
 
 			TabLayoutResource = Resource.Layout.Tabbar;
 			ToolbarResource = Resource.Layout.Toolbar;

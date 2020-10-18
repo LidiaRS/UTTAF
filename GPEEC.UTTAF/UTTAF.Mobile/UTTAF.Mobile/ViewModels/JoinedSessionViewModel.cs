@@ -48,6 +48,14 @@ namespace UTTAF.Mobile.ViewModels
 				await Application.Current.MainPage.DisplayAlert("Ops!", message, "Ok");
 			}));
 
+			_attendeeHubService.ExitedAtSession(message => Application.Current.Dispatcher.BeginInvokeOnMainThread(async () =>
+			{
+				await Application.Current.MainPage.DisplayAlert("Até logo!", message, "Ok");
+				await Application.Current.MainPage.Navigation.PopModalAsync(true);
+			}));
+
+
+
 			//commands
 			ExitSessionCommand = new Command(async () => await ExitSessionAsync());
 		}
