@@ -1,8 +1,8 @@
-﻿using UTTAF.API.Models;
+﻿using UTTAF.Dependencies.Clients.Models;
 using UTTAF.Dependencies.Data.Converters.Interfaces;
 using UTTAF.Dependencies.Data.VOs;
 
-namespace UTTAF.API.Data.Converters
+namespace UTTAF.Dependencies.Clients.Data.Converters
 {
 	public class AttendeeConverter : IParser<AttendeeModel, AttendeeVO>, IParser<AttendeeVO, AttendeeModel>
 	{

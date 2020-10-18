@@ -4,7 +4,7 @@ namespace UTTAF.Dependencies.Data.VOs
 {
 	public class AttendeeVO
 	{
-		public Guid Id { get; set; }
+		public Guid AttendeeId { get; set; }
 
 		public string Name { get; set; }
 

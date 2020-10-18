@@ -12,11 +12,11 @@ using UTTAF.Dependencies.Interfaces.RPC.Hubs;
 
 namespace UTTAF.Desktop.Services
 {
-	public class SessionService : ISessionHub, IConnectionManager
+	public class SessionHubService : ISessionHub, IConnectionManager
 	{
 		private readonly HubConnection _connection;
 
-		public SessionService(SessionConnection sessionConnection)
+		public SessionHubService(SessionConnection sessionConnection)
 		{
 			_connection = sessionConnection.Connection;
 		}
@@ -26,21 +26,27 @@ namespace UTTAF.Desktop.Services
 			await _connection.StartAsync();
 		}
 
-		public async Task DesconeectAsync()
+		public async Task DisconnectAsync()
 		{
 			await _connection.StopAsync();
 		}
 
 		//Invoke
 
-		public async Task CreateSessionAsync(SessionVO newSession) =>
+		public async Task CreateSessionAsync(SessionVO newSession)
+		{
+			await ConnectAsync();
 			await _connection.InvokeAsync(newSession);
+		}
 
 		public async Task MarkSessionWithStartedAsync(SessionVO newSessionStatus) =>
 			await _connection.InvokeAsync(newSessionStatus);
 
-		public async Task DeleteSessionAsync(string sessionReference) =>
+		public async Task DeleteSessionAsync(string sessionReference)
+		{
 			await _connection.InvokeAsync(sessionReference, nameof(DeleteSessionAsync));
+			await DisconnectAsync();
+		}
 
 		//On<T>
 
@@ -67,5 +73,11 @@ namespace UTTAF.Desktop.Services
 
 		public IDisposable NotRemovedSession(Action<string> action) =>
 			_connection.BindOnInterface<string, ISessionClient>(x => x.NotRemovedSessionAsync, action);
+
+		public IDisposable AttendeeJoined(Action<AttendeeVO, string> action) =>
+			_connection.BindOnInterface<AttendeeVO, string, ISessionClient>(x => x.AttendeeJoinedAsync, action);
+
+		public IDisposable AttendeeExited(Action<AttendeeVO, string> action) =>
+			_connection.BindOnInterface<AttendeeVO, string, ISessionClient>(x => x.AttendeeExitedAsync, action);
 	}
 }

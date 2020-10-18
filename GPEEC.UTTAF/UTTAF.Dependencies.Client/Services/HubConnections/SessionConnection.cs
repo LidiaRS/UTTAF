@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 
+using System;
 using System.Threading.Tasks;
 
 namespace UTTAF.Dependencies.Clients.Services.HubConnections
@@ -12,7 +13,6 @@ namespace UTTAF.Dependencies.Clients.Services.HubConnections
 		{
 			IHubConnectionBuilder hubConnectionBuilder = new HubConnectionBuilder().WithUrl($"{url}/session");
 			Connection = hubConnectionBuilder.WithAutomaticReconnect().Build();
-			Task.Run(async () => await Connection.StartAsync());
 		}
 	}
 }

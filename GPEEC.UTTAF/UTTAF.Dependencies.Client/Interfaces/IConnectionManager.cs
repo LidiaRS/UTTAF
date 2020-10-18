@@ -6,6 +6,6 @@ namespace UTTAF.Dependencies.Clients.Interfaces
 	{
 		Task ConnectAsync();
 
-		Task DesconeectAsync();
+		Task DisconnectAsync();
 	}
 }

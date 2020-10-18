@@ -3,9 +3,10 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 
+using UTTAF.Dependencies.Clients.Data.Converters;
 using UTTAF.Dependencies.Clients.Helpers;
-using UTTAF.Dependencies.Clients.ViewModels;
-using UTTAF.Dependencies.Data.VOs;
+using UTTAF.Dependencies.Clients.Models;
+using UTTAF.Dependencies.Clients.Utils;
 using UTTAF.Mobile.Services;
 using UTTAF.Mobile.Views;
 
@@ -13,13 +14,13 @@ using Xamarin.Forms;
 
 namespace UTTAF.Mobile.ViewModels
 {
-	public class JoinedSessionViewModel : ViewModel
+	public class JoinedSessionViewModel : PropertyNotifier
 	{
 		private readonly AttendeeHubService _attendeeHubService;
+		private readonly AttendeeConverter _attendeeConverter;
+		private AttendeeModel __attendee;
 
-		private AttendeeVO __attendee;
-
-		public AttendeeVO Attendee
+		public AttendeeModel Attendee
 		{
 			get => __attendee;
 			set => Set(ref __attendee, value);
@@ -27,9 +28,10 @@ namespace UTTAF.Mobile.ViewModels
 
 		public ICommand ExitSessionCommand { get; private set; }
 
-		public JoinedSessionViewModel(AttendeeHubService attendeeHubService)
+		public JoinedSessionViewModel(AttendeeHubService attendeeHubService, AttendeeConverter attendeeConverter)
 		{
 			_attendeeHubService = attendeeHubService;
+			_attendeeConverter = attendeeConverter;
 
 			Initialize();
 		}
@@ -54,15 +56,13 @@ namespace UTTAF.Mobile.ViewModels
 				await Application.Current.MainPage.Navigation.PopModalAsync(true);
 			}));
 
-
-
 			//commands
 			ExitSessionCommand = new Command(async () => await ExitSessionAsync());
 		}
 
 		private async Task ExitSessionAsync()
 		{
-			await _attendeeHubService.LeaveAtSessionAsync(Attendee);
+			await _attendeeHubService.LeaveAtSessionAsync(_attendeeConverter.Parse(Attendee));
 		}
 	}
 }

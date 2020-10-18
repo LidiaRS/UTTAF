@@ -1,12 +1,13 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
 using UTTAF.Dependencies.Clients.Helpers;
-using UTTAF.Dependencies.Clients.ViewModels;
+using UTTAF.Dependencies.Clients.Utils;
 using UTTAF.Dependencies.Data.VOs;
 using UTTAF.Dependencies.Enums;
 using UTTAF.Desktop.Commands;
@@ -17,9 +18,9 @@ using UTTAF.Desktop.Views.DialogHost;
 
 namespace UTTAF.Desktop.ViewModels
 {
-	public class ConfigureViewModel : ViewModel
+	public class ConfigureViewModel : PropertyNotifier
 	{
-		private readonly SessionService _sessionService;
+		private readonly SessionHubService _sessionService;
 		private readonly IBarCodeService _barCodeService;
 
 		private string __sessionReference;
@@ -58,7 +59,7 @@ namespace UTTAF.Desktop.ViewModels
 		public ICommand StartSessionCommand { get; private set; }
 		public ICommand ContinueCommand { get; private set; }
 
-		public ConfigureViewModel(SessionService sessionService, IBarCodeService barCodeService)
+		public ConfigureViewModel(SessionHubService sessionService, IBarCodeService barCodeService)
 		{
 			_sessionService = sessionService;
 			_barCodeService = barCodeService;
@@ -115,6 +116,21 @@ namespace UTTAF.Desktop.ViewModels
 				StartCreateSessionVisibility = Visibility.Visible;
 				NextCreateSessionVisibility = Visibility.Collapsed;
 				((App)Application.Current).ServiceProvider.GetRequiredService<ConfigureView>().CancelCreateSession.Command.Execute(null);
+			}));
+
+			_sessionService.AttendeeJoined((attendee, message) => Application.Current.Dispatcher.Invoke(() =>
+			{
+				Attendees.Add(attendee);
+			}));
+
+			_sessionService.AttendeeExited((attendee, message) => Application.Current.Dispatcher.Invoke(() =>
+			{
+				var currentAttendee = Attendees.SingleOrDefault(a => a.AttendeeId == attendee.AttendeeId);
+
+				if (currentAttendee is null)
+					return;
+
+				Attendees.Remove(currentAttendee);
 			}));
 		}
 

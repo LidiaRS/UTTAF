@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace UTTAF.API.Data.Converters.Interfaces
+namespace UTTAF.Dependencies.Data.Converters.Interfaces
 {
 	public interface IParserList<TOrigin, TDestiny>
 	{

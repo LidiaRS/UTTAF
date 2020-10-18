@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UTTAF.API.Migrations
 {
-    public partial class RemoveSessionPassword : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,13 +11,13 @@ namespace UTTAF.API.Migrations
                 name: "Attendees",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    AttendeeId = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     SessionReference = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Attendees", x => x.Id);
+                    table.PrimaryKey("PK_Attendees", x => x.AttendeeId);
                 });
 
             migrationBuilder.CreateTable(
@@ -38,13 +38,14 @@ namespace UTTAF.API.Migrations
                 name: "Sessions",
                 columns: table => new
                 {
+                    SessionId = table.Column<Guid>(nullable: false),
                     SessionReference = table.Column<string>(nullable: false),
                     SessionStatus = table.Column<int>(nullable: false),
                     SessionDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sessions", x => x.SessionReference);
+                    table.PrimaryKey("PK_Sessions", x => x.SessionId);
                 });
         }
 

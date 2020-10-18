@@ -1,5 +1,5 @@
-﻿using UTTAF.API.Data.Converters.Interfaces;
-using UTTAF.API.Models;
+﻿using UTTAF.API.Models;
+using UTTAF.Dependencies.Data.Converters.Interfaces;
 using UTTAF.Dependencies.Data.VOs;
 
 namespace UTTAF.API.Data.Converters

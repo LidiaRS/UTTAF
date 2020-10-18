@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UTTAF.API", "UTTAF.API\UTTA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTTAF.Mobile.Android", "UTTAF.Mobile\UTTAF.Mobile.Android\UTTAF.Mobile.Android.csproj", "{EB03CB1C-D13B-4C34-A983-C588CEC692B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTTAF.Dependencies.Clients", "UTTAF.Dependencies.Client\UTTAF.Dependencies.Clients.csproj", "{0EA4E88C-9B62-4EEC-926C-F260A544A5CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UTTAF.Dependencies.Clients", "UTTAF.Dependencies.Client\UTTAF.Dependencies.Clients.csproj", "{0EA4E88C-9B62-4EEC-926C-F260A544A5CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

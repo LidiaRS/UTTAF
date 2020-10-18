@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Threading.Tasks;
 
 using UTTAF.API.Data;
-using UTTAF.API.Data.Converters;
 using UTTAF.API.Models;
 using UTTAF.API.Repository.Interfaces;
 
@@ -16,16 +15,19 @@ namespace UTTAF.API.Repository
 		{
 		}
 
-		public async Task<AttendeeModel> AddAttendeeTaskAsync(AttendeeModel attendee)
+		public async Task<AttendeeModel> AddAttendeeTaskAsync(AttendeeModel newAttendee)
 		{
-			EntityEntry<AttendeeModel> att = await _context.Attendees.AddAsync(attendee);
+			EntityEntry<AttendeeModel> att = await _context.Attendees.AddAsync(newAttendee);
 			await _context.SaveChangesAsync();
 
 			return att.Entity;
 		}
 
-		public async Task<AttendeeModel> FindByNameInSessionTaskAsync(AttendeeModel attendee) =>
-			await _context.Attendees.SingleOrDefaultAsync(x => x.Name == attendee.Name && x.SessionReference == attendee.SessionReference);
+		public async Task<AttendeeModel> FindByIdInSessionTaskAsync(AttendeeModel attendeeInSession) =>
+			await _context.Attendees.SingleOrDefaultAsync(attendee => attendee.AttendeeId == attendeeInSession.AttendeeId && attendee.SessionReference == attendeeInSession.SessionReference);
+
+		public async Task<AttendeeModel> FindByNameInSessionTaskAsync(AttendeeModel attendeeData) =>
+			await _context.Attendees.SingleOrDefaultAsync(attendee => attendee.Name == attendeeData.Name && attendee.SessionReference == attendeeData.SessionReference);
 
 		public async Task LeaveAttendeeTaskAsync(AttendeeModel attendee)
 		{

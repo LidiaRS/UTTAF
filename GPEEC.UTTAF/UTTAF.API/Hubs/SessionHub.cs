@@ -79,8 +79,10 @@ namespace UTTAF.API.Hubs
 			}
 
 			await Clients.Caller.RemovedSessionAsync("Sessao removida com sucesso!");
+			await Clients.OthersInGroup(sessionReference).RemovedSessionAsync("A sessao atual foi encerrada!");
 			await Groups.RemoveFromGroupAsync(Context.ConnectionId, sessionReference);
 		}
+
 
 		public async Task JoinAtSessionAsync(AttendeeVO newAttendee)
 		{
@@ -103,7 +105,7 @@ namespace UTTAF.API.Hubs
 			}
 
 			await Clients.Caller.JoinedAtSessionAsync(joinedAttendee, session, "Agora voce está participando da sessao!");
-			await Clients.OthersInGroup(joinedAttendee.SessionReference).AttendeeExitedAsync(joinedAttendee, $"{joinedAttendee.Name} agora está participando da sessao!");
+			await Clients.OthersInGroup(joinedAttendee.SessionReference).AttendeeJoinedAsync(joinedAttendee, $"{joinedAttendee.Name} agora está participando da sessao!");
 			await Groups.AddToGroupAsync(Context.ConnectionId, session.SessionReference);
 		}
 

@@ -27,15 +27,15 @@ namespace UTTAF.Desktop
 		private void ConfigureServices(IServiceCollection services)
 		{
 			//Views
-			services.AddScoped<ConfigureView>();
-			services.AddScoped<MainView>();
+			services.AddSingleton<ConfigureView>();
+			services.AddSingleton<MainView>();
 
 			//ViewModels
-			services.AddScoped<ConfigureViewModel>();
-			services.AddScoped<MainViewModel>();
+			services.AddTransient<ConfigureViewModel>();
+			services.AddTransient<MainViewModel>();
 
 			// --------- Services ---------
-			services.AddSingleton<SessionService>();
+			services.AddSingleton<SessionHubService>();
 			services.AddSingleton<IBarCodeService, BarCodeService>();
 
 			//Hub Connections

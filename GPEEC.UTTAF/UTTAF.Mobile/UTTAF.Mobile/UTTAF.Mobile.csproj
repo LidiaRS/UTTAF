@@ -15,12 +15,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Models\**" />
-    <EmbeddedResource Remove="Models\**" />
-    <None Remove="Models\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.0.4" />
     <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.3.0.40" />
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1560" />

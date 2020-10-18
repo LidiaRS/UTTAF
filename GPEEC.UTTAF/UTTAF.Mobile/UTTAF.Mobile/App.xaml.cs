@@ -3,6 +3,8 @@ using Microsoft.Extensions.Hosting;
 
 using System;
 using System.Threading.Tasks;
+
+using UTTAF.Dependencies.Clients.Data.Converters;
 using UTTAF.Dependencies.Clients.Helpers;
 using UTTAF.Dependencies.Clients.Services.HubConnections;
 using UTTAF.Mobile.Services;
@@ -30,18 +32,22 @@ namespace UTTAF.Mobile
 		private void ConfigureServices(HostBuilderContext builder, IServiceCollection services)
 		{
 			//Views
-			services.AddScoped<StartView>();
-			services.AddScoped<JoinSessionView>();
-			services.AddScoped<MovingRobotView>();
-			services.AddScoped<JoinedSessionView>();
+			services.AddTransient<StartView>();
+			services.AddTransient<JoinSessionView>();
+			services.AddTransient<MovingRobotView>();
+			services.AddTransient<JoinedSessionView>();
 
 			//ViewModels
-			services.AddScoped<JoinSessionViewModel>();
-			services.AddScoped<JoinedSessionViewModel>();
+			services.AddTransient<JoinSessionViewModel>();
+			services.AddTransient<JoinedSessionViewModel>();
 
-			//Serices
+			//Services
 			services.AddSingleton<IBarCodeService, BarCodeService>();
 			services.AddSingleton<AttendeeHubService>();
+			services.AddSingleton<SessionHubService>();
+
+			//Converters
+			services.AddSingleton<AttendeeConverter>();
 
 			services.AddSingleton(new SessionConnection(DataHelper.URLMobile));
 		}

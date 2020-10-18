@@ -7,12 +7,12 @@ namespace UTTAF.Desktop.Views
 {
 	public partial class ConfigureView : Window
 	{
-		public ConfigureView(ConfigureViewModel configureViewModel, SessionService sessionService)
+		public ConfigureView(ConfigureViewModel configureViewModel, SessionHubService sessionService)
 		{
 			InitializeComponent();
 			DataContext = configureViewModel;
 
-			Closing += async (s, e) => await sessionService.DesconeectAsync();
+			Closing += async (s, e) => await sessionService.DisconnectAsync();
 		}
 
 		public void CancelSession()

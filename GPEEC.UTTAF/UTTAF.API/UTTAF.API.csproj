@@ -6,37 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200314042353_Init.cs" />
-    <Compile Remove="Migrations\20200314042353_Init.Designer.cs" />
-    <Compile Remove="Migrations\20200314043451_Init.cs" />
-    <Compile Remove="Migrations\20200314043451_Init.Designer.cs" />
-    <Compile Remove="Migrations\20200314050634_RefatoringAuthModel.cs" />
-    <Compile Remove="Migrations\20200314050634_RefatoringAuthModel.Designer.cs" />
-    <Compile Remove="Migrations\20200314050957_RefatoringAuthModel.cs" />
-    <Compile Remove="Migrations\20200314050957_RefatoringAuthModel.Designer.cs" />
-    <Compile Remove="Migrations\20200314051825_RefatoringAuthModel.cs" />
-    <Compile Remove="Migrations\20200314051825_RefatoringAuthModel.Designer.cs" />
-    <Compile Remove="Migrations\20200316005903_SessionStatusEnum.cs" />
-    <Compile Remove="Migrations\20200316005903_SessionStatusEnum.Designer.cs" />
-    <Compile Remove="Migrations\20200316010712_ChangeControllerName.cs" />
-    <Compile Remove="Migrations\20200316010712_ChangeControllerName.Designer.cs" />
-    <Compile Remove="Migrations\20200316011616_RefatoringSessionModel.cs" />
-    <Compile Remove="Migrations\20200316011616_RefatoringSessionModel.Designer.cs" />
-    <Compile Remove="Migrations\20200316015631_AddPasswordInSession.cs" />
-    <Compile Remove="Migrations\20200316015631_AddPasswordInSession.Designer.cs" />
-    <Compile Remove="Migrations\20200316031828_AttendeesEndPoint.cs" />
-    <Compile Remove="Migrations\20200316031828_AttendeesEndPoint.Designer.cs" />
-    <Compile Remove="Migrations\20200316051125_NullableTypeOnDate.cs" />
-    <Compile Remove="Migrations\20200316051125_NullableTypeOnDate.Designer.cs" />
-    <Compile Remove="Migrations\20200316051324_NullableTypeOnDate.cs" />
-    <Compile Remove="Migrations\20200316051324_NullableTypeOnDate.Designer.cs" />
-    <Compile Remove="Migrations\20200321214530_ChangeSessionMigration.cs" />
-    <Compile Remove="Migrations\20200321214530_ChangeSessionMigration.Designer.cs" />
-    <Compile Remove="Migrations\20200329012830_ChangeIdAttendeeType.cs" />
-    <Compile Remove="Migrations\20200329012830_ChangeIdAttendeeType.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Storage.db-shm" />
     <None Remove="Storage.db-wal" />
   </ItemGroup>

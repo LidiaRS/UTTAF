@@ -22,8 +22,7 @@ namespace UTTAF.API.Business
 
 		public async Task<AttendeeVO> JoinAtSessionTaskAsync(AttendeeVO newAttendee)
 		{
-			if (!(_attendeeConverter.Parse(newAttendee) is AttendeeModel newAttendeeModel))
-				throw new Exception("Nao foi possivel fazer a conversao AttendeeVO -> AttendeeModel");
+			AttendeeModel newAttendeeModel = _attendeeConverter.Parse(newAttendee);
 
 			if (!(await _attendeeRepository.AddAttendeeTaskAsync(newAttendeeModel) is AttendeeModel addedAttendeeModel))
 				throw new Exception("Nao foi possivel adicionar o participante na sessao");
@@ -33,18 +32,16 @@ namespace UTTAF.API.Business
 
 		public async Task<AttendeeVO> FindByNameInSessionTaskAsync(AttendeeVO attendee)
 		{
-			if (!(_attendeeConverter.Parse(attendee) is AttendeeModel attendeeModel))
-				throw new Exception("Nao foi possivel fazer a conversao AttendeeVO -> AttendeeModel");
+			AttendeeModel attendeeModel = _attendeeConverter.Parse(attendee);
 
 			return _attendeeConverter.Parse(await _attendeeRepository.FindByNameInSessionTaskAsync(attendeeModel));
 		}
 
 		public async Task LeaveAtSessionAsync(AttendeeVO attendee)
 		{
-			if (!(_attendeeConverter.Parse(attendee) is AttendeeModel attendeeModel))
-				throw new Exception("Nao foi possivel fazer a conversao AttendeeVO -> AttendeeModel");
+			AttendeeModel attendeeModel = _attendeeConverter.Parse(attendee);
 
-			if (!(await _attendeeRepository.FindByNameInSessionTaskAsync(attendeeModel) is AttendeeModel currentAttendee))
+			if (!(await _attendeeRepository.FindByIdInSessionTaskAsync(attendeeModel) is AttendeeModel currentAttendee))
 				throw new Exception("Nao foi possivel pegar as informaçoes do participante");
 
 			await _attendeeRepository.LeaveAttendeeTaskAsync(currentAttendee);

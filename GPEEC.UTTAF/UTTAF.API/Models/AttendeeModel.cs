@@ -5,7 +5,8 @@ namespace UTTAF.API.Models
 {
 	public class AttendeeModel
 	{
-		public Guid Id { get; set; }
+		[Key]
+		public Guid AttendeeId { get; set; }
 
 		[Required]
 		public string Name { get; set; }

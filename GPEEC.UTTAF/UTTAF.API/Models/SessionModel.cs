@@ -8,6 +8,8 @@ namespace UTTAF.API.Models
 	public class SessionModel
 	{
 		[Key]
+		public Guid SessionId { get; set; }
+
 		[Required]
 		public string SessionReference { get; set; }
 

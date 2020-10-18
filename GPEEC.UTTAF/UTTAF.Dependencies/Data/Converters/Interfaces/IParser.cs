@@ -1,4 +1,4 @@
-﻿namespace UTTAF.API.Data.Converters.Interfaces
+﻿namespace UTTAF.Dependencies.Data.Converters.Interfaces
 {
 	public interface IParser<TOrigin, TDestiny>
 	{

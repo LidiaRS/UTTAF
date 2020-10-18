@@ -10,6 +10,8 @@ namespace UTTAF.API.Repository.Interfaces
 
 		Task<AttendeeModel> FindByNameInSessionTaskAsync(AttendeeModel attendee);
 
+		Task<AttendeeModel> FindByIdInSessionTaskAsync(AttendeeModel attendee);
+
 		Task LeaveAttendeeTaskAsync(AttendeeModel attendee);
 	}
 }

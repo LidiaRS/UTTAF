@@ -14,11 +14,11 @@ namespace UTTAF.API.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.3");
+                .HasAnnotation("ProductVersion", "3.1.9");
 
             modelBuilder.Entity("UTTAF.API.Models.AttendeeModel", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("AttendeeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
@@ -30,7 +30,7 @@ namespace UTTAF.API.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("AttendeeId");
 
                     b.ToTable("Attendees");
                 });
@@ -58,17 +58,21 @@ namespace UTTAF.API.Migrations
 
             modelBuilder.Entity("UTTAF.API.Models.SessionModel", b =>
                 {
-                    b.Property<string>("SessionReference")
+                    b.Property<Guid>("SessionId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("SessionDate")
+                    b.Property<DateTime>("SessionDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SessionReference")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("SessionStatus")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("SessionReference");
+                    b.HasKey("SessionId");
 
                     b.ToTable("Sessions");
                 });

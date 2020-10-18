@@ -1,9 +1,9 @@
-﻿using UTTAF.Dependencies.Clients.ViewModels;
+﻿using UTTAF.Dependencies.Clients.Utils;
 using UTTAF.Desktop.Models;
 
 namespace UTTAF.Desktop.ViewModels
 {
-	public class MainViewModel : ViewModel
+	public class MainViewModel : PropertyNotifier
 	{
 		private MainModel __mainModel;
 
