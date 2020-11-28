@@ -1,16 +1,16 @@
 // --- Bibliotecas Auxiliares ---
 #include <AFMotor.h> //Inclui biblioteca AF Motor
 
-// --- Seleção dos Motores ---
+// --- SeleÃ§ao dos Motores ---
 AF_DCMotor motor1(2); //Motor da Direita
 AF_DCMotor motor2(1); //Motor da Esquerda
-//Sensores de Refletância
-int sensorLinhaD = A14; //Sensor de Refletância da direita ligado na porta A15
-int sensorLinhaE = A13; //Sensor de Refletância da esquerda ligado na porta A14
-int valorLinhaE, valorLinhaD = 0; //variável que armazena o valor do sensor
-//calibração dos sensores
-int ValorCorte_E = 150; //se o valor for menor do que 150, o valor lido é linha branca, senão estará no preto (Ajustado previamente)
-int ValorCorte_D = 150; //se o valor for menor do que 150, o valor lido é linha branca, senão estará no preto (Ajustado previamente)
+//Sensores de Refletancia
+int sensorLinhaD = A14; //Sensor de Refletancia da direita ligado na porta A14
+int sensorLinhaE = A13; //Sensor de Refletancia da esquerda ligado na porta A13
+int valorLinhaE, valorLinhaD = 0; //variÃ¡vel que armazena o valor do sensor
+//calibraÃ§ao dos sensores
+int ValorCorte_E = 150; //se o valor for menor do que 150, o valor lido Ã© linha branca, senao estarÃ¡ no preto (Ajustado previamente)
+int ValorCorte_D = 150; //se o valor for menor do que 150, o valor lido Ã© linha branca, senao estarÃ¡ no preto (Ajustado previamente)
 //Contem o Cartao de parada que fica no portal.
 String CartaoParada = "CARD_STOP";
 bool Continuar = true;
@@ -18,7 +18,7 @@ bool Continuar = true;
 //=====================================================================
 void setup() 
 {
-	//Para o Shied a biblioteca se encarrega de setar entradas e saídas!
+	//Para o Shied a biblioteca se encarrega de setar entradas e saï¿½das!
 	//Demais pinos devem ser declarados
 	Serial1.begin(115200);
 	pinMode(trigPin, OUTPUT);
@@ -66,7 +66,7 @@ void loop()
 		motor_esq_frente();
 	}
 }
-//OBS também é possível criar funções para os motores
+//OBS tambÃ©m Ã© possÃ­vel criar funÃ§oes para os motores
 //conforme exemplo abaixo.
 //motor da direita
 void motor_dir_frente()

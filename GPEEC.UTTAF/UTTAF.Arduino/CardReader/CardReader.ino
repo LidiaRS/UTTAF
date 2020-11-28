@@ -9,7 +9,7 @@
 #define SS_PIN 10
 #define RST_PIN 9
 
-String IDtag = ""; //Vari·vel que armazenar· o ID da Tag
+String IDtag = ""; //Vari√°vel que armazenar√° o ID da Tag
 String CardStop = "CARD_STOP_AQUI";
 String PositiveCards[] = { "CARD_P", "CARD_P" };
 String NegativeCards[] = { "CARD_N", "CARD_N", "CARD_N" };
@@ -18,17 +18,17 @@ MFRC522 ReaderRFID(SS_PIN, RST_PIN);
 
 void setup()
 {
-  Serial.begin(115200);             // Inicializa a comunicaÁ„o Serial
+  Serial.begin(115200);             // Inicializa a comunica√ßao Serial
   SPI.begin();                      // Inicializa comunicacao SPI
   LeitorRFID.PCD_Init();            // Inicializa o leitor RFID
-  pinMode(LED_Green, OUTPUT);       // Declara o pino do led verde como saÌda
-  pinMode(LED_Red, OUTPUT);    // Declara o pino do led vermelho como saÌda
-  pinMode(BUZZER, OUTPUT);          // Declara o pino do buzzer como saÌda
+  pinMode(LED_Green, OUTPUT);       // Declara o pino do led verde como sa√≠da
+  pinMode(LED_Red, OUTPUT);    // Declara o pino do led vermelho como sa√≠da
+  pinMode(BUZZER, OUTPUT);          // Declara o pino do buzzer como sa√≠da
 }
 
 void loop()
 {
-  Reader();  //Chama a funÁ„o respons·vel por fazer a leitura das Tag's
+  Reader();  //Chama a fun√ßao respons√°vel por fazer a leitura das Tag's
 }
 
 void Reader()
@@ -42,7 +42,7 @@ void Reader()
             return;
         }
 
-        // Pega o ID da Tag atravÈs da funÁ„o LeitorRFID.uid e Armazena o ID na vari·vel IDtag
+        // Pega o ID da Tag atrav√©s da fun√ßao LeitorRFID.uid e Armazena o ID na vari√°vel IDtag
         for (byte i = 0; i < ReaderRFID.uid.size; i++)
             IDtag.concat(String(ReaderRFID.uid.uidByte[i], HEX));
 
@@ -53,11 +53,11 @@ void Reader()
 
 void acessoLiberado()
 {
-      Serial.print(IDtag); //Exibe a mensagem "Tag Cadastrada" e o ID da tag n„o cadastrada
+      Serial.print(IDtag); //Exibe a mensagem "Tag Cadastrada" e o ID da tag nao cadastrada
 
       if(IDtag != CardStop)
       {
-          efeitoPermitido();  //Chama a funÁ„o efeitoPermitido().
+          efeitoPermitido();  //Chama a fun√ßao efeitoPermitido().
           CartaoPositivo();
           CartaoNegativo();
           Stop();
@@ -99,7 +99,7 @@ void efeitoPermitido(){
   int qtd_bips = 1; //definindo a quantidade de bips
   for(int j=0; j<qtd_bips; j++)
   {
-    //Ligando o buzzer com uma frequÍncia de 1500 hz e ligando o led verde.
+    //Ligando o buzzer com uma frequencia de 1500 hz e ligando o led verde.
     tone(BUZZER,1500);
     delay(100);
 
