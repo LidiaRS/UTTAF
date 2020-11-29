@@ -8,9 +8,6 @@ namespace UTTAF.Dependencies.Clients.Data.Converters
 	{
 		public AttendeeModel Parse(AttendeeVO origin)
 		{
-			if (origin is null)
-				return null;
-
 			return new AttendeeModel
 			{
 				AttendeeId = origin.AttendeeId,
@@ -21,9 +18,6 @@ namespace UTTAF.Dependencies.Clients.Data.Converters
 
 		public AttendeeVO Parse(AttendeeModel origin)
 		{
-			if (origin is null)
-				return null;
-
 			return new AttendeeVO
 			{
 				AttendeeId = origin.AttendeeId,

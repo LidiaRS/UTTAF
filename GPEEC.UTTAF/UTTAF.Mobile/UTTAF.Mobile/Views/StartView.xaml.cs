@@ -1,6 +1,4 @@
-﻿using Logikoz.XamarinUtilities.Utilities;
-
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -17,7 +15,7 @@ namespace UTTAF.Mobile.Views
 
 		private async void JoinSession(object sender, System.EventArgs e)
 		{
-			await PopPushViewUtil.PushModalAsync(((App)Application.Current).ServiceProvider.GetRequiredService<JoinSessionView>());
+			await Application.Current.MainPage.Navigation.PushModalAsync(((App)Application.Current).ServiceProvider.GetRequiredService<JoinSessionView>());
 		}
 	}
 }

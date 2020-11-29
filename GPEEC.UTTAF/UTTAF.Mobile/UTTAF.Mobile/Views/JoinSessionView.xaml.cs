@@ -1,6 +1,4 @@
-﻿using Logikoz.XamarinUtilities.Utilities;
-
-using System;
+﻿using System;
 
 using UTTAF.Mobile.ViewModels;
 
@@ -19,9 +17,9 @@ namespace UTTAF.Mobile.Views
 			BindingContext = joinSessionViewModel;
 		}
 
-		private void BackToStart(object sender, EventArgs e)
+		private async void BackToStart(object sender, EventArgs e)
 		{
-			PopPushViewUtil.PopModal<JoinSessionView>();
+			await Application.Current.MainPage.Navigation.PopModalAsync();
 		}
 	}
 }

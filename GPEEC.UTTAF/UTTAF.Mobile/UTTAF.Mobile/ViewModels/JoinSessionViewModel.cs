@@ -1,6 +1,4 @@
-﻿using Logikoz.XamarinUtilities.Utilities;
-
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -59,7 +57,7 @@ namespace UTTAF.Mobile.ViewModels
 				//TODO: refatorar isso para um service
 				DataHelper.Attendee = _attendeeConverter.Parse(attendee);
 				DataHelper.AuthSession = session;
-				await PopPushViewUtil.PushModalAsync(((App)Application.Current).ServiceProvider.GetRequiredService<JoinedSessionView>(), true);
+				await Application.Current.MainPage.Navigation.PushModalAsync(((App)Application.Current).ServiceProvider.GetRequiredService<JoinedSessionView>(), true);
 			}));
 
 			_attendeeHubService.NotJoinedAtSession(message => Application.Current.Dispatcher.BeginInvokeOnMainThread(async () =>
