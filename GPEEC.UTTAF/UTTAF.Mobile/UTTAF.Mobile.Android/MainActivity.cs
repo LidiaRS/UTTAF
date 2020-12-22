@@ -15,6 +15,11 @@ namespace UTTAF.Mobile.Droid
 	{
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
+			AndroidEnvironment.UnhandledExceptionRaiser += (object sender, RaiseThrowableEventArgs e) =>
+			{
+				App.Current.MainPage.DisplayAlert("Erro", e.Exception.Message, "Ok");
+			};
+
 			SyncfusionLicenseProvider.RegisterLicense("MzM3MTQzQDMxMzgyZTMzMmUzMFRhVFQ2cGFkS08yd1pQc2hRd0dDQWF2eGRjb1BUaEtoc05Denl1bHZ2Nms9");
 
 			TabLayoutResource = Resource.Layout.Tabbar;
