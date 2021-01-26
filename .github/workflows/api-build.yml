@@ -1,4 +1,4 @@
-name: .NET 5 Build
+name: API Build
 
 on: 
   pull_request:
