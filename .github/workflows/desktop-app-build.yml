@@ -5,12 +5,30 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        configuration: [Release]
+
+    runs-on: windows-latest
+
+    env:
+      Wap_Project_Path: GPEEC.UTTAF\UTTAF.Desktop\UTTAF.Desktop.csproj
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET 5
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Install .NET 5
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
-    - name: Build Desktop App (WPF)
-      run: dotnet build ./GPEEC.UTTAF/UTTAF.Desktop/UTTAF.Desktop.csproj
+
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
+
+    - name: Restore the application
+      run: msbuild $env:Wap_Project_Path /t:Restore /p:Configuration=$env:Configuration
+      env:
+        Configuration: ${{ matrix.configuration }}
