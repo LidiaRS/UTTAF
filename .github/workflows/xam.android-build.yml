@@ -1,4 +1,4 @@
-name: Xamarin.Android
+name: Xam.Android Build
 
 on:
   pull_request:
