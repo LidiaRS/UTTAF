@@ -1,156 +1,155 @@
 ﻿<Window
-    x:Class="UTTAF.Desktop.Views.MainView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
-    Title="UTTAF - Utilizaçao de Tecnologia no Transito com Análise Física"
-    Background="#070B21"
-    WindowState="Maximized"
-    WindowStyle="None"
-    mc:Ignorable="d">
-    <DockPanel>
-        <!--  Card  & Boneco Libras  -->
-        <Grid Margin="30,20" DockPanel.Dock="Left">
-            <Grid Margin="0,50,0,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <md:Card
-                    Grid.Row="0"
-                    md:ShadowAssist.ShadowEdges="Top, Left, Right"
-                    Background="{DynamicResource PrimaryHueDarkBrush}">
-                    <TextBlock
-                        Padding="5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                        Text="{Binding TitleCard, FallbackValue=Colisao entre carros}" />
-                </md:Card>
-                <md:Card
-                    Grid.Row="1"
-                    Width="320"
-                    Height="350"
-                    Background="#3aFFFFFF">
-                    <Grid Margin="7">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Image
-                            Grid.Row="0"
-                            Width="180"
-                            Height="180"
-                            HorizontalAlignment="Center"
-                            Source="https://imgsapp.em.com.br/app/foto_127989356258/2015/03/05/4859/20150305095836354379i.jpg" />
-                        <TextBlock
-                            Grid.Row="1"
-                            HorizontalAlignment="Center"
-                            Foreground="White"
-                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                            Text="{Binding DescriptionIcident, FallbackValue=Acidente com uma vitima do sexo femenino na BR364.}"
-                            TextAlignment="Center"
-                            TextWrapping="Wrap" />
-                        <TextBlock
-                            Grid.Row="2"
-                            Margin="0,10,0,0"
-                            HorizontalAlignment="Center"
-                            Foreground="White"
-                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                            Text="{Binding IncidentDate, FallbackValue=14/03/2017}" />
-                    </Grid>
-                </md:Card>
-            </Grid>
-            <md:Card
-                HorizontalAlignment="Center"
-                VerticalAlignment="Bottom"
-                Background="Transparent">
-                <Image
-                    Width="200"
-                    Height="200"
-                    Source="https://i.pinimg.com/originals/c3/09/6c/c3096cd1a4d63a70d96f3eb33403c517.jpg"
-                    Stretch="Fill" />
-            </md:Card>
-        </Grid>
-        <!--  Imagem ampliada & Descriçao detalhada  -->
-        <Grid DockPanel.Dock="Right">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid
-                Grid.Row="0"
-                Margin="0,30,20,0"
-                HorizontalAlignment="Center">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <md:Card
-                    Grid.Row="0"
-                    md:ShadowAssist.ShadowEdges="Top, Left, Right"
-                    Background="{DynamicResource PrimaryHueDarkBrush}">
-                    <TextBlock
-                        Padding="5"
-                        HorizontalAlignment="Center"
-                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                        Text="Imagem do Acidente" />
-                </md:Card>
-                <md:Card Grid.Row="1" Background="#3aFFFFFF">
-                    <Image Source="https://imgsapp.em.com.br/app/foto_127989356258/2015/03/05/4859/20150305095836354379i.jpg" Stretch="UniformToFill" />
-                </md:Card>
+	x:Class="UTTAF.Desktop.Views.MainView"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+	Title="UTTAF - Utilizaçao de Tecnologia no Transito com Análise Física"
+	Background="#070B21"
+	WindowState="Maximized"
+	WindowStyle="None"
+	mc:Ignorable="d">
+	<DockPanel>
+		<!--  Card  & Boneco Libras  -->
+		<Grid Margin="30,20" DockPanel.Dock="Left">
+			<Grid Margin="0,50,0,0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+				<md:Card
+					Grid.Row="0"
+					md:ShadowAssist.ShadowEdges="Top, Left, Right"
+					Background="{DynamicResource PrimaryHueDarkBrush}">
+					<TextBlock
+						Padding="5"
+						HorizontalAlignment="Center"
+						VerticalAlignment="Center"
+						Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+						Text="{Binding TitleCard, FallbackValue=Colisao entre carros}" />
+				</md:Card>
+				<md:Card
+					Grid.Row="1"
+					Width="320"
+					Height="350"
+					Background="#3aFFFFFF">
+					<Grid Margin="7">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+						<Image
+							Grid.Row="0"
+							Width="180"
+							Height="180"
+							HorizontalAlignment="Center"
+							Source="https://imgsapp.em.com.br/app/foto_127989356258/2015/03/05/4859/20150305095836354379i.jpg" />
+						<TextBlock
+							Grid.Row="1"
+							HorizontalAlignment="Center"
+							Foreground="White"
+							Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+							Text="{Binding DescriptionIcident, FallbackValue=Acidente com uma vitima do sexo femenino na BR364.}"
+							TextAlignment="Center"
+							TextWrapping="Wrap" />
+						<TextBlock
+							Grid.Row="2"
+							Margin="0,10,0,0"
+							HorizontalAlignment="Center"
+							Foreground="White"
+							Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+							Text="{Binding IncidentDate, FallbackValue=14/03/2017}" />
+					</Grid>
+				</md:Card>
+			</Grid>
+			<md:Card
+				HorizontalAlignment="Center"
+				VerticalAlignment="Bottom"
+				Background="Transparent">
+				<Image
+					Width="200"
+					Height="200"
+					Source="https://i.pinimg.com/originals/c3/09/6c/c3096cd1a4d63a70d96f3eb33403c517.jpg"
+					Stretch="Fill" />
+			</md:Card>
+		</Grid>
+		<!--  Imagem ampliada & Descriçao detalhada  -->
+		<Grid DockPanel.Dock="Right">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<Grid
+				Grid.Row="0"
+				Margin="0,30,20,0"
+				HorizontalAlignment="Center">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+				<md:Card
+					Grid.Row="0"
+					md:ShadowAssist.ShadowEdges="Top, Left, Right"
+					Background="{DynamicResource PrimaryHueDarkBrush}">
+					<TextBlock
+						Padding="5"
+						HorizontalAlignment="Center"
+						Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+						Text="Imagem do Acidente" />
+				</md:Card>
+				<md:Card Grid.Row="1" Background="#3aFFFFFF">
+					<Image Source="https://imgsapp.em.com.br/app/foto_127989356258/2015/03/05/4859/20150305095836354379i.jpg" Stretch="UniformToFill" />
+				</md:Card>
+			</Grid>
+			<Grid Grid.Row="1" Margin="0,10,20,20">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+				<md:Card Grid.Row="1" Background="#3aFFFFFF">
+					<ScrollViewer VerticalScrollBarVisibility="Auto">
+						<TextBlock
+							Margin="10"
+							FontSize="18"
+							Foreground="White"
+							TextWrapping="Wrap">
+							<Run Text="Aliquyam dolore consetetur *stet* te takimata amet nonumy et amet et ut magna lorem ea et eos labore ipsum autem" />
+							<LineBreak />
+							<LineBreak />
+							<Run Text="Vel eum elitr elitr ipsum et erat elitr ea facilisi sanctus et dolores eos sed vel aliquip sit vero rebum" />
+							<Run Text="Eos invidunt dolore vero sanctus tempor consetetur vulputate in accusam et elitr velit nobis feugait dolor ipsum sit rebum ipsum" />
+							<LineBreak />
+							<LineBreak />
+							<Run Text="Sed tempor kasd lorem nonumy aliquyam justo vero et sit amet diam dolor et euismod sit invidunt labore tempor clita" />
+							<Run Text="Eos gubergren ipsum dolor magna rebum diam sit ipsum feugait erat amet consectetuer accusam consequat clita voluptua stet ut dolores" />
+						</TextBlock>
+					</ScrollViewer>
+				</md:Card>
+				<md:Card
+					Grid.Row="0"
+					Padding="5"
+					HorizontalAlignment="Left"
+					md:ShadowAssist.ShadowEdges="Top, Left, Right"
+					Background="{DynamicResource PrimaryHueDarkBrush}">
+					<TextBlock
+						FontSize="18"
+						FontWeight="Bold"
+						Text="Descriçao" />
+				</md:Card>
+			</Grid>
 
-            </Grid>
-            <Grid Grid.Row="1" Margin="0,10,20,20">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <md:Card Grid.Row="1" Background="#3aFFFFFF">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <TextBlock
-                            Margin="10"
-                            FontSize="18"
-                            Foreground="White"
-                            TextWrapping="Wrap">
-                            <Run Text="Aliquyam dolore consetetur *stet* te takimata amet nonumy et amet et ut magna lorem ea et eos labore ipsum autem" />
-                            <LineBreak />
-                            <LineBreak />
-                            <Run Text="Vel eum elitr elitr ipsum et erat elitr ea facilisi sanctus et dolores eos sed vel aliquip sit vero rebum" />
-                            <Run Text="Eos invidunt dolore vero sanctus tempor consetetur vulputate in accusam et elitr velit nobis feugait dolor ipsum sit rebum ipsum" />
-                            <LineBreak />
-                            <LineBreak />
-                            <Run Text="Sed tempor kasd lorem nonumy aliquyam justo vero et sit amet diam dolor et euismod sit invidunt labore tempor clita" />
-                            <Run Text="Eos gubergren ipsum dolor magna rebum diam sit ipsum feugait erat amet consectetuer accusam consequat clita voluptua stet ut dolores" />
-                        </TextBlock>
-                    </ScrollViewer>
-                </md:Card>
-                <md:Card
-                    Grid.Row="0"
-                    Padding="5"
-                    HorizontalAlignment="Left"
-                    md:ShadowAssist.ShadowEdges="Top, Left, Right"
-                    Background="{DynamicResource PrimaryHueDarkBrush}">
-                    <TextBlock
-                        FontSize="18"
-                        FontWeight="Bold"
-                        Text="Descriçao" />
-                </md:Card>
-            </Grid>
-
-            <Button
-                Grid.Row="1"
-                Margin="10"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Background="{StaticResource PrimaryHueDarkBrush}"
-                Click="Button_Click"
-                Content="{md:PackIcon Kind=Settings}"
-                Foreground="White"
-                Style="{StaticResource MaterialDesignIconButton}" />
-        </Grid>
-    </DockPanel>
+			<Button
+				Grid.Row="1"
+				Margin="10"
+				HorizontalAlignment="Right"
+				VerticalAlignment="Bottom"
+				Background="{StaticResource PrimaryHueDarkBrush}"
+				Click="Button_Click"
+				Content="{md:PackIcon Kind=Settings}"
+				Foreground="White"
+				Style="{StaticResource MaterialDesignIconButton}" />
+		</Grid>
+	</DockPanel>
 </Window>

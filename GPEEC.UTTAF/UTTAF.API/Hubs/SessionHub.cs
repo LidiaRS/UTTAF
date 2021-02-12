@@ -83,7 +83,6 @@ namespace UTTAF.API.Hubs
 			await Groups.RemoveFromGroupAsync(Context.ConnectionId, sessionReference);
 		}
 
-
 		public async Task JoinAtSessionAsync(AttendeeVO newAttendee)
 		{
 			if (!(await _sessionBusiness.FindBySessionReferenceTaskAsync(newAttendee.SessionReference) is SessionVO session))
