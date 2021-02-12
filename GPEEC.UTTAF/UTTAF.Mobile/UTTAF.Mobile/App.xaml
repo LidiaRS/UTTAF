@@ -3,5 +3,7 @@
 	x:Class="UTTAF.Mobile.App"
 	xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-	<Application.Resources />
+	<Application.Resources>
+		<StyleSheet Source="/Common/Assets/css/style.css" />
+	</Application.Resources>
 </Application>
