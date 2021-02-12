@@ -1,0 +1,45 @@
+﻿label {
+	color: #000;
+}
+
+^contentpage {
+	background-color: #fff;
+	padding: 30;
+}
+
+frame {
+	background-color: #ededed;
+	color: #fff;
+	border-radius: 10;
+	padding: 15;
+}
+
+	frame label {
+		font-size: 36;
+		text-align: center;
+	}
+
+.title {
+	margin: 10 0;
+	font-size: 20;
+}
+
+.description {
+	margin: 30 0;
+	font-size: 16;
+}
+
+.support {
+	margin: 30 24 30 0;
+	font-size: 16;
+}
+
+	.support .message {
+		color: #00ff21;
+		font-style: bold;
+	}
+
+	.support .link {
+		text-decoration: underline;
+		color: #7483b5;
+	}
