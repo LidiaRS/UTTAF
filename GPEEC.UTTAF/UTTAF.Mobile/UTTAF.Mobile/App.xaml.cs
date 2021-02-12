@@ -1,7 +1,6 @@
-﻿using System;
+﻿using UTTAF.Mobile.Home;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace UTTAF.Mobile
 {
@@ -11,7 +10,7 @@ namespace UTTAF.Mobile
 		{
 			InitializeComponent();
 
-			MainPage = new MainPage();
+			MainPage = new MainView();
 		}
 
 		protected override void OnStart()
